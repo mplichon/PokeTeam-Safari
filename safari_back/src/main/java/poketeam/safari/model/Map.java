@@ -12,21 +12,21 @@ public class Map {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Column(name="nom_maps",nullable = false,length = 50)	
+	@Column(name="nom",nullable = false,length = 30)
 	private String nom;
-	@Column(name="lien_maps",nullable = false,length = 50)	
-	private String lien_img;
+	@Column(name="lien_image",nullable = false,length = 50)
+	private String lienImage;
 	
 	
-	public Map(String nom, String lien_img) {
+	public Map(String nom, String lienImage) {
 		this.nom = nom;
-		this.lien_img = lien_img;
+		this.lienImage = lienImage;
 	}
 
-	public Map(Integer id, String nom, String lien_img) {
+	public Map(Integer id, String nom, String lienImage) {
 		this.id = id;
 		this.nom = nom;
-		this.lien_img = lien_img;
+		this.lienImage = lienImage;
 	}
 	
 	public Map() {}
@@ -41,19 +41,19 @@ public class Map {
 	}
 
 
-	public String getLien_img() {
-		return lien_img;
+	public String getLienImage() {
+		return lienImage;
 	}
 
 
-	public void setLien_img(String lien_img) {
-		this.lien_img = lien_img;
+	public void setLienImage(String lienImage) {
+		this.lienImage = lienImage;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Map [nom=" + nom + ", lien_img=" + lien_img + "]";
+		return "Map [nom=" + nom + ", lienImage=" + lienImage + "]";
 	}
 	
 	

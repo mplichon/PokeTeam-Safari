@@ -14,11 +14,11 @@ import jakarta.persistence.ManyToOne;
 public class Joueur extends Compte {
 	
 	
-	@Column(name="nickname",nullable = false,length = 15)
+	@Column(name="surnom",nullable = false,length = 20)
 	private String surnom;
 	
 	@ManyToOne
-	@JoinColumn(name = "map_id")
+	@JoinColumn(name = "id_map")
 	private Map positionActuelle;
 
 	//a preciser
