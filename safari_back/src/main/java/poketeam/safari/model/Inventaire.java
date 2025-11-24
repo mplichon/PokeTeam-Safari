@@ -15,13 +15,13 @@ public class Inventaire {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	
-	@Column(name="nbPokeball", nullable = false, columnDefinition = "INT(3)")
+	@Column(name="nb_pokeball", nullable = false, columnDefinition = "INT(3)")
 	Integer nbPokeball;
 	
-	@Column(name="nbFriandise", nullable = false, columnDefinition = "INT(3)")
+	@Column(name="nb_friandise", nullable = false, columnDefinition = "INT(3)")
 	Integer nbFriandise;
 	
-	@Column(name="nbBoue", nullable = false, columnDefinition = "INT(3)")
+	@Column(name="nb_boue", nullable = false, columnDefinition = "INT(3)")
 	Integer nbBoue;
 	
 	
