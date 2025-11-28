@@ -1,5 +1,7 @@
 package poketeam.safari.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +18,7 @@ public class Map {
 	private String nom;
 	@Column(name="lien_image",nullable = false,length = 50)
 	private String lienImage;
+
 	
 	
 	public Map(String nom, String lienImage) {
