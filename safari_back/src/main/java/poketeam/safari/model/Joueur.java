@@ -5,9 +5,11 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("joueur")
@@ -17,17 +19,21 @@ public class Joueur extends Compte {
 	@Column(name="surnom",nullable = false,length = 20)
 	private String surnom;
 	
+	@Embedded
+	private Inventaire inventaire;
+
 	@ManyToOne
 	@JoinColumn(name = "id_map")
 	private Map positionActuelle;
 
-	//a preciser
-	private transient List<Pokemon> pokedex = new ArrayList();
+	@OneToMany(mappedBy = "joueur")
+	private List<PokemonCapture> pokemonsCaptures = new ArrayList<PokemonCapture>();
 	
 	
 	public Joueur(String login, String password, String surnom) {
 		super(login, password);
 		this.surnom = surnom;
+		this.inventaire = new Inventaire(999, 999, 999);
 	}
 	
 	public Joueur(Integer id, String login, String password, String surnom) {
