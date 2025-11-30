@@ -78,6 +78,7 @@ public class RencontrePokemonService {
 		double tauxCaptureTemp = rencontrePokemon.getPokemon().getTauxCapture();
 		int ballShackCpt = 0;
 		double mult;
+		int ballShakeProba;
 		
 		// Calcul tauxCapture temporaire: 
 		if(rencontrePokemon.getTauxCaptureMod() > 0) {
@@ -94,9 +95,10 @@ public class RencontrePokemonService {
 		if (tauxCapture255 < 1) {
 			tauxCapture255 = 1;
 		}
+		//Calcul du taux de reussite des remuements de la pokéball
+		ballShakeProba = (int) (65535.0 * Math.pow(((double) tauxCapture255 /255), (double) 1/4));
 		//Check à effectuer pour les 4 fois lorsque la pokéball remue
 		while(ballShackCpt < 4) {
-			int ballShakeProba = (int) (65535 * Math.pow(tauxCapture255/255, 1/4));
 			if(ballShakeProba > Math.random()*65535) {
 				ballShackCpt++;
 			}else {
@@ -110,7 +112,6 @@ public class RencontrePokemonService {
             return finDeRencontreCapture(rencontrePokemon);
 		}
 		return aFuit(rencontrePokemon);
-		
 	}
 
     //En travaux 
@@ -134,16 +135,6 @@ public class RencontrePokemonService {
         return tourSuivant(rencontrePokemon);
 	}
 
-    final void finDetour(RencontrePokemon rencontrePokemon) {
-        if(!rencontrePokemon.isEstCapture() && !rencontrePokemon.isaFuit()) {
-            tourSuivant(rencontrePokemon);
-        } else if(rencontrePokemon.isaFuit()) {
-            finDeRencontreFuite(rencontrePokemon);
-        } else if(rencontrePokemon.isEstCapture()) {
-            finDeRencontreCapture(rencontrePokemon);
-        }
-
-    }
 
     private String finDeRencontreCapture(RencontrePokemon rencontrePokemon) {
         deleteById(rencontrePokemon.getId());
