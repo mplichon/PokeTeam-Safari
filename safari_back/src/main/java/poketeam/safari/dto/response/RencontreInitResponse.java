@@ -1,4 +1,4 @@
-package poketeam.safari.dao.dto.response;
+package poketeam.safari.dto.response;
 
 public class RencontreInitResponse {
      private Integer idRencontre;

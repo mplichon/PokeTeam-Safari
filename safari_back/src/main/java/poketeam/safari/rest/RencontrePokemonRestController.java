@@ -6,14 +6,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import poketeam.safari.dao.dto.request.RencontreInitRequest;
-import poketeam.safari.dao.dto.response.RencontreInitResponse;
-import poketeam.safari.dao.dto.response.RencontreStatutResponse;
+import poketeam.safari.dto.request.RencontreInitRequest;
+import poketeam.safari.dto.response.RencontreInitResponse;
+import poketeam.safari.dto.response.RencontreStatutResponse;
 import poketeam.safari.model.RencontrePokemon;
 import poketeam.safari.service.RencontrePokemonService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController

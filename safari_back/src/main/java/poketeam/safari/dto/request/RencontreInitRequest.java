@@ -1,4 +1,4 @@
-package poketeam.safari.dao.dto.request;
+package poketeam.safari.dto.request;
 
 public class RencontreInitRequest {
     private Integer idPokemon;
