@@ -23,6 +23,10 @@ export class PokemonPage implements OnInit {
   protected pokemonForm!: FormGroup;
   protected nomCtrl!: FormControl;
   protected tauxCaptureCtrl!: FormControl;
+  protected tauxFuiteCtrl!: FormControl;
+  protected facteurApparitionCtrl!: FormControl;
+  protected type1Ctrl!: FormControl;
+  protected type2Ctrl!: FormControl;
   protected editingPokemon!: PokemonDto | null;
 
   constructor(private pokemonService: PokemonService, private formBuilder: FormBuilder) { }
@@ -32,21 +36,45 @@ export class PokemonPage implements OnInit {
 
     this.nomCtrl = new FormControl('', Validators.required);
     this.tauxCaptureCtrl = new FormControl('', Validators.required);
+    this.tauxFuiteCtrl = new FormControl('', Validators.required);
+    this.facteurApparitionCtrl = new FormControl('', Validators.required);
+    this.type1Ctrl = new FormControl('', Validators.required);
+    this.type2Ctrl = new FormControl('');
 
     this.pokemonForm = this.formBuilder.group({
       nom: this.nomCtrl,
-      tauxCapture: this.tauxCaptureCtrl
+      tauxCapture: this.tauxCaptureCtrl,
+      tauxFuite: this.tauxFuiteCtrl,
+      facteurApparition: this.facteurApparitionCtrl,
+      type1: this.type1Ctrl,
+      type2: this.type2Ctrl
     });
   }
 
   public ajouterModifierPokemon() {
 
     if (this.editingPokemon) {
-      this.pokemonService.save(new PokemonDto(this.editingPokemon.id, this.nomCtrl.value, this.tauxCaptureCtrl.value, 0, 0, "", ""));
+      this.pokemonService.save(new PokemonDto(
+        this.editingPokemon.id, 
+        this.nomCtrl.value, 
+        this.tauxCaptureCtrl.value, 
+        this.tauxFuiteCtrl.value, 
+        this.facteurApparitionCtrl.value, 
+        this.type1Ctrl.value, 
+        this.type2Ctrl.value
+      ));
     }
 
     else {
-      this.pokemonService.save(new PokemonDto(0, this.nomCtrl.value, this.tauxCaptureCtrl.value, 0, 0, "", ""));
+      this.pokemonService.save(new PokemonDto(
+        0, 
+        this.nomCtrl.value, 
+        this.tauxCaptureCtrl.value, 
+        this.tauxFuiteCtrl.value, 
+        this.facteurApparitionCtrl.value, 
+        this.type1Ctrl.value, 
+        this.type2Ctrl.value
+      ));
     }
 
     this.editingPokemon = null;
