@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, startWith, Subject, switchMap } from 'rxjs';
+import { PokemonDto } from '../dto/pokemon-dto';
 // import { PokemonDto } from '../dto/pokemon-dto'; // si existant
 
 @Injectable({
