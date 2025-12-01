@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import poketeam.safari.dto.response.JoueurResponse;
 import poketeam.safari.model.Joueur;
 import poketeam.safari.service.CompteService;
 
@@ -29,34 +30,39 @@ public class JoueurRestController {
 
 
 	@GetMapping
-	public List<Joueur> allJoueurs()
+	public List<JoueurResponse> allJoueurs()
 	{
 		log.info("GET /api/joueur - allJoueurs() called");
-		return compteSrv.getAllJoueurs();
+		return compteSrv.getAllJoueurs().stream()
+				.map(joueur -> new JoueurResponse(joueur.getId(), joueur.getLogin(), joueur.getSurnom()))
+				.toList();
 	}
 
 
 	@GetMapping("/{id}")
-	public Joueur ficheJoueur(@PathVariable Integer id, Joueur joueur) {
+	public JoueurResponse ficheJoueur(@PathVariable Integer id, Joueur joueur) {
 		log.info("GET /api/joueur/{} - ficheJoueur() called", id);
-		return compteSrv.getJoueurById(id);
+		Joueur foundJoueur = compteSrv.getJoueurById(id);
+		return new JoueurResponse(foundJoueur.getId(), foundJoueur.getLogin(), foundJoueur.getSurnom());
 	}
 
 
 	@PostMapping
-	public Joueur ajoutJoueur(@RequestBody Joueur joueur)
+	public JoueurResponse ajoutJoueur(@RequestBody Joueur joueur)
 	{
 		log.info("POST /api/joueur - ajoutJoueur() called");
-		return (Joueur) compteSrv.create(joueur);
+		Joueur createdJoueur = (Joueur) compteSrv.create(joueur);
+		return new JoueurResponse(createdJoueur.getId(), createdJoueur.getLogin(), createdJoueur.getSurnom());
 	}
 
 
 	@PutMapping("/{id}")
-	public Joueur modifierJoueur(@PathVariable Integer id, @RequestBody Joueur joueur)
+	public JoueurResponse modifierJoueur(@PathVariable Integer id, @RequestBody Joueur joueur)
 	{
 		log.info("PUT /api/joueur/{} - modifierJoueur() called", id);
 		joueur.setId(id);
-		return (Joueur) compteSrv.update(joueur);
+		Joueur updatedJoueur = (Joueur) compteSrv.update(joueur);
+		return new JoueurResponse(updatedJoueur.getId(), updatedJoueur.getLogin(), updatedJoueur.getSurnom());
 	}
 
 

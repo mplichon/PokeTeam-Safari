@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import poketeam.safari.dto.response.AdminResponse;
 import poketeam.safari.model.Admin;
 import poketeam.safari.service.CompteService;
 
@@ -29,34 +30,38 @@ public class AdminRestController {
 
 
 	@GetMapping
-	public List<Admin> allAdmins()
+	public List<AdminResponse> allAdmins()
 	{
 		log.info("GET /api/admin - allAdmins() called");
-		return compteSrv.getAllAdmins();
+		return compteSrv.getAllAdmins().stream()
+				.map(admin -> new AdminResponse(admin.getId(), admin.getLogin()))
+				.toList();
 	}
 
 
 	@GetMapping("/{id}")
-	public Admin ficheAdmin(@PathVariable Integer id, Admin admin) {
+	public AdminResponse ficheAdmin(@PathVariable Integer id, Admin admin) {
 		log.info("GET /api/admin/{} - ficheAdmin() called", id);
-		return compteSrv.getAdminById(id);
+		return new AdminResponse(compteSrv.getAdminById(id).getId(), compteSrv.getAdminById(id).getLogin());
 	}
 
 
 	@PostMapping
-	public Admin ajoutAdmin(@RequestBody Admin admin)
+	public AdminResponse ajoutAdmin(@RequestBody Admin admin)
 	{
 		log.info("POST /api/admin - ajoutAdmin() called");
-		return (Admin) compteSrv.create(admin);
+		Admin createdAdmin = (Admin) compteSrv.create(admin);
+		return new AdminResponse(createdAdmin.getId(), createdAdmin.getLogin());
 	}
 
 
 	@PutMapping("/{id}")
-	public Admin modifierAdmin(@PathVariable Integer id, @RequestBody Admin admin)
+	public AdminResponse modifierAdmin(@PathVariable Integer id, @RequestBody Admin admin)
 	{
 		log.info("PUT /api/admin/{} - modifierAdmin() called", id);
 		admin.setId(id);
-		return (Admin) compteSrv.update(admin);
+		Admin updatedAdmin = (Admin) compteSrv.update(admin);
+		return new AdminResponse(updatedAdmin.getId(), updatedAdmin.getLogin());
 	}
 
 
