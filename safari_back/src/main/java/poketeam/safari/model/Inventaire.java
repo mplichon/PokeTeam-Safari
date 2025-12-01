@@ -9,10 +9,6 @@ import jakarta.persistence.Id;
 @Embeddable
 public class Inventaire {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer id;
-
 	@Column(name = "nb_pokeball", nullable = false, columnDefinition = "INT(3)")
 	Integer nbPokeball;
 

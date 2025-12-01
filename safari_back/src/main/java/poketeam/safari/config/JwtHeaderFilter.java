@@ -46,7 +46,7 @@ public class JwtHeaderFilter extends OncePerRequestFilter{
                     autorities.add(new SimpleGrantedAuthority("ROLE_JOUEUR"));
                 }
 
-                else if (compte instanceof Admin f) {
+                else if (compte instanceof Admin) {
                     autorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
                 }
 
