@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-login-page',
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login-page.html',
-  styleUrl: './login-page.css',
+  styleUrls: ['../../../styles.css'],
 })
 
 export class LoginPage implements OnInit {
