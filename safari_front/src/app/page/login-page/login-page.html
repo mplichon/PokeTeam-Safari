@@ -1,1 +1,52 @@
-<p>login-page works!</p>
+<body class="backconnx">
+<div class="encarco">
+    <div class="center_g16">
+ <img class="pokeballdeco" src="pokeballpix.png" alt="">
+
+    <h1 class="title">Welcome <br> back</h1>
+    <h2 class="subtitle">to the <br> pokefari</h2>
+</div>
+<br>
+<div class="inputs">
+
+    <input class="conxn" type="text" name="login" id="login" placeholder="ton login" >
+    <br>
+    <div class="password-container">
+    <input class="conxn" type="password" name="password" id="password" placeholder="ton mot de passe">
+    <img id="toggle" src="openy.png" alt="">
+    </div>
+    
+<br>
+
+<br>
+<button  onclick="window.location.href='index.html'"  class="primary_b">se connecter</button>
+<br>
+</div>
+<div class="inscrib">
+<p class="txt">pas encore de compte ? 
+    <br>
+    <br>
+    <br>
+    <a class="secondary_b" href="">cree ton compte</a></p>
+    </div>
+</div>
+    
+
+
+
+
+    <script>
+const mdp = document.getElementById('password');
+const toggle = document.getElementById('toggle');
+
+toggle.addEventListener('click', () => {
+  if (mdp.type === 'password') {
+    mdp.type = 'text';
+    toggle.src = 'openy.png'; 
+  } else {
+    mdp.type = 'password';
+    toggle.src = 'closey.png'; 
+  }
+});
+</script>
+</body>
