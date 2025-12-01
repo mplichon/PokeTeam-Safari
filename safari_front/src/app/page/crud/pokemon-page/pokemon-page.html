@@ -4,19 +4,26 @@
     <table>
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Nom</th>
-                <th>Pays</th>
+                <th>Taux de capture</th>
+                <th>Taux de fuite</th>
+                <th>Facteur d'apparition</th>
+                <th>Type 1</th>
+                <th>Type 2</th>
                 <th>Actions</th>
             </tr>
         </thead>
 
         <tbody>
             <tr *ngFor="let p of pokemons$ | async; trackBy: trackPokemon">
-                <td>
-                    <a [routerLink]="[ '/pokemon', p.id ]">{{ p.nom }}</a>
-                </td>
-
+                <td>{{ p.id }}</td>
+                <td>{{ p.nom }}</td>
                 <td>{{ p.tauxCapture }}</td>
+                <td>{{ p.tauxFuite }}</td>
+                <td>{{ p.facteurApparition }}</td>
+                <td>{{ p.type1 }}</td>
+                <td>{{ p.type2 }}</td>
 
                 <td>
                     <button (click)="editPokemon(p)">Modifier</button>
@@ -28,7 +35,7 @@
 
     <div class="ajout">
         <form (ngSubmit)="ajouterModifierPokemon()" [formGroup]="pokemonForm">
-
+            <!-- nom -->
             <div>
                 <input  type="text" formControlName="nom" placeholder="Nom obligatoire"/> 
                 
@@ -37,12 +44,45 @@
                 }
             </div>
 
+            <!-- taux de capture -->
             <div>
-                <input type="text" formControlName="tauxCapture" placeholder="Pays obligatoire"/>
+                <input type="number" formControlName="tauxCapture" placeholder="Taux de capture obligatoire"/>
 
                 @if (tauxCaptureCtrl.hasError('required')) {
-                    <div class="error-message">Le pays est obligatoire</div>
+                    <div class="error-message">Le taux de capture est obligatoire</div>
                 }
+            </div>
+
+            <!-- taux de fuite -->
+            <div>
+                <input  type="number" formControlName="tauxFuite" placeholder="Taux de fuite obligatoire"/> 
+                
+                @if (tauxFuiteCtrl.hasError('required')) {
+                    <div class="error-message">Le taux de fuite est obligatoire</div>
+                }
+            </div>
+
+            <!-- facteur d'apparition -->
+            <div>
+                <input  type="number" formControlName="facteurApparition" placeholder="Facteur d'apparition obligatoire"/> 
+                
+                @if (facteurApparitionCtrl.hasError('required')) {
+                    <div class="error-message">Le facteur d'apparition est obligatoire</div>
+                }
+            </div>
+
+            <!-- type 1 -->
+            <div>
+                <input  type="text" formControlName="type1" placeholder="Type 1 obligatoire"/> 
+                
+                @if (type1Ctrl.hasError('required')) {
+                    <div class="error-message">Le nom est obligatoire</div>
+                }
+            </div>
+
+            <!-- type 2 -->
+            <div>
+                <input  type="text" formControlName="type2" placeholder="Type 2"/>
             </div>
 
             @if (editingPokemon) {
