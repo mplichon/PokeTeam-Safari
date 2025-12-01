@@ -1,5 +1,4 @@
 import { Component, EventEmitter, input, Input, Output } from '@angular/core';
-import { Pokemon } from '../../../models/pokemon.model';
 import { ListePokemons } from './pokemon.interface';
 
 @Component({
