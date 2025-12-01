@@ -11,7 +11,7 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let p of pokemons$ | async; trackBy: trackEditeur">
+            <tr *ngFor="let p of pokemons$ | async; trackBy: trackPokemon">
                 <td>
                     <a [routerLink]="[ '/pokemon', p.id ]">{{ p.nom }}</a>
                 </td>
