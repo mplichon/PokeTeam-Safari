@@ -1,1 +1,361 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* -------- FONTS -------- */
+.press-start-2p-regular,
+* {
+  font-family: "Press Start 2P", system-ui;
+  text-transform: uppercase;
+}
+
+
+/* -------- BACKGROUND -------- */
+.backconnx { 
+  background: url("back1.png") center/cover no-repeat;
+  width: 100vw;
+  margin: 0;
+}
+
+
+/* -------- ENCAR DE CO -------- */
+.encarco {
+  background: #EDF0F6;
+  border: 8px solid #216EAC;
+  width: fit-content;
+  box-shadow: 8px 8px 0 #3B3B3B;
+  display: flex;
+  flex-direction: column;
+  padding: 48px 32px;
+  margin: 4% auto;
+  transition: 0.15s;
+}
+
+
+
+/* -------- CENTRAGE ET GAP 16 -------- */
+.center_g16 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+
+/* -------- TXTS -------- */
+.pokeballdeco { width: 50px; }
+
+.title { 
+  color: #216EAC;
+  text-align: center;
+}
+
+.subtitle {
+  color: #D10700;
+  text-align: center;
+  font-size: 20px;
+  margin: -20px 0 20px;
+}
+
+
+/* -------- INPUTS -------- */
+.conxn {
+  background: #fff;
+  border: 4px solid #3B3B3B;
+  padding: 8px;
+  box-shadow: 4px 4px 0 #3B3B3B;
+  font-size: 12px;
+  color: #3B3B3B;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Placeholder */
+.conxn::placeholder {
+  color: #D2DAEB;
+}
+
+/* Hover */
+.conxn:hover {
+  background: #F4F6FB;
+}
+
+/* Focus */
+.conxn:focus {
+  outline: none;
+
+  box-shadow: 4px 4px 0 #216EAC;
+}
+
+
+/* -------- PASSWORD-CONTAINER -------- */
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container .conxn {
+  padding-right: 30px;
+}
+
+/* Œil */
+#toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+  transition: 0.15s;
+}
+
+/* Hover œil */
+#toggle:hover {
+  opacity: 0.8;
+}
+
+/* Active œil */
+#toggle:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+
+/* -------- INPUTS ENCAR -------- */
+.inputs {
+  padding: 0 16px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+
+/* -------- BUTTONS -------- */
+.primary_b,
+.secondary_b {
+  padding: 16px 24px;
+  border: none;
+  box-shadow: 4px 4px 0 #3B3B3B;
+  margin: auto;
+  text-transform: uppercase;
+  transition: 0.15s;
+}
+
+/* Primary */
+.primary_b {
+  background: #216EAC;
+  color: #EDF0F6;
+}
+
+.primary_b:hover {
+  background: #1A5A8A;
+}
+
+.primary_b:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #3B3B3B;
+}
+
+/* Secondary */
+.secondary_b {
+  background: #D2DAEB;
+  color: #216EAC;
+  text-decoration: none;
+}
+
+.secondary_b:hover {
+  background: #C4CDDF;
+}
+
+.secondary_b:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #216EAC;
+}
+
+
+/* -------- TEXTE SUP -------- */
+.inscrib { margin-top: 16px; text-align: center; }
+.txt { font-size: 12px; }
+
+/* -------- RESPONSIVE DESKTOP -------- */
+@media (min-width: 1200px) {
+  .encarco {
+    max-width: 600px;
+    margin: 4% auto;
+  }
+
+  .inputs {
+    max-width: 500px;
+  }
+
+  .conxn {
+    font-size: 14px;
+  }
+
+  .primary_b, .secondary_b {
+    padding: 18px 28px;
+  }
+}
+
+/* -------- ANIMATION APPARITION -------- */
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.encarco {
+  animation: popup 0.35s ease-out;
+}
+
+/*--P2- index --*/
+
+.bodindex  {
+
+ padding: 32px;
+ background: repeating-linear-gradient(
+  0deg,           /* orientation : 0deg = horizontal */
+  #D2DAEB,        /* couleur 1 */
+  #D2DAEB 20px,   /* hauteur de la ligne 1 */
+  #EDF0F6 20px,   /* couleur 2 commence */
+  #EDF0F6 40px    /* hauteur totale ligne 1+2 */
+    );
+
+}
+
+
+/* ----------------- TOP BAR ----------------- */
+.top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px ;
+   
+}
+.accueil {
+  
+    background-color: #415240;
+    border: #3B3B3B solid 4px ;
+    box-shadow: inset 8px 8px 0 #0000003f;
+    color: white;
+    padding: 4px 16px;
+width: 80%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    margin: auto;
+}
+
+.iconsbtns {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    width: fit-content;
+}
+
+.btninfo,
+.btnexit {
+    width: 32px;
+    height: 32px;
+    border: none;
+    cursor: pointer;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Couleurs temporaires pour repérage */
+.btninfo {
+    background-color: #FF6B6B;
+}
+
+.btnexit {
+    background-color: #6BCB77;
+}
+
+
+
+/* ----------------- GRID LAYOUT ----------------- */
+.layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;  /* Colonne gauche / Colonne droite */
+    grid-template-rows: auto auto;   /* Ligne A / Ligne B à gauche */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Bloc C prend les deux lignes */
+.carte {
+    grid-column: 2;   /* colonne 2 = droite */
+    grid-row: 1 / 3;  /* occupe deux lignes */
+    background-color: #4D96FF; /* couleur Bloc C */
+}
+
+/* Bloc gauche */
+.pokedex {
+    background-image: url("pokedex.png");
+    background-size: cover;      /* pour que l'image remplisse le div */
+    background-repeat: no-repeat; /* éviter la répétition */
+    background-position: center;  /* centrer l'image */
+
+width: 272px;
+height: 563px;
+
+display: flex;
+flex-direction: column;
+
+
+
+}
+
+.openinginv{
+
+width: 135px;
+
+}
+
+h3 {
+ color: white;
+ font-size: 12px;
+
+}
+
+.encarnbm {
+  
+    background-color: #415240;
+    border: #3B3B3B solid 4px ;
+    box-shadow: inset 8px 8px 0 #0000003f;
+    color: white;
+    padding: 4px 16px;
+width: fit-content;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    margin: auto;
+}
+
+
+.inventaire {
+    background-color: #FFD6A5; /* Bloc B */
+    min-height: 150px; /* juste pour visualisation */
+}
+
+/* ----------------- OPTIONS DE DEBUG / REPÈRE ----------------- */
+.layout-grid section {
+    border: 2px dashed #333; /* bordures pour visualiser blocs */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
+}
