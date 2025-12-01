@@ -9,7 +9,7 @@ import { PokemonDto } from '../dto/pokemon-dto';
 })
 export class PokemonService {
 
-  private apiUrl: string = '/api/pokemon-capture';
+  private apiUrl: string = '/pokemon';
 
   private refresh$: Subject<void> = new Subject<void>();
 
