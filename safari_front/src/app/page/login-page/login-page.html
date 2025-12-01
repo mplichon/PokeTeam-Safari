@@ -7,19 +7,30 @@
     <h2 class="subtitle">to the <br> pokefari</h2>
 </div>
 <br>
+
+<div *ngIf="loginError">
+    Nom d'utilisateur ou <br> mot de passe incorrect
+</div>
+
+<form (ngSubmit)="connecter()" [formGroup]="userForm">
 <div class="inputs">
 
-    <input class="conxn" type="text" name="login" id="login" placeholder="ton login" >
+    <input class="conxn" type="text" formControlName="username" name="login" id="login" placeholder="ton login" >
     <br>
     <div class="password-container">
-    <input class="conxn" type="password" name="password" id="password" placeholder="ton mot de passe">
+    <input class="conxn" type="password" formControlName="password" name="password" id="password" placeholder="ton mot de passe">
     <img id="toggle" src="openy.png" alt="">
     </div>
     
 <br>
 
 <br>
-<button  onclick="window.location.href='index.html'"  class="primary_b">se connecter</button>
+<button  onclick="window.location.href='index.html'" [disabled]="userForm.invalid" value="Se connecter" class="primary_b">se connecter</button>
+</div>
+</form>
+
+
+
 <br>
 </div>
 <div class="inscrib">
@@ -29,7 +40,7 @@
     <br>
     <a class="secondary_b" href="">cree ton compte</a></p>
     </div>
-</div>
+
     
 
 
