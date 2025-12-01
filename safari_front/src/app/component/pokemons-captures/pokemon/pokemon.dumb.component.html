@@ -1,1 +1,14 @@
-<p>pokemon works!</p>
+<div class = "pokemon-list">
+    @for(pokemon of ListePokemons(); track pokemon.id) {
+
+    <div class="pokemon-item">
+         <img [src]="pokemon.sprite" alt="{{pokemon.name}}" class="pokemon-sprite">
+
+        <div class="pokemon-info">
+        <span class="pokemon-id">N. {{ pokemon.id }}</span>
+        <span class="pokemon-name">{{ pokemon.name }}</span>
+      </div>
+    </div>
+    }
+
+</div>
