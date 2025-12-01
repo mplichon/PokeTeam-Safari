@@ -1,21 +1,22 @@
 package poketeam.safari.rest;
 
+import org.hibernate.mapping.Table;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import poketeam.safari.dto.request.RencontreInitRequest;
-import poketeam.safari.dto.response.RencontreInitResponse;
-import poketeam.safari.dto.response.RencontreStatutResponse;
-import poketeam.safari.model.RencontrePokemon;
-import poketeam.safari.service.PokemonService;
-import poketeam.safari.service.RencontrePokemonService;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import poketeam.safari.dto.response.RencontreInitResponse;
+import poketeam.safari.dto.response.RencontreStatutResponse;
+import poketeam.safari.model.Pokemon;
+import poketeam.safari.model.RencontrePokemon;
+import poketeam.safari.model.TableApparition;
+import poketeam.safari.service.PokemonCaptureService;
+import poketeam.safari.service.PokemonService;
+import poketeam.safari.service.RencontrePokemonService;
+import poketeam.safari.service.TableApparitionService;
 
 
 @RestController
@@ -29,11 +30,15 @@ public class RencontrePokemonRestController {
     @Autowired
     private PokemonService pokemonService;
 
-    @PostMapping("/initialiser")
-    public RencontreInitResponse initialiserRencontre(@RequestBody RencontreInitRequest request) {
-        
-        RencontrePokemon rencontre = rencontrePokemonService.createOrUpdate(new RencontrePokemon(pokemonService.getById(request.getIdPokemon())));
-        return new RencontreInitResponse(rencontre.getId());
+    @Autowired
+    private TableApparitionService tableApparitionService;
+
+    @GetMapping("/initialiser")
+    public RencontreInitResponse initialiserRencontre() {
+        TableApparition pokemonPicker = tableApparitionService.getAll().get((int)(Math.random() * tableApparitionService.tableSize()));
+        Pokemon pokemonPicked = pokemonService.getById(pokemonPicker.getIdPokemon());
+        RencontrePokemon rencontre = rencontrePokemonService.createOrUpdate(new RencontrePokemon(pokemonPicked));
+        return new RencontreInitResponse(rencontre.getId(),pokemonPicked.getId(), pokemonPicked.getNom());
     }
 
     @GetMapping("/pokeball/{idRencontre}")
@@ -45,6 +50,7 @@ public class RencontrePokemonRestController {
     @GetMapping("/boue/{idRencontre}")
     public RencontreStatutResponse lancerBoue(@PathVariable Integer idRencontre) {
         String statut = rencontrePokemonService.lancerBoue(rencontrePokemonService.getById(idRencontre));
+
         return new RencontreStatutResponse(statut);
     }
 

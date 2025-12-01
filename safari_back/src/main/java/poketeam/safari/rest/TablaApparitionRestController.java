@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -25,8 +24,11 @@ public class TablaApparitionRestController {
     @Autowired
     private PokemonService pokemonService;
 
+
+
    @GetMapping("/init")
    public void initialisation() {
+    tableApparitionService.deleteAll();
     List<Pokemon> listePokemon = pokemonService.getAll();
         for (Pokemon p : listePokemon) {
             for (int i = 0; i < p.getFacteurApparition(); i++) {
@@ -34,5 +36,12 @@ public class TablaApparitionRestController {
             tableApparitionService.save(ta);
             }
         }
+    }
+
+    @GetMapping
+    public TableApparition getAll() {
+        List<TableApparition> tableApparitions = tableApparitionService.getAll();
+        TableApparition tableApparition = tableApparitions.get((int)(Math.random() * tableApparitions.size()));
+        return tableApparition;
     }
 }
