@@ -368,6 +368,13 @@ align-items: center;
 
 }
 
+.newbloc {
+  grid-column: 1;
+  grid-row: 3;
+  background-color: #FFD6A5; /* juste pour visualiser */
+  min-height: 150px;
+}
+
 
 .selectitems{
     width: 100%;
