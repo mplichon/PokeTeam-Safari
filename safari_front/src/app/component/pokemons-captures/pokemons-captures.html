@@ -1,4 +1,20 @@
 <div class="container">
+
     <h2 class="title-section">Votre Pokedex</h2>
-    <app-pokemon [ListePokemons]="ListePokemons()" class=""/>
+
+    <div class="layout">
+        
+        <!-- Zone Détail -->
+        <app-pokemon-detail 
+            [pokemon]="selectedPokemon()">
+        </app-pokemon-detail>
+
+        <!-- Zone Liste -->
+        <app-pokemon 
+            [ListePokemons]="ListePokemons()"
+            (selectPokemon)="onPokemonSelected($event)">
+        </app-pokemon>
+
+    </div>
+
 </div>

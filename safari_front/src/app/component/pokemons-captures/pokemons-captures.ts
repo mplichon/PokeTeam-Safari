@@ -1,13 +1,14 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { PokemonDumbComponent } from './pokemon/pokemon.dumb.component';
-import { Pokemon } from '../../models/pokemon.model';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+import { Pokemon } from './pokemon/pokemon.interface';
+import { PokemonDetail } from './pokemon-detail/pokemon-detail';
 
 @Component({
   selector: 'app-pokemons-captures',
-  imports: [PokemonDumbComponent, CommonModule],
+  imports: [PokemonDumbComponent, CommonModule, PokemonDetail],
   templateUrl: './pokemons-captures.html',
   styleUrl: './pokemons-captures.css',
 })
@@ -24,6 +25,7 @@ export class PokemonsCaptures implements OnInit {
           id: p.id,
           name: p.name,
           sprite: p.sprite,               // correspond à 96x96
+          img: p.image,                   // correspond à l'image complète
           types: p.apiTypes?.map((t : { name: string }) => t.name) ?? []
         }))
       )
@@ -34,9 +36,15 @@ export class PokemonsCaptures implements OnInit {
 
   ListePokemons = signal<Pokemon[]>([]);
 
+  selectedPokemon = signal<Pokemon | null>(null);
+
  ngOnInit(): void {
     this.getFirst151().subscribe((list) => {
       this.ListePokemons.set(list);
     });
+  }
+
+  onPokemonSelected(pokemon: Pokemon): void {
+    this.selectedPokemon.set(pokemon);
   }
 }
