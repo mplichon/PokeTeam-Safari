@@ -297,9 +297,13 @@ width: 80%;
 
 /* Bloc C prend les deux lignes */
 .carte {
-    grid-column: 2;   /* colonne 2 = droite */
-    grid-row: 1 / 3;  /* occupe deux lignes */
-    background-color: #4D96FF; /* couleur Bloc C */
+   grid-column: 2;
+    grid-row: 1 / span 2;  /* occupe deux lignes */  /* occupe deux lignes */
+    background-image: url(assets/fondcarte.png);
+    background-size: cover;      /* pour que l'image remplisse le div */
+    background-repeat: no-repeat; /* éviter la répétition */
+    height: 100%;
+    width: 100%;
 }
 
 /* Bloc gauche */
@@ -314,6 +318,9 @@ height: 563px;
 
 display: flex;
 flex-direction: column;
+
+ grid-column: 1;
+    grid-row: 1;
 
 
 
@@ -350,6 +357,10 @@ width: fit-content;
 .inventaire {
     background-color: #FFD6A5; /* Bloc B */
     min-height: 150px; /* juste pour visualisation */
+    width: 272px;
+    grid-column: 1;
+    grid-row: 2;
+
 }
 
 /* ----------------- OPTIONS DE DEBUG / REPÈRE ----------------- */
