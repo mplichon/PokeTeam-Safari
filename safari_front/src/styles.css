@@ -289,17 +289,22 @@ width: 80%;
 /* ----------------- GRID LAYOUT ----------------- */
 .layout-grid {
     display: grid;
-    grid-template-columns: 1fr 2fr;  /* Colonne gauche / Colonne droite */
-    grid-template-rows: auto auto;   /* Ligne A / Ligne B à gauche */
+    grid-template-columns: 1fr 4fr;  /* Colonne gauche / Colonne droite */
+    grid-template-rows: auto auto auto;   /* Ligne A / Ligne B à gauche */
     gap: 20px;
     padding: 20px;
 }
 
 /* Bloc C prend les deux lignes */
 .carte {
-    grid-column: 2;   /* colonne 2 = droite */
-    grid-row: 1 / 3;  /* occupe deux lignes */
-    background-color: #4D96FF; /* couleur Bloc C */
+   grid-column: 2;
+    grid-row: 1 / span 3;  /* occupe deux lignes */  /* occupe deux lignes */
+    background-image: url(assets/fondcarte.png);
+    background-size: cover;      /* pour que l'image remplisse le div */
+    background-repeat: no-repeat; /* éviter la répétition */
+    height: 100%;
+    width: 100%;
+    border: #3B3B3B solid 4px ;
 }
 
 /* Bloc gauche */
@@ -314,6 +319,9 @@ height: 563px;
 
 display: flex;
 flex-direction: column;
+
+ grid-column: 1;
+    grid-row: 1;
 
 
 
@@ -348,16 +356,114 @@ width: fit-content;
 
 
 .inventaire {
-    background-color: #FFD6A5; /* Bloc B */
+    background-color: #F8F8C8; /* Bloc B */
     min-height: 150px; /* juste pour visualisation */
+    width: 272px;
+    grid-column: 1;
+    grid-row: 2;
+display: flex;
+flex-direction: column;
+align-items: center; 
+
+
 }
+
+.newbloc {
+  grid-column: 1;
+  grid-row: 3;
+  background-color: #FFD6A5; /* juste pour visualiser */
+  min-height: 150px;
+  width: 0;
+}
+
+
+.selectitems{
+    width: 100%;
+    font-size: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding: 16px;
+    margin: 0;                 /* corrige le décalage */
+    list-style: none;          /* enlève les puces */
+
+    border: #F8E088 solid 4px;
+    box-sizing: border-box;    /* évite les débordements */
+}
+
+
+
+.indic{
+
+font-size: 8px;
+margin: auto;
+
+
+}
+
+.item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;      
+    padding: 4px 16px;       
+    
+    background-color: #FFFFE9;
+    box-shadow: 4px 4px 0 #F8E088;
+
+    box-sizing: border-box;
+}
+
+
+.item p {
+    margin: 0;
+}
+
+.subsubtitle{
+
+color: white;
+background-color: #216EAC;
+width: 100%;
+font-weight: lighter;
+margin: auto;
+text-align: center;
+padding: 4px 0;
+
+}
+
+.lower_inv{
+
+color: white;
+background-color: #415240;
+width: 100%;
+font-weight: lighter;
+margin: auto;
+text-align: center;
+padding: 4px 0;
+display: flex;
+flex-direction: row;
+justify-content: left;
+
+}
+
+.img_inv {
+  width: 16px;
+  height: 16px;
+  margin: 4px 8px;
+}
+
+
+
 
 /* ----------------- OPTIONS DE DEBUG / REPÈRE ----------------- */
 .layout-grid section {
-    border: 2px dashed #333; /* bordures pour visualiser blocs */
+    
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    color: #333;
+    
 }

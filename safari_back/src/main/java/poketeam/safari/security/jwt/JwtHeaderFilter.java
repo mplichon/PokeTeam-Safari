@@ -1,4 +1,4 @@
-package poketeam.safari.config;
+package poketeam.safari.security.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -29,6 +29,11 @@ public class JwtHeaderFilter extends OncePerRequestFilter{
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String header = request.getHeader("Authorization");
+
+        if (request.getRequestURI().equals("/api/auth")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         if (header != null) {
             String token = header.substring(7); // On enlève "Bearer " pour garder que le jeton

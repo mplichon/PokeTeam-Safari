@@ -21,7 +21,7 @@ public abstract class Compte {
 	@Column(name="login", nullable = false, length = 20)
     protected String login;
 
-	@Column(name="password", nullable = false, length = 30)
+	@Column(name="password", nullable = false, length = 150)
     protected String password;
 
     public Compte() {}

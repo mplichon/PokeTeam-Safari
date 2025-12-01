@@ -1,0 +1,23 @@
+<div class="pokemon-detail">
+
+  <img class="pokemon-big"
+       [src]="pokemonToDisplay.sprite"
+       alt="{{ pokemonToDisplay.name }}">
+
+  <div class="pokemon-header">
+    <img class="pokeball" src="assets/pokeballpix.png" alt="">
+    <span class="id">N. {{ pokemonToDisplay.id }}</span>
+    <span class="name">{{ pokemonToDisplay.name }}</span>
+  </div>
+
+  <div class="types">
+    <span class="type" *ngFor="let t of pokemonToDisplay.types">
+      {{ t }}
+    </span>
+  </div>
+
+  <div class="actions">
+    <button>PRECEDENT</button>
+    <button>SUIVANT</button>
+  </div>
+</div>

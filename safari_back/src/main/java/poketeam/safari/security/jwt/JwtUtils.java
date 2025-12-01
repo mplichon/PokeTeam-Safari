@@ -1,4 +1,4 @@
-package poketeam.safari.config;
+package poketeam.safari.security.jwt;
 
 import org.jose4j.jws.JsonWebSignature;
 import org.jose4j.jwt.JwtClaims;

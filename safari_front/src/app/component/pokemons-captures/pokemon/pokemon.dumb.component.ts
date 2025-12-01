@@ -1,5 +1,5 @@
 import { Component, EventEmitter, input, Input, Output } from '@angular/core';
-import { ListePokemons } from './pokemon.interface';
+import { ListePokemons, Pokemon } from './pokemon.interface';
 
 @Component({
   selector: 'app-pokemon',
@@ -10,4 +10,6 @@ import { ListePokemons } from './pokemon.interface';
 
 export class PokemonDumbComponent {
   readonly ListePokemons = input.required<ListePokemons>();
+
+  @Output() selectPokemon = new EventEmitter<Pokemon>();
 }

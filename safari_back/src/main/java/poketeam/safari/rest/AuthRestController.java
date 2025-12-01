@@ -3,12 +3,9 @@ package poketeam.safari.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import poketeam.safari.config.JwtUtils;
+import poketeam.safari.security.jwt.JwtUtils;
 import poketeam.safari.dto.request.AuthUserRequest;
 import poketeam.safari.dto.response.AuthResponse;
 
@@ -26,6 +23,13 @@ public class AuthRestController {
         // On demande à Spring Security si le user / password sont OK
         this.am.authenticate(auth);
 
+        System.out.println("test");
+
         return new AuthResponse(JwtUtils.generate(auth));
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "OK";
     }
 }
