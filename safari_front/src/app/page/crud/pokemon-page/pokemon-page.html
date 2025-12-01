@@ -1,1 +1,58 @@
-<p>pokemon-page works!</p>
+<h1>Liste des Pokémons</h1>
+
+<div id="grille">
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Pays</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let p of pokemons$ | async; trackBy: trackEditeur">
+                <td>
+                    <a [routerLink]="[ '/pokemon', p.id ]">{{ p.nom }}</a>
+                </td>
+
+                <td>{{ p.pays }}</td>
+
+                <td>
+                    <button (click)="editEditeur(p)">Modifier</button>
+                    <button (click)="deleteEditeur(p)">Supprimer</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="ajout">
+        <form (ngSubmit)="ajouterModifierEditeur()" [formGroup]="pokemonForm">
+
+            <div>
+                <input  type="text" formControlName="nom" placeholder="Nom obligatoire"/> 
+                
+                @if (nomCtrl.hasError('required')) {
+                    <div class="error-message">Le nom est obligatoire</div>
+                }
+            </div>
+
+            <div>
+                <input type="text" formControlName="pays" placeholder="Pays obligatoire"/>
+
+                @if (paysCtrl.hasError('required')) {
+                    <div class="error-message">Le pays est obligatoire</div>
+                }
+            </div>
+
+            @if (editingEditeur) {
+                <input type="submit" [disabled]="pokemonForm.invalid" value="Modifier" />
+            }
+
+            @else {
+                <input type="submit" [disabled]="pokemonForm.invalid" value="Ajouter" />
+            }
+
+        </form>
+    </div>
+</div>
