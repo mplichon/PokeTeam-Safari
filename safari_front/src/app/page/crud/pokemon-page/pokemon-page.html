@@ -16,18 +16,18 @@
                     <a [routerLink]="[ '/pokemon', p.id ]">{{ p.nom }}</a>
                 </td>
 
-                <td>{{ p.pays }}</td>
+                <td>{{ p.tauxCapture }}</td>
 
                 <td>
-                    <button (click)="editEditeur(p)">Modifier</button>
-                    <button (click)="deleteEditeur(p)">Supprimer</button>
+                    <button (click)="editPokemon(p)">Modifier</button>
+                    <button (click)="deletePokemon(p)">Supprimer</button>
                 </td>
             </tr>
         </tbody>
     </table>
 
     <div class="ajout">
-        <form (ngSubmit)="ajouterModifierEditeur()" [formGroup]="pokemonForm">
+        <form (ngSubmit)="ajouterModifierPokemon()" [formGroup]="pokemonForm">
 
             <div>
                 <input  type="text" formControlName="nom" placeholder="Nom obligatoire"/> 
@@ -38,14 +38,14 @@
             </div>
 
             <div>
-                <input type="text" formControlName="pays" placeholder="Pays obligatoire"/>
+                <input type="text" formControlName="tauxCapture" placeholder="Pays obligatoire"/>
 
-                @if (paysCtrl.hasError('required')) {
+                @if (tauxCaptureCtrl.hasError('required')) {
                     <div class="error-message">Le pays est obligatoire</div>
                 }
             </div>
 
-            @if (editingEditeur) {
+            @if (editingPokemon) {
                 <input type="submit" [disabled]="pokemonForm.invalid" value="Modifier" />
             }
 
