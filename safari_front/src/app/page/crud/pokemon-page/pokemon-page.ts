@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { PokemonService } from '../../../service/pokemon-service';
+import { PokemonDto } from '../../../dto/pokemon-dto';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-pokemon-page',
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   templateUrl: './pokemon-page.html',
   styleUrl: './pokemon-page.css',
 })
 export class PokemonPage implements OnInit {
-  protected pokemon: PokemonDto = new PokemonDto();
+  protected pokemon: PokemonDto = new PokemonDto(0, "", "", 0);
   protected pokemons$!: Observable<PokemonDto[]>;
   protected pokemonForm!: FormGroup;
   protected nomCtrl!: FormControl;
