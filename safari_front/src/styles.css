@@ -14,7 +14,7 @@ html, body {
 
 /* -------- BACKGROUND -------- */
 .backconnx { 
-  background: url("back1.png") center/cover no-repeat;
+  background: url("./assets/back1.png") center/cover no-repeat;
   width: 100vw;
   margin: 0;
 }
@@ -302,7 +302,7 @@ width: 80%;
 
 /* Bloc gauche */
 .pokedex {
-    background-image: url("pokedex.png");
+    background-image: url("./assets/pokedex.png");
     background-size: cover;      /* pour que l'image remplisse le div */
     background-repeat: no-repeat; /* éviter la répétition */
     background-position: center;  /* centrer l'image */
