@@ -10,13 +10,17 @@ import poketeam.safari.dto.request.RencontreInitRequest;
 import poketeam.safari.dto.response.RencontreInitResponse;
 import poketeam.safari.dto.response.RencontreStatutResponse;
 import poketeam.safari.model.RencontrePokemon;
+import poketeam.safari.service.PokemonService;
 import poketeam.safari.service.RencontrePokemonService;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
 @RequestMapping("/api/rencontre")
+@CrossOrigin("*")
 public class RencontrePokemonRestController {
     
     @Autowired

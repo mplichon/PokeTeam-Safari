@@ -23,6 +23,9 @@ public class Pokemon {
 	
 	@Column(name="taux_capture")
 	int tauxCapture;
+
+	@Column(name="taux_fuite")
+	int tauxFuite;
 	
 	@Column(name="facteur_apparition")
 	int facteurApparition;
@@ -38,10 +41,11 @@ public class Pokemon {
 
 	public Pokemon() {}
 	
-	public Pokemon(Integer id, String nom, int tauxCapture, int facteurApparition, String type1) {
+	public Pokemon(Integer id, String nom, int tauxCapture, int tauxFuite, int facteurApparition, String type1) {
 		this.id = id;
 		this.nom = nom;
 		this.tauxCapture = tauxCapture;
+		this.tauxFuite = tauxFuite;
 		this.facteurApparition = facteurApparition;
 		this.type1 = TypeElement.valueOf(type1);
 		this.type2 = null;
@@ -49,10 +53,11 @@ public class Pokemon {
 	
 	
 	
-	public Pokemon(Integer id, String nom, int tauxCapture, int facteurApparition, String type1, String type2) {
+	public Pokemon(Integer id, String nom, int tauxCapture, int tauxFuite, int facteurApparition, String type1, String type2) {
 		this.id = id;
 		this.nom = nom;
 		this.tauxCapture = tauxCapture;
+		this.tauxFuite = tauxFuite;
 		this.facteurApparition = facteurApparition;
 		this.type1 = TypeElement.valueOf(type1);;
 		this.type2 = TypeElement.valueOf(type2);;
@@ -88,6 +93,14 @@ public class Pokemon {
 		this.tauxCapture = tauxCapture;
 	}
 
+	public int getTauxFuite() {
+		return tauxFuite;
+	}
+
+	public void setTauxFuite(int tauxFuite) {
+		this.tauxFuite = tauxFuite;
+	}
+
 
 	public int getFacteurApparition() {
 		return facteurApparition;
@@ -121,7 +134,7 @@ public class Pokemon {
 
 	@Override
 	public String toString() {
-		return "Pokemon [id=" + id + ", nom=" + nom + ", tauxCapture=" + tauxCapture + ", facteurApparition="
+		return "Pokemon [id=" + id + ", nom=" + nom + ", tauxCapture=" + tauxCapture + ", tauxFuite=" + tauxFuite + ", facteurApparition="
 				+ facteurApparition + ", type1=" + type1 + ", type2=" + type2 + "]";
 	}
 	

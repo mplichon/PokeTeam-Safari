@@ -41,6 +41,14 @@ public class PokemonCapture {
 
 	
 	// Getters et setters
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 	public Joueur getJoueur() {
 		return joueur;
 	}
