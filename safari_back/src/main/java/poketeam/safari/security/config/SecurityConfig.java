@@ -1,4 +1,4 @@
-package poketeam.safari.config;
+package poketeam.safari.security.config;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import poketeam.safari.security.jwt.JwtHeaderFilter;
 
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true) // Activer les annotations @PreAuthorize / @PostAuthorize
@@ -39,7 +40,6 @@ public class SecurityConfig {
             auth.requestMatchers("/**").permitAll();
         });
 
-        // Activer le formulaire de connexion
         http.formLogin(form -> {
             form.loginPage("/login"); // Page de login, GetMapping à gérer nous-même
             form.loginProcessingUrl("/process_login"); // URL de process du login par Spring Security, PostMapping créé et géré par Spring Security
@@ -57,6 +57,7 @@ public class SecurityConfig {
 
         // Désactiver la protection CSRF
         http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"));
+
 
         // Configuration de la politique CORS
         http.cors(cors -> {
@@ -87,8 +88,8 @@ public class SecurityConfig {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        System.out.println("\r\nMot de passe ===> " + passwordEncoder.encode("admin") + "\r\n");
-        System.out.println("\r\nMot de passe ===> " + passwordEncoder.encode("user") + "\r\n");
+        System.out.println("\r\nMot de passe ===> " + passwordEncoder.encode("usermdp") + "\r\n");
+        System.out.println("\r\nMot de passe ===> " + passwordEncoder.encode("adminmdp") + "\r\n");
 
         return passwordEncoder;
     }
