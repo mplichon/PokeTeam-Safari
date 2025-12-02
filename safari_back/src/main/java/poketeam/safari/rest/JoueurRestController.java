@@ -60,6 +60,10 @@ public class JoueurRestController {
 	{
 		log.info("POST /api/joueur - ajoutJoueur() called");
         Joueur joueur = new Joueur(joueurToCreate.getUsername(), joueurToCreate.getPassword(), joueurToCreate.getSurnom());
+		Compte compte = compteSrv.findByLogin(joueur.getLogin());
+		if (compte != null) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Un compte avec ce login existe déjà");
+		}
 		Joueur createdJoueur = (Joueur) compteSrv.create(joueur);
 		return new JoueurResponse(createdJoueur.getId(), createdJoueur.getLogin(), createdJoueur.getSurnom());
 	}
