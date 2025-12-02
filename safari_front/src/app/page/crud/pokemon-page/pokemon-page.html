@@ -5,6 +5,19 @@
 
 <table>
     <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Taux de capture</th>
+            <th>Taux de fuite</th>
+            <th>Facteur d'apparition</th>
+            <th>Type 1</th>
+            <th>Type 2</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
         <tr *ngFor="let p of pokemons$ | async; trackBy: trackPokemon">
             <td>{{ p.id }}</td>
             <td>{{ p.nom }}</td>
