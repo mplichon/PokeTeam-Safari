@@ -1,48 +1,49 @@
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable, Subject } from 'rxjs';
-// import { startWith, switchMap } from 'rxjs/operators';
-// import { PokemoncaptureDto } from '../dto/pokemoncapture-dto';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
+import { startWith, switchMap } from 'rxjs/operators';
+import { PokemonCaptureDto } from '../dto/pokemon-capture-dto';
 
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class PokemonCaptureService {
 
-//   private apiUrl: string = '/api/pokemon-capture';
-//   private refresh$: Subject<void> = new Subject<void>();
+@Injectable({
+ providedIn: 'root',
+ })
+ export class PokemonCaptureService {
 
-//   constructor(private http: HttpClient) { }
+   private apiUrl: string = '/api/pokemon-capture';
+   private refresh$: Subject<void> = new Subject<void>();
 
-//   public findAll(): Observable<PokemoncaptureDto[]> {
-//     return this.refresh$.pipe(
-//       startWith(null),
-//       switchMap(() => this.http.get<PokemoncaptureDto[]>(this.apiUrl))
-//     );
-//   }
+   constructor(private http: HttpClient) { }
 
-//   public refresh() {
-//     this.refresh$.next();
-//   }
+   public findAll(): Observable<PokemonCaptureDto[]> {
+     return this.refresh$.pipe(
+       startWith(null),
+       switchMap(() => this.http.get<PokemonCaptureDto[]>(this.apiUrl))
+    );
+   }
 
-//   public findById(id: number): Observable<PokemoncaptureDto> {
-//     return this.http.get<PokemoncaptureDto>(`${this.apiUrl}/${id}`);
-//   }
+  public refresh() {
+    this.refresh$.next();
+  }
 
-//   public save(pokemoncaptureDto: PokemoncaptureDto): void {
-//     const payload = pokemoncaptureDto.toJson();
+  public findById(id: number): Observable<PokemonCaptureDto> {
+    return this.http.get<PokemonCaptureDto>(`${this.apiUrl}/${id}`);
+  }
 
-//     if (!pokemoncaptureDto.id) {
-//       this.http.post<PokemoncaptureDto>(this.apiUrl, payload)
-//         .subscribe(() => this.refresh());
-//     } else {
-//       this.http.put<PokemoncaptureDto>(`${this.apiUrl}/${pokemoncaptureDto.id}`, payload)
-//         .subscribe(() => this.refresh());
-//     }
-//   }
+  public save(pokemoncaptureDto: PokemonCaptureDto): void {
+    const payload = pokemoncaptureDto.toJson();
 
-//   public deleteById(id: number): void {
-//     this.http.delete<void>(`${this.apiUrl}/${id}`)
-//       .subscribe(() => this.refresh());
-//   }
-// }
+    if (!pokemoncaptureDto.id) {
+      this.http.post<PokemonCaptureDto>(this.apiUrl, payload)
+        .subscribe(() => this.refresh());
+    } else {
+      this.http.put<PokemonCaptureDto>(`${this.apiUrl}/${pokemoncaptureDto.id}`, payload)
+        .subscribe(() => this.refresh());
+    }
+  }
+
+  public deleteById(id: number): void {
+    this.http.delete<void>(`${this.apiUrl}/${id}`)
+      .subscribe(() => this.refresh());
+  }
+}

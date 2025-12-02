@@ -5,6 +5,7 @@ export interface Pokemon {
   types?: string[]; 
 }
 
+//pokemon avec l'image nette en +
 export interface PokemonDetail {
   id: number;
   name: string;

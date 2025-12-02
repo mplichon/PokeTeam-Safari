@@ -1,11 +1,11 @@
-<div class="backconnx">
+<body class="backconnx">
   <div class="encarco">
 
     <div class="center_g16">
       <img class="pokeballdeco" src="assets/pokeballpix.png" alt="pokeballpix">
 
-      <h1 class="title">Create <br> Account</h1>
-      <h2 class="subtitle">Welcome to the <br> pokefari</h2>
+      <h1 class="title">welcome</h1>
+      <h2 class="subtitle">to the <br> pokefari</h2>
     </div>
 
     <div *ngIf="registerError">
@@ -18,7 +18,6 @@
         <input class="conxn"
                type="text"
                formControlName="username"
-               name="username"
                placeholder="ton login">
 
         <div class="password-container">
@@ -26,8 +25,6 @@
                  type="password"
                  formControlName="password"
                  placeholder="ton mot de passe">
-
-          <img id="toggle" src="assets/openy.png" alt="">
         </div>
 
         <div class="password-container">
@@ -39,9 +36,9 @@
           <img id="toggle" src="assets/openy.png" alt="">
         </div>
 
-        <button type="submit"
-                class="primary_b"
-                (click)="test()">
+        <button class="primary_b"
+                type="submit"
+                [disabled]="registerForm.invalid">
           créer mon compte
         </button>
 
@@ -59,4 +56,4 @@
       </a>
     </p>
   </div>
-</div>
+</body>

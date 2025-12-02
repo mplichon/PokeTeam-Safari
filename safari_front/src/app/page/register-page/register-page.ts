@@ -14,10 +14,6 @@ import { passwordMatchValidator } from '../../validator/password-match-validator
 })
 export class RegisterPage implements OnInit{
 
-  test(){
-    console.log("clic")
-  }
-
   protected registerForm!: FormGroup;
   protected registerError = false;
   showPassword = false;
