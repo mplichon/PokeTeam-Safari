@@ -1,15 +1,14 @@
 export class AdminDto {
   constructor(
-    private _id?: number,
-    private _login: string = '',
-    private _admin: boolean = true
+    private _id: number,
+    private _login: string,
   ) {}
 
-  public get id(): number | undefined {
+  public get id(): number {
     return this._id;
   }
 
-  public set id(value: number | undefined) {
+  public set id(value: number) {
     this._id = value;
   }
 
@@ -21,26 +20,16 @@ export class AdminDto {
     this._login = value;
   }
 
-  public get admin(): boolean {
-    return this._admin;
-  }
-
-  public set admin(value: boolean) {
-    this._admin = value;
-  }
-
   public toJson(): any {
     return {
-      login: this.login,
-      admin: this.admin
+      login: this.login
     };
   }
 
   public toJsonWithId(): any {
     return {
       id: this.id,
-      login: this.login,
-      admin: this.admin
+      login: this.login
     };
   }
 }
