@@ -7,7 +7,7 @@ import { MapDto } from '../dto/map-dto';
   providedIn: 'root',
 })
 export class MapService {
-  private apiUrl: string = '/api/map';
+  private apiUrl: string = '/map';
   private refresh$: Subject<void> = new Subject<void>();
 
   constructor(private http: HttpClient) {}
