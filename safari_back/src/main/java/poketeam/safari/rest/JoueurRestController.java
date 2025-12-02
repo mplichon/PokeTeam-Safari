@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import poketeam.safari.dto.request.JoueurCreationRequest;
 import poketeam.safari.dto.response.JoueurResponse;
 import poketeam.safari.model.Joueur;
 import poketeam.safari.service.CompteService;
@@ -48,10 +49,12 @@ public class JoueurRestController {
 
 
 	@PostMapping
-	public JoueurResponse ajoutJoueur(@RequestBody Joueur joueur)
+	public JoueurResponse ajoutJoueur(@RequestBody JoueurCreationRequest joueurToCreate)
 	{
 		log.info("POST /api/joueur - ajoutJoueur() called");
+        Joueur joueur = new Joueur(joueurToCreate.getLogin(), joueurToCreate.getPassword(), joueurToCreate.getSurnom());
 		Joueur createdJoueur = (Joueur) compteSrv.create(joueur);
+
 		return new JoueurResponse(createdJoueur.getId(), createdJoueur.getLogin(), createdJoueur.getSurnom());
 	}
 

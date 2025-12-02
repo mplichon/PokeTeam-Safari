@@ -16,7 +16,7 @@ import jakarta.persistence.OneToMany;
 public class Joueur extends Compte {
 	
 	
-	@Column(name="surnom",nullable = false,length = 20)
+	@Column(name="surnom",length = 20)
 	private String surnom;
 	
 	@Embedded
@@ -59,6 +59,15 @@ public class Joueur extends Compte {
 	public void setPositionActuelle(Map positionActuelle) {
 		this.positionActuelle = positionActuelle;
 	}
+
+
+    public Inventaire getInventaire() {
+        return inventaire;
+    }
+
+    public void setInventaire(Inventaire inventaire) {
+        this.inventaire = inventaire;
+    }
 
 	@Override
 	public String toString() {

@@ -6,13 +6,13 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class Inventaire {
 
-	@Column(name = "nb_pokeball", nullable = false, columnDefinition = "INT(3)")
+	@Column(name = "nb_pokeball", columnDefinition = "INT(3)")
 	Integer nbPokeball;
 
-	@Column(name = "nb_friandise", nullable = false, columnDefinition = "INT(3)")
+	@Column(name = "nb_friandise", columnDefinition = "INT(3)")
 	Integer nbFriandise;
 
-	@Column(name = "nb_boue", nullable = false, columnDefinition = "INT(3)")
+	@Column(name = "nb_boue", columnDefinition = "INT(3)")
 	Integer nbBoue;
 
 	public Inventaire() {

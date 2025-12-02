@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import poketeam.safari.dao.IDAOCompte;
@@ -17,6 +18,7 @@ public class CompteService {
     @Autowired
     IDAOCompte daoCompte;
 
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     // @Autowired
 	// PasswordEncoder passwordEncoder;
 
@@ -72,7 +74,7 @@ public class CompteService {
 
     // create / update / delete
 	public Compte create(Compte compte) {
-        // compte.setPassword(passwordEncoder.encode(compte.getPassword()));
+        compte.setPassword(passwordEncoder.encode(compte.getPassword()));
 		return daoCompte.save(compte);
 	}
 
