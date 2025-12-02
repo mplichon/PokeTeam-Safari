@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { startWith, switchMap } from 'rxjs/operators';
+import { map, startWith, switchMap } from 'rxjs/operators';
 import { PokemonCaptureDto } from '../dto/pokemon-capture-dto';
 
 
@@ -10,7 +10,7 @@ import { PokemonCaptureDto } from '../dto/pokemon-capture-dto';
  })
  export class PokemonCaptureService {
 
-   private apiUrl: string = '/api/pokemon-capture';
+   private apiUrl: string = '/pokemon-capture';
    private refresh$: Subject<void> = new Subject<void>();
 
    constructor(private http: HttpClient) { }
@@ -45,5 +45,15 @@ import { PokemonCaptureDto } from '../dto/pokemon-capture-dto';
   public deleteById(id: number): void {
     this.http.delete<void>(`${this.apiUrl}/${id}`)
       .subscribe(() => this.refresh());
+  }
+
+  public pokemonCaptureParIdParJoueur(id: number): Observable<number[]> {
+    return this.http.
+        get<PokemonCaptureDto[]>(`${this.apiUrl}/joueur/${id}`)
+        .pipe(
+            map(list =>
+            [...new Set(list.map(p => p.id))]
+            )
+        )
   }
 }

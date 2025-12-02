@@ -1,0 +1,17 @@
+.pokemon-item {
+    display: flex;
+    align-items: center;
+}
+
+.pokemon-sprite {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+/* Pokéball → plus petite mais dans la même boîte */
+.pokemon-sprite.placeholder {
+  transform: scale(0.4);      /* ajuste à ton goût : 0.5, 0.7 etc. */
+  transform-origin: center center;
+}
