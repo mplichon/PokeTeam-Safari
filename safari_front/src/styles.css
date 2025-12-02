@@ -489,6 +489,7 @@ justify-content: left;
   overflow-y: auto;
   padding-right: 8px;
   overflow: auto;
+  width: 140%;
   
 }
 
@@ -552,6 +553,7 @@ justify-content: left;
  display: flex;
  flex-direction: column;
  justify-content: center;
+ width: 140%;
 
 }
 
@@ -638,9 +640,12 @@ padding: 16px 0;
 }
 
 .layout {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 20px;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
+width: 80%;
+
     padding: 32px 52px ;
     height: 100%;
 }
