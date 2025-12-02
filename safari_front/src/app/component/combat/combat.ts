@@ -41,7 +41,8 @@ export class Combat implements OnInit {
   ngOnInit(): void {
 
     //aller chercher l'id du pokemon
-    //this.id=??
+    this._id=Math.floor(Math.random() * 151) + 1
+    console.log(this._id);
 
     this.getPokemon(this._id).subscribe({
       next: (p) => {
