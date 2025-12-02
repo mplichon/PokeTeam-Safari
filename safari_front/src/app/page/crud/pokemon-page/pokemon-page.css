@@ -1,0 +1,139 @@
+/* ------------------- WRAPPER ------------------- */
+.page-poke-list {
+  padding: 32px;
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  background: repeating-linear-gradient(
+    0deg,
+    #D2DAEB,
+    #D2DAEB 20px,
+    #EDF0F6 20px,
+    #EDF0F6 40px
+  );
+}
+
+/* ------------------- TITRE ------------------- */
+.page-poke-list h1 {
+  font-size: 20px;
+  text-align: center;
+  color: #216EAC;
+  margin-bottom: 32px;
+}
+
+
+/* ------------------- TABLE ------------------- */
+.page-poke-list table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 6px solid #3B3B3B;
+  box-shadow: 6px 6px 0 #3B3B3B;
+  font-size: 14px;
+}
+
+.page-poke-list thead th {
+  background-color: #216EAC;
+  color: #EDF0F6;
+  padding: 14px 10px;
+  border-bottom: 4px solid #3B3B3B;
+  text-align: center;
+  font-weight: 600;
+}
+
+.page-poke-list tbody td {
+  background: #FFFFFF;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 3px solid #D2DAEB;
+  color: #3B3B3B;
+}
+
+.page-poke-list tbody tr:nth-child(even) td {
+  background: #F4F6FB;
+}
+
+
+/* ------------------- BOUTONS DU TABLEAU ------------------- */
+.page-poke-list table button {
+  background-color: #D2DAEB;
+  color: #216EAC;
+  padding: 8px 12px;
+  border: 4px solid #3B3B3B;
+  cursor: pointer;
+  font-size: 12px;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 #3B3B3B;
+  transition: 0.1s;
+}
+
+.page-poke-list table button:hover {
+  background-color: #C4CDDF;
+}
+
+.page-poke-list table button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #3B3B3B;
+}
+
+
+/* ------------------- FORMULAIRE AJOUT ------------------- */
+.page-poke-list .ajout {
+  margin: 40px auto 0 auto;
+  background: #FFFFFF;
+  border: 6px solid #216EAC;
+  box-shadow: 6px 6px 0 #3B3B3B;
+  padding: 28px;
+  width: fit-content;
+}
+
+/* Inputs identiques à .conxn */
+.page-poke-list .ajout input[type="text"],
+.page-poke-list .ajout input[type="number"] {
+  background: #FFFFFF;
+  border: 4px solid #3B3B3B;
+  padding: 8px;
+  width: 260px;
+  font-size: 14px;
+  box-shadow: 4px 4px 0 #3B3B3B;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.page-poke-list .ajout input::placeholder {
+  color: #A7B5C9;
+}
+
+.page-poke-list .ajout input:focus {
+  outline: none;
+  box-shadow: 4px 4px 0 #216EAC;
+}
+
+/* Submit identique à .primary_b */
+.page-poke-list .ajout input[type="submit"] {
+  background-color: #216EAC;
+  color: #EDF0F6;
+  border: 4px solid #3B3B3B;
+  padding: 12px 18px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 4px 4px 0 #3B3B3B;
+  transition: 0.1s;
+  margin-top: 10px;
+}
+
+.page-poke-list .ajout input[type="submit"]:hover {
+  background-color: #1A5A8A;
+}
+
+.page-poke-list .ajout input[type="submit"]:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #3B3B3B;
+}
+
+.page-poke-list .error-message {
+  color: #D10700;
+  font-size: 12px;
+  margin-top: 4px;
+}
