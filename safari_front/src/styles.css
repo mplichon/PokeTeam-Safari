@@ -741,7 +741,7 @@ background: #ffffff;
 background: radial-gradient(circle,rgba(255, 255, 255, 1) 0%, rgba(148, 187, 233, 1) 52%, rgba(70, 149, 240, 1) 100%);
 }
 
-.containeur_fuite, .containteur_fuit{
+.containeur_fuite, .containeur_fuit{
   display: flex;
   justify-content: center;  /* centre horizontal */
   align-items: center;    
