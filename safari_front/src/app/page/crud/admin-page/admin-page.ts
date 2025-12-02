@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AdminService } from '../../../service/admin-service';
 import { AdminDto } from '../../../dto/admin-dto';
+import { AdminPasswordDto } from '../../../dto/admin-password-dto';
 
 @Component({
   selector: 'app-admin-page',
@@ -17,7 +18,7 @@ import { AdminDto } from '../../../dto/admin-dto';
   styleUrls: ['./admin-page.css']
 })
 export class AdminPage implements OnInit {
-
+  protected admin: AdminDto = new AdminDto(0, "");
   protected admins$!: Observable<AdminDto[]>;
   protected adminForm!: FormGroup;
   protected loginCtrl!: FormControl;
@@ -30,7 +31,7 @@ export class AdminPage implements OnInit {
     this.admins$ = this.adminService.findAll();
 
     this.loginCtrl = new FormControl('', Validators.required);
-    this.passwordCtrl = new FormControl('', Validators.required);
+    this.passwordCtrl = new FormControl('', [ Validators.required, Validators.minLength(6) ]);
 
     this.adminForm = this.formBuilder.group({
       login: this.loginCtrl,
@@ -38,21 +39,22 @@ export class AdminPage implements OnInit {
     });
   }
 
-  public ajouterModifierAdmin(): void {
-    const login = this.loginCtrl.value;
-    const password = this.passwordCtrl.value; 
+  public ajouterModifierAdmin() {
 
     if (this.editingAdmin) {
-      // Modification
-      const updatedAdmin = new AdminDto(this.editingAdmin.id, login);
-   
-      (updatedAdmin as any).password = password;
-      this.adminService.save(updatedAdmin);
-    } else {
-      // Ajout
-      const newAdmin = new AdminDto(undefined, login);
-      (newAdmin as any).password = password;
-      this.adminService.save(newAdmin);
+      this.adminService.save(new AdminPasswordDto(
+        this.editingAdmin.id, 
+        this.loginCtrl.value, 
+        this.passwordCtrl.value
+      ));
+    }
+
+    else {
+      this.adminService.save(new AdminPasswordDto(
+        0, 
+        this.loginCtrl.value, 
+        this.passwordCtrl.value
+      ));
     }
 
     this.editingAdmin = null;
@@ -61,18 +63,17 @@ export class AdminPage implements OnInit {
   }
 
   public editAdmin(admin: AdminDto): void {
+    // Clone du Admin pour l'édition
     this.editingAdmin = admin;
     this.loginCtrl.setValue(admin.login);
-    this.passwordCtrl.setValue(''); 
+    this.passwordCtrl.setValue('');
   }
 
   public deleteAdmin(admin: AdminDto): void {
-    if (admin.id) {
-      this.adminService.deleteById(admin.id);
-    }
+    this.adminService.deleteById(admin.id);
   }
 
-  public trackAdmin(index: number, value: AdminDto): number | undefined {
+  public trackAdmin(index: number, value: AdminDto) {
     return value.id;
   }
 }
