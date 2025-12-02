@@ -20,7 +20,8 @@ export class Combat implements OnInit {
     name: '',
     sprite: '',
     img: '',
-    types: []
+    type1: '',
+    type2: ''
   };
 
   private baseUrl = 'https://pokebuildapi.fr/api/v1/pokemon';
@@ -28,16 +29,21 @@ export class Combat implements OnInit {
   constructor(private http: HttpClient) {}
 
   getPokemon(id: number): Observable<PokemonDetail> {
-    return this.http.get<any>(`${this.baseUrl}/`+ id).pipe(
-      map((p) => ({
-          id: p.id,
-          name: p.name,
-          sprite: p.sprite,               // correspond à 96x96
-          img: p.image,                   // correspond à l'image complète
-          types: p.apiTypes?.map((t : { name: string }) => t.name) ?? []
-        }))
-      )
-  }
+  return this.http.get<any>(`${this.baseUrl}/${id}`).pipe(
+    map(p => {
+      const types = p.apiTypes?.map((t: { name: string }) => t.name) ?? [];
+
+      return {
+        id: p.id,
+        name: p.name,
+        sprite: p.sprite,
+        img: p.image,
+        type1: types[0] ?? '',
+        type2: types[1] ?? null
+      };
+    })
+  );
+}
   ngOnInit(): void {
 
     //aller chercher l'id du pokemon
