@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { PokemonService } from '../../../service/pokemon-service';
 import { PokemonDto } from '../../../dto/pokemon-dto';
 import { CommonModule } from '@angular/common';
 import { TypeElementDto } from '../../../dto/type-element-dto';
 import { TypeElementService } from '../../../service/type-element-service';
+import { typeNotMatchValidator } from '../../../validator/type-not-match-validator';
 
 @Component({
   selector: 'app-pokemon-page',
@@ -40,8 +41,8 @@ export class PokemonPage implements OnInit {
     this.tauxCaptureCtrl = new FormControl('', [Validators.required, Validators.min(0), Validators.max(255)]);
     this.tauxFuiteCtrl = new FormControl('', [Validators.required, Validators.min(0), Validators.max(255)]);
     this.facteurApparitionCtrl = new FormControl('', [Validators.required, Validators.min(0), Validators.max(255)]);
-    this.type1Ctrl = new FormControl('', Validators.required);
-    this.type2Ctrl = new FormControl('');
+    this.type1Ctrl = new FormControl(null, Validators.required);
+    this.type2Ctrl = new FormControl(null);
 
     this.pokemonForm = this.formBuilder.group({
       nom: this.nomCtrl,
@@ -50,6 +51,8 @@ export class PokemonPage implements OnInit {
       facteurApparition: this.facteurApparitionCtrl,
       type1: this.type1Ctrl,
       type2: this.type2Ctrl
+    }, {
+      validators: typeNotMatchValidator('type1', 'type2')
     });
   }
 

@@ -114,6 +114,7 @@
         <!-- type 1 -->
         <div>
             <select formControlName="type1">
+                <option [ngValue]="null">-- Aucun --</option>
                 <option *ngFor="let t of types$ | async" [ngValue]="t.key">
                     {{ t.nom }}
                 </option>
@@ -127,10 +128,15 @@
         <!-- type 2 -->
         <div>
             <select formControlName="type2">
+                <option [ngValue]="null">-- Aucun --</option>
                 <option *ngFor="let t of types$ | async" [ngValue]="t.key">
                     {{ t.nom }}
                 </option>
             </select>
+
+            @if (type2Ctrl.hasError('typeNotMatch')) {
+                <div class="error-message">Les 2 types doivent être différents</div>
+            }
         </div>
 
         @if (editingPokemon) {
