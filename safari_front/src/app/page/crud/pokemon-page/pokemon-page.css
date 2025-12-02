@@ -2,8 +2,15 @@
 .page-poke-list {
   padding: 32px;
   min-height: 100vh;
-  background: #EDF0F6;
   box-sizing: border-box;
+
+  background: repeating-linear-gradient(
+    0deg,
+    #D2DAEB,
+    #D2DAEB 20px,
+    #EDF0F6 20px,
+    #EDF0F6 40px
+  );
 }
 
 /* ------------------- TITRE ------------------- */
