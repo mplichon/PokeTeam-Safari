@@ -1,7 +1,6 @@
-<div class="admin-container">
+<!-- <div class="admin-container">
   <h2>Gestion des Admins</h2>
 
-  <!-- Formulaire ajout / modification -->
   <form [formGroup]="adminForm" (ngSubmit)="ajouterModifierAdmin()" class="admin-form">
     <div class="form-group">
       <label for="login">Login :</label>
@@ -19,7 +18,6 @@
     <button type="button" (click)="adminForm.reset(); editingAdmin = null" class="cancel-btn">Annuler</button>
   </form>
 
-  <!-- Tableau des admins -->
   <table class="admin-table">
     <thead>
       <tr>
@@ -39,4 +37,67 @@
       </tr>
     </tbody>
   </table>
+</div> -->
+
+<!-- Admin -->
+<div class="page-poke-list">
+
+<h1>Liste des Admins</h1>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Login</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let a of admins$ | async; trackBy: trackAdmin">
+            <td>{{ a.id }}</td>
+            <td>{{ a.login }}</td>
+            <td>
+                <button (click)="editAdmin(a)">Modifier</button>
+                <button (click)="deleteAdmin(a)">Supprimer</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="ajout">
+    <form (ngSubmit)="ajouterModifierAdmin()" [formGroup]="adminForm">
+        <!-- login -->
+        <div>
+            <input  type="text" formControlName="login" placeholder="Identifiant"/> 
+            
+            @if (loginCtrl.hasError('required')) {
+                <div class="error-message">L'identifiant est obligatoire</div>
+            }
+        </div>
+
+        <!-- password -->
+        <div>
+            <input type="text" formControlName="password" placeholder="Mot de passe"/>
+
+            @if (passwordCtrl.hasError('required')) {
+                <div class="error-message">Le mot de passe est obligatoire</div>
+            }
+
+            @else if (passwordCtrl.hasError('minlength')) {
+                <div class="error-message">Le mot de passe doit faire 6 caractères minimum</div>
+            }
+        </div>
+
+        @if (editingAdmin) {
+            <input type="submit" [disabled]="adminForm.invalid" value="Modifier" />
+        }
+
+        @else {
+            <input type="submit" [disabled]="adminForm.invalid" value="Ajouter" />
+        }
+
+    </form>
+</div>
 </div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, startWith, switchMap } from 'rxjs';
 import { AdminDto } from '../dto/admin-dto';
+import { AdminPasswordDto } from '../dto/admin-password-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -27,14 +28,14 @@ export class AdminService {
     return this.http.get<AdminDto>(`${this.apiUrl}/${id}`);
   }
 
-  public save(adminDto: AdminDto): void {
+  public save(adminDto: AdminPasswordDto): void {
     const payload = adminDto.toJson();
 
     if (!adminDto.id) {
-      this.http.post<AdminDto>(this.apiUrl, payload)
+      this.http.post<AdminPasswordDto>(this.apiUrl, payload)
         .subscribe(() => this.refresh());
     } else {
-      this.http.put<AdminDto>(`${this.apiUrl}/${adminDto.id}`, payload)
+      this.http.put<AdminPasswordDto>(`${this.apiUrl}/${adminDto.id}`, payload)
         .subscribe(() => this.refresh());
     }
   }

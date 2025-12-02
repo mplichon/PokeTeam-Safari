@@ -79,9 +79,9 @@ public class CompteService {
 	}
 
 	public Compte update(Compte compte) {
-        // if (compte.getPassword() != null) {
-		// 	compte.setPassword(passwordEncoder.encode(compte.getPassword()));
-		// }
+        if (compte.getPassword() != null) {
+			compte.setPassword(passwordEncoder.encode(compte.getPassword()));
+		}
 		return daoCompte.save(compte);
 	}
 
