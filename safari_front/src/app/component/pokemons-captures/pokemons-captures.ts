@@ -41,6 +41,8 @@ export class PokemonsCaptures implements OnInit {
  ngOnInit(): void {
     this.getFirst151().subscribe((list) => {
       this.ListePokemons.set(list);
+      
+      console.log(this.ListePokemons)
     });
   }
 

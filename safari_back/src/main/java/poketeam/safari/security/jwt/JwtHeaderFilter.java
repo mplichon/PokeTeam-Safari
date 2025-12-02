@@ -39,10 +39,11 @@ public class JwtHeaderFilter extends OncePerRequestFilter{
             String token = header.substring(7); // On enlève "Bearer " pour garder que le jeton
 
             // On vérifie le jeton, et si tout est OK, on récupère l'utilisateur associé à ce jeton
-            Optional<String> optUsername = JwtUtils.validateAndGetSubjet(token);
+            Optional<Integer> optId = JwtUtils.validateAndGetId(token);
 
-            if (optUsername.isPresent()) {
-                Compte compte = this.daoCompte.findByLogin(optUsername.get()).orElseThrow();
+            if (optId.isPresent()) {
+                Integer id = optId.get();
+                Compte compte = this.daoCompte.findById(id).orElseThrow();
 
                 // On refabrique une liste de rôles pour l'utilisateur
                 List<GrantedAuthority> autorities = new ArrayList<>();
@@ -56,7 +57,7 @@ public class JwtHeaderFilter extends OncePerRequestFilter{
                 }
 
                 // Créer, pour Spring Security, un nouvel User, avec le nom d'utilisateur, pas de mdp, et la liste des autorités
-                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(optUsername.get(), null, autorities);
+                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(compte.getLogin(), null, autorities);
 
                 // Injecter notre nouvel authentication dans le contexte de Spring Security
                 SecurityContextHolder.getContext().setAuthentication(auth);

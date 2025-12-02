@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { AuthService } from '../../service/auth-service';
+import { AuthRequestDto } from '../../component/dto/auth-request-dto';
 @Component({
   selector: 'app-login-page',
   imports: [CommonModule, ReactiveFormsModule],
@@ -16,10 +18,12 @@ export class LoginPage implements OnInit {
   protected usernameCtrl!: FormControl;
   protected passwordCtrl!: FormControl;
 
-  constructor(/*private authService: AuthService */ private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
 
+    this.usernameCtrl = this.formBuilder.control('', Validators.required);
+    this.passwordCtrl = this.formBuilder.control('', [ Validators.required, Validators.minLength(6) ]);
 
     this.userForm = this.formBuilder.group({
       username: this.usernameCtrl,
@@ -30,10 +34,10 @@ export class LoginPage implements OnInit {
   public async connecter() {
     try {
       // La méthode auth renvoyant une Promise, on peut attendre la résolution avec "await"
-    //  await this.authService.auth(new AuthRequestDto(this.usernameCtrl.value, this.passwordCtrl.value));
+      await this.authService.auth(new AuthRequestDto(this.usernameCtrl.value, this.passwordCtrl.value));
 
       // Si tout est OK, on va sur la page des matières
-      this.router.navigate([ '/game-page' ]);
+      this.router.navigate([ '/game' ]);
     }
 
     // Si la connexion n'a pas pu se faire, affichage de l'erreur sur le template

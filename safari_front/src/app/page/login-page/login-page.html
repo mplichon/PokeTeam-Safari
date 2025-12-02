@@ -13,20 +13,21 @@
 </div>
 
 <form (ngSubmit)="connecter()" [formGroup]="userForm">
-<div class="inputs">
+    <div class="inputs">
 
-    <input class="conxn" type="text" formControlName="username" name="login" id="login" placeholder="ton login" >
-    <br>
-    <div class="password-container">
-    <input class="conxn" type="password" formControlName="password" name="password" id="password" placeholder="ton mot de passe">
-    <img id="toggle" src="openy.png" alt="">
-    </div>
+      <input class="conxn" type="text" formControlName="username" name="username" id="username" placeholder="ton login" >
+      <br>
+        <div class="password-container">
+          <input class="conxn" type="password" formControlName="password" name="password" id="password" placeholder="ton mot de passe">
+          <img id="toggle" src="assets/openy.png" alt="">
+
+        </div>
     
-<br>
+      <br>
 
-<br>
-<button  onclick="window.location.href='index.html'" [disabled]="userForm.invalid" value="Se connecter" class="primary_b">se connecter</button>
-</div>
+  <br>
+    <button  onclick="window.location.href='index.html'" [disabled]="userForm.invalid" value="Se connecter" class="primary_b">se connecter</button>
+  </div>
 </form>
 
 
@@ -46,18 +47,18 @@
 
 
 
-    <script>
-const mdp = document.getElementById('password');
-const toggle = document.getElementById('toggle');
+  <script>
+      const mdp = document.getElementById('password');
+      const toggle = document.getElementById('toggle');
 
-toggle.addEventListener('click', () => {
-  if (mdp.type === 'password') {
-    mdp.type = 'text';
-    toggle.src = 'openy.png'; 
-  } else {
-    mdp.type = 'password';
-    toggle.src = 'closey.png'; 
-  }
-});
-</script>
+      toggle.addEventListener('click', () => {
+        if (mdp.type === 'password') {
+          mdp.type = 'text';
+          toggle.src = 'assets/openy.pngopeny.png'; 
+        } else {
+          mdp.type = 'password';
+          toggle.src = 'assets/closey.png'; 
+        }
+      });
+  </script>
 </body>

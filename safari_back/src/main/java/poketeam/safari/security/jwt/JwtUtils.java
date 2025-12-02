@@ -16,11 +16,14 @@ public class JwtUtils {
 
     private JwtUtils() { }
 
-    public static String generate(Authentication auth) {
+    public static String generate(Authentication auth, Integer idCompte) {
         JwtClaims claims = new JwtClaims();
         JsonWebSignature jws = new JsonWebSignature();
 
         claims.setSubject(auth.getName());
+
+        claims.setClaim("id", idCompte);
+
         claims.setIssuedAtToNow();
         claims.setExpirationTimeMinutesInTheFuture((int)(JWT_EXPIRATION / 60000));
 
@@ -49,6 +52,20 @@ public class JwtUtils {
         }
 
         catch (Exception ex) {
+            return Optional.empty();
+        }
+    }
+
+    public static Optional<Integer> validateAndGetId(String token) {
+        try {
+            JwtConsumer consumer = new JwtConsumerBuilder()
+                    .setVerificationKey(new HmacKey(JWT_KEY.getBytes()))
+                    .setRequireExpirationTime()
+                    .build();
+
+            JwtClaims claims = consumer.processToClaims(token);
+            return Optional.ofNullable(claims.getClaimValue("id", Integer.class));
+        } catch (Exception ex) {
             return Optional.empty();
         }
     }
