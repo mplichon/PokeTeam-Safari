@@ -5,45 +5,6 @@
 
 <table>
     <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nom</th>
-            <th>Taux de capture</th>
-            <th>Taux de fuite</th>
-            <th>Facteur d'apparition</th>
-            <th>Type 1</th>
-            <th>Type 2</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>Bulbizarre</td>
-            <td>20</td>
-            <td>140</td>
-            <td>23</td>
-            <td>PLANTE</td>
-            <td>POISON</td>
-            <td>
-                <button>Modifier</button>
-                <button>Supprimer</button>
-            </td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Salamèche</td>
-            <td>20</td>
-            <td>140</td>
-            <td>23</td>
-            <td>FEU</td>
-            <td></td>
-            <td>
-                <button>Modifier</button>
-                <button>Supprimer</button>
-            </td>
-        </tr>
         <tr *ngFor="let p of pokemons$ | async; trackBy: trackPokemon">
             <td>{{ p.id }}</td>
             <td>{{ p.nom }}</td>
