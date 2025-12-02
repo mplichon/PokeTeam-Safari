@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { PokemonService } from '../../../service/pokemon-service';
 import { PokemonDto } from '../../../dto/pokemon-dto';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-page',
@@ -34,9 +33,9 @@ export class PokemonPage implements OnInit {
     this.pokemons$ = this.pokemonService.findAll();
 
     this.nomCtrl = new FormControl('', Validators.required);
-    this.tauxCaptureCtrl = new FormControl('', Validators.required);
-    this.tauxFuiteCtrl = new FormControl('', Validators.required);
-    this.facteurApparitionCtrl = new FormControl('', Validators.required);
+    this.tauxCaptureCtrl = new FormControl('', [Validators.required, Validators.min(0), Validators.max(255)]);
+    this.tauxFuiteCtrl = new FormControl('', [Validators.required, Validators.min(0), Validators.max(255)]);
+    this.facteurApparitionCtrl = new FormControl('', [Validators.required, Validators.min(0), Validators.max(255)]);
     this.type1Ctrl = new FormControl('', Validators.required);
     this.type2Ctrl = new FormControl('');
 
@@ -79,13 +78,21 @@ export class PokemonPage implements OnInit {
     this.editingPokemon = null;
     this.nomCtrl.reset();
     this.tauxCaptureCtrl.reset();
+    this.tauxFuiteCtrl.reset();
+    this.facteurApparitionCtrl.reset();
+    this.type1Ctrl.reset();
+    this.type2Ctrl.reset();
   }
 
   public editPokemon(pokemon: PokemonDto): void {
-    // Clone du TODO pour l'édition
+    // Clone du Pokemon pour l'édition
     this.editingPokemon = pokemon;
     this.nomCtrl.setValue(pokemon.nom);
     this.tauxCaptureCtrl.setValue(pokemon.tauxCapture);
+    this.tauxFuiteCtrl.setValue(pokemon.tauxFuite);
+    this.facteurApparitionCtrl.setValue(pokemon.facteurApparition);
+    this.type1Ctrl.setValue(pokemon.type1);
+    this.type2Ctrl.setValue(pokemon.type2);
   }
 
   public deletePokemon(pokemon: PokemonDto): void {

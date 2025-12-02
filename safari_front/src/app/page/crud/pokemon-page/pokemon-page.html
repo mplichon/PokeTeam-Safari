@@ -79,6 +79,10 @@
             @if (tauxCaptureCtrl.hasError('required')) {
                 <div class="error-message">Le taux de capture est obligatoire</div>
             }
+
+            @if (tauxCaptureCtrl.hasError('min') || tauxCaptureCtrl.hasError('max')) {
+                <div class="error-message">Le taux de capture doit être compris entre 0 et 255</div>
+            }
         </div>
 
         <!-- taux de fuite -->
@@ -88,6 +92,10 @@
             @if (tauxFuiteCtrl.hasError('required')) {
                 <div class="error-message">Le taux de fuite est obligatoire</div>
             }
+
+            @if (tauxFuiteCtrl.hasError('min') || tauxFuiteCtrl.hasError('max')) {
+                <div class="error-message">Le taux de fuite doit être compris entre 0 et 255</div>
+            }
         </div>
 
         <!-- facteur d'apparition -->
@@ -96,6 +104,10 @@
             
             @if (facteurApparitionCtrl.hasError('required')) {
                 <div class="error-message">Le facteur d'apparition est obligatoire</div>
+            }
+
+            @if (facteurApparitionCtrl.hasError('min') || facteurApparitionCtrl.hasError('max')) {
+                <div class="error-message">Le facteur d'apparition doit être compris entre 0 et 255</div>
             }
         </div>
 
