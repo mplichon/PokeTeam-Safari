@@ -33,11 +33,11 @@ public class RencontrePokemonRestController {
     @Autowired
     private TableApparitionService tableApparitionService;
 
-    @GetMapping("/initialiser")
-    public RencontreInitResponse initialiserRencontre() {
+    @GetMapping("/initialiser/{idJoueur}")
+    public RencontreInitResponse initialiserRencontre(@PathVariable int idJoueur) {
         TableApparition pokemonPicker = tableApparitionService.getAll().get((int)(Math.random() * tableApparitionService.tableSize()));
         Pokemon pokemonPicked = pokemonService.getById(pokemonPicker.getIdPokemon());
-        RencontrePokemon rencontre = rencontrePokemonService.createOrUpdate(new RencontrePokemon(pokemonPicked));
+        RencontrePokemon rencontre = rencontrePokemonService.createOrUpdate(new RencontrePokemon(pokemonPicked, idJoueur));
         return new RencontreInitResponse(rencontre.getId(),pokemonPicked.getId(), pokemonPicked.getNom());
     }
 

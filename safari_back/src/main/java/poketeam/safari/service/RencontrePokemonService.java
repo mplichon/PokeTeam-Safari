@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import poketeam.safari.dao.IDAORencontrePokemon;
+import poketeam.safari.model.Joueur;
+import poketeam.safari.model.PokemonCapture;
 import poketeam.safari.model.RencontrePokemon;
 
 @Service
@@ -11,6 +13,12 @@ public class RencontrePokemonService {
 
     @Autowired
     private IDAORencontrePokemon daoRencontrePokemon;
+
+    @Autowired
+    private PokemonCaptureService pokemonCaptureService;
+
+    @Autowired
+    private CompteService compteService;
 
 
     public RencontrePokemon getById(Integer id) {
@@ -137,6 +145,8 @@ public class RencontrePokemonService {
 
 
     private String finDeRencontreCapture(RencontrePokemon rencontrePokemon) {
+        Joueur joueur = (Joueur) compteService.getById(rencontrePokemon.getIdJoueur());
+        pokemonCaptureService.create(new PokemonCapture(joueur, rencontrePokemon.getPokemon()));
         deleteById(rencontrePokemon.getId());
         return "capture";
     }

@@ -18,15 +18,17 @@ public class RencontrePokemon {
 	private int tauxCaptureMod;
 	private boolean aFuit;
 	private boolean estCapture;
+	private int idJoueur;
 
 	public RencontrePokemon() {}
 
-	public RencontrePokemon(Pokemon pokemon) {
+	public RencontrePokemon(Pokemon pokemon, int idJoueur) {
 		this.pokemon = pokemon;
 		tauxFuiteMod = 0;
 		tauxCaptureMod = 0;
 		this.aFuit = false;
 		this.estCapture = false;
+		this.idJoueur = idJoueur;
 	}
 
 	public RencontrePokemon(Integer id, Pokemon pokemon, int tauxFuiteMod, int tauxCaptureMod, boolean aFuit,
@@ -37,6 +39,7 @@ public class RencontrePokemon {
 		this.tauxCaptureMod = tauxCaptureMod;
 		this.aFuit = aFuit;
 		this.estCapture = estCapture;
+		this.idJoueur = idJoueur;
 	}
 
 	public Integer getId() {
@@ -86,5 +89,13 @@ public class RencontrePokemon {
 
 	public void setEstCapture(boolean estCapture) {
 		this.estCapture = estCapture;
+	}
+	
+	public int getIdJoueur() {
+		return idJoueur;
+	}
+
+	public void setIdJoueur(int idJoueur) {
+		this.idJoueur = idJoueur;
 	}
 }

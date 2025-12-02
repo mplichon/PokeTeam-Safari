@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Pokemon, PokemonDetail } from '../../interface/pokemon.interface';
 import { CommonModule } from '@angular/common';
+import { JwtService } from '../../service/jwt-service';
 
 type CombatStatus = 'fuite' | 'capture' | 'continue' | 'abandon';
 
@@ -14,8 +15,9 @@ type CombatStatus = 'fuite' | 'capture' | 'continue' | 'abandon';
 })
 export class Combat implements OnInit {
 
-  _id = 1;
+  
 
+  username = 0; 
   pokemon: PokemonDetail = {
     id: 0,
     name: '',
@@ -30,15 +32,12 @@ export class Combat implements OnInit {
 
   private baseUrl = 'https://pokebuildapi.fr/api/v1/pokemon';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private jwtService: JwtService) {}
+  
 
   ngOnInit(): void {
-    this._id = Math.floor(Math.random() * 151) + 1;
-    this.getPokemon(this._id).subscribe({
-      next: (p) => this.pokemon = p,
-      error: (err) => console.error('Erreur API Pokémon', err)
-    });
-      this.initRencontre();
+    this.initRencontre();
+    //this._id = Math.floor(Math.random() * 151) + 1;
 
   }
 
@@ -61,9 +60,14 @@ export class Combat implements OnInit {
   // Appel API selon l'action choisie
 
   initRencontre() {
-  this.http.get<{idRencontre: number, idPokemon: number, nom: string}>('http://localhost:8080/api/rencontre/initialiser')
+  this.username = this.jwtService.userId ?? 0;
+  this.http.get<{idRencontre: number, idPokemon: number, nom: string}>('http://localhost:8080/api/rencontre/initialiser/' + this.username)
     .subscribe(res => {
       this.idRencontre = res.idRencontre;
+      this.getPokemon(res.idPokemon).subscribe({
+      next: (p) => this.pokemon = p,
+      error: (err) => console.error('Erreur API Pokémon', err)
+    });
       console.log('Rencontre initialisée avec id', this.idRencontre);
     });
 }
