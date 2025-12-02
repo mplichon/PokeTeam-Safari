@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pokedex-access',
@@ -7,7 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './pokedex-access.css',
 })
 export class PokedexAccess {
-  
+  @Input() isOpen: boolean = false; // etat parent
   @Output() toggleView = new EventEmitter<void>();
 
   onClickButton() {
