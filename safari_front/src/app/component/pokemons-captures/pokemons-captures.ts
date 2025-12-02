@@ -2,9 +2,11 @@ import { Component, OnInit, signal } from '@angular/core';
 import { PokemonDumbComponent } from './pokemon/pokemon.dumb.component';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { forkJoin, map, Observable } from 'rxjs';
 import { Pokemon } from '../../interface/pokemon.interface';
 import { PokemonDetail } from './pokemon-detail/pokemon-detail';
+import { JwtService } from '../../service/jwt-service';
+import { PokemonCaptureService } from '../../service/pokemon-capture-service';
 
 @Component({
   selector: 'app-pokemons-captures',
@@ -14,9 +16,11 @@ import { PokemonDetail } from './pokemon-detail/pokemon-detail';
 })
 export class PokemonsCaptures implements OnInit {
 
+  userId: number | null = null;
+
   private baseUrl = 'https://pokebuildapi.fr/api/v1';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private jwtService: JwtService, private pokemonCaptureService: PokemonCaptureService) {}
 
   getFirst151(): Observable<Pokemon[]> {
     return this.http.get<any[]>(`${this.baseUrl}/pokemon/limit/151`).pipe(
@@ -25,7 +29,6 @@ export class PokemonsCaptures implements OnInit {
           id: p.id,
           name: p.name,
           sprite: p.sprite,               // correspond à 96x96
-          img: p.image,                   // correspond à l'image complète
           types: p.apiTypes?.map((t : { name: string }) => t.name) ?? []
         }))
       )
@@ -39,11 +42,43 @@ export class PokemonsCaptures implements OnInit {
   selectedPokemon = signal<Pokemon | null>(null);
 
  ngOnInit(): void {
-    this.getFirst151().subscribe((list) => {
-      this.ListePokemons.set(list);
-      
-      console.log(this.ListePokemons)
+
+  this.userId = this.jwtService.userId;
+
+    if (this.userId == null) {
+      console.error("Aucun userId dans le JWT");
+      return;
+    }
+
+    forkJoin({
+      allPokemons: this.getFirst151(),
+      capturedIds: this.pokemonCaptureService.pokemonCaptureParIdParJoueur(this.userId)
+    }).subscribe({
+      next: ({ allPokemons, capturedIds }) => {
+        const capturedSet = new Set(capturedIds);
+
+        const adaptedList = allPokemons.map(p => {
+          if (capturedSet.has(p.id)) {
+            // Pokémon capturé → on garde toutes les infos
+            return p;
+          }
+
+          // Pokémon non capturé → on garde seulement l'id, le reste vide
+          return {
+            ...p,
+            name: '-----',
+            sprite: 'assets/pokeitem.png',
+            types: [],
+          };
+        });
+
+        this.ListePokemons.set(adaptedList);
+      },
+      error: err => {
+        console.error('Erreur lors du chargement des pokémons ou des captures', err);
+      }
     });
+  
   }
 
   onPokemonSelected(pokemon: Pokemon): void {

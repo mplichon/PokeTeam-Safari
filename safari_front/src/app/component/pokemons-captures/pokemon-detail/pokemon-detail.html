@@ -1,26 +1,31 @@
 <div class="pokemon-detail">
-<div class="pokepicture">
-  <img class="pokemon-big"
-       [src]="pokemonToDisplay.sprite"
-       alt="{{ pokemonToDisplay.name }}">
-</div>
-       <div class="infospoke">
-
-  <div class="pokemon-header">
-    <img class="pokeball" src="assets/pokeitem.png" alt="">
-    <span class="id">N.{{ pokemonToDisplay.id }}</span>
-    <span class="name">{{ pokemonToDisplay.name }}</span>
+  <div class="pokepicture">
+    <img 
+      [src]="pokemonToDisplay.sprite"
+      alt="{{ pokemonToDisplay.name }}"
+      class="pokemon-big"
+      [class.placeholder]="pokemonToDisplay.sprite.includes('pokeitem')"
+    >
   </div>
 
-  <div class="types">
-    <span class="type" *ngFor="let t of pokemonToDisplay.types">
-      {{ t }}
-    </span>
-  </div>
+  <div class="infospoke">
 
-  <div class="actions">
-    <button class="secondary_b">PRECEDENT</button>
-    <button class="primary_b">SUIVANT</button>
-  </div>
+    <div class="pokemon-header">
+      <img class="pokeball" src="assets/pokeitem.png" alt="">
+      <span class="id">N.{{ pokemonToDisplay.id }}</span>
+      <span class="name">{{ pokemonToDisplay.name }}</span>
+    </div>
+
+    <div class="types">
+      <span class="type" *ngFor="let t of pokemonToDisplay.types">
+        {{ t }}
+      </span>
+    </div>
+
+    <div class="actions">
+      <button class="secondary_b">PRECEDENT</button>
+      <button class="primary_b">SUIVANT</button>
+    </div>
+
   </div>
 </div>
