@@ -312,6 +312,18 @@ width: 80%;
     border: #3B3B3B solid 4px ;
 }
 
+.combat {
+grid-column: 2;
+grid-row: 1 / span 3;  
+
+background: #1da7fd;
+background: linear-gradient(180deg, rgba(29, 167, 253, 1) 0%, rgba(255, 255, 255, 1) 22%, rgba(255, 255, 255, 1) 30%, rgba(255, 207, 110, 1) 52%, rgba(199, 222, 115, 1) 58%, rgba(51, 166, 91, 1) 88%, rgba(24, 122, 65, 1) 99%);
+height: 100%;
+width: 100%;
+border: #3B3B3B solid 4px ;
+
+}
+
 .pokemoncapture{
 
     grid-column: 2;
@@ -542,6 +554,7 @@ justify-content: left;
 .pokemon-name {
   color: #3B3B3B;
   text-transform: uppercase;
+  margin: auto;
 }
 
 .pokemon-detail {
@@ -609,7 +622,7 @@ padding: 8px;
   border: 2px solid #3B3B3B;
   color: white;
   padding: 5px 10px;
- 
+ margin: auto;
   margin-right: 5px;
   text-transform: uppercase;
   font-size: 12px;
@@ -651,7 +664,123 @@ width: 80%;
 }
 
 
+/*--combat--*/
 
+.img_poke {
+image-rendering: pixelated;      
+image-rendering: crisp-edges;     
+image-rendering: optimizeSpeed; 
+width: 350px;
+margin-bottom: -100px;
+z-index: 2;
+
+
+}
+
+.img_socle {
+width: 400px;
+
+
+
+}
+
+.combat_poke{
+
+  display: flex;
+  flex-direction: column;
+
+
+
+
+
+
+}
+
+.id_poke{
+display: flex ;
+flex-direction: row ;
+width: fit-content ;
+left: 0;
+margin-right: auto;
+gap: 10px;
+padding: 0 16px ;
+background-color: white;
+
+  border-width: 0 4px 4px 0;
+  border-style: solid;
+  border-color: #3B3B3B;
+box-shadow: inset 8px 8px 0  #0000003f;
+
+
+
+
+
+
+
+}
+
+.containeur{
+
+width: 100%;
+height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centre horizontalement */
+
+
+
+}
+
+.containeur_capture{
+  display: flex;
+  justify-content: center;  /* centre horizontal */
+  align-items: center;    
+width: 100%;
+height: 100%;
+background: #ffffff;
+background: radial-gradient(circle,rgba(255, 255, 255, 1) 0%, rgba(148, 187, 233, 1) 52%, rgba(70, 149, 240, 1) 100%);
+}
+
+.containeur_fuite, .containteur_fuit{
+  display: flex;
+  justify-content: center;  /* centre horizontal */
+  align-items: center;    
+width: 100%;
+height: 100%;
+background: #ffffff;
+background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(150, 150, 150, 1) 52%, rgba(99, 99, 99, 1) 100%);}
+
+.center_txt{
+
+text-align: center;
+color: #0a5491;
+}
+
+.actions_combat{
+
+display: grid;
+grid-template-columns: auto auto;
+grid-template-rows: auto auto;
+margin-top: 20px;
+
+
+}
+
+b {
+
+ padding: 2px;
+  font-weight: bolder;
+  background-color: white;
+
+
+}
+
+
+.actions_combat > button {
+    /* uniquement les boutons directement dans .actions */
+width: 300px;
+height: 80px;
+}
 
 
 
