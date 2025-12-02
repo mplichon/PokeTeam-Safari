@@ -61,7 +61,7 @@ export class Combat implements OnInit {
   // Appel API selon l'action choisie
 
   initRencontre() {
-  this.http.get<{idRencontre: number, idPokemon: number, nom: string}>('/api/rencontre/initialiser')
+  this.http.get<{idRencontre: number, idPokemon: number, nom: string}>('http://localhost:8080/api/rencontre/initialiser')
     .subscribe(res => {
       this.idRencontre = res.idRencontre;
       console.log('Rencontre initialisée avec id', this.idRencontre);
@@ -69,27 +69,27 @@ export class Combat implements OnInit {
 }
 
 pokeball() {
-  this.http.get<{status: string}>(`/api/rencontre/pokeball/${this.idRencontre}`)
-    .subscribe(res => this.combatStatus = res.status as any);
+  this.http.get<{statut: string}>(`http://localhost:8080/api/rencontre/pokeball/${this.idRencontre}`)
+    .subscribe(res => this.combatStatus = res.statut as any);
 }
 
 appat() {
-  this.http.get<{status: string}>(`/api/rencontre/appat/${this.idRencontre}`)
-    .subscribe(res => this.combatStatus = res.status as any);
+  this.http.get<{statut: string}>(`http://localhost:8080/api/rencontre/appat/${this.idRencontre}`)
+    .subscribe(res => this.combatStatus = res.statut as any);
 }
 
 boue() {
-  this.http.get<{status: string}>(`/api/rencontre/boue/${this.idRencontre}`)
-    .subscribe(res => this.combatStatus = res.status as any);
+  this.http.get<{statut: string}>(`http://localhost:8080/api/rencontre/boue/${this.idRencontre}`)
+    .subscribe(res => this.combatStatus = res.statut as any);
 }
 
 fuite() {
-  this.http.get<{status: string}>(`/api/rencontre/fuir/${this.idRencontre}`)
-    .subscribe(res => this.combatStatus = res.status as any);
+  this.http.get<{statut: string}>(`http://localhost:8080/api/rencontre/fuir/${this.idRencontre}`)
+    .subscribe(res => this.combatStatus = res.statut as any);
 }
 
-  private handleStatus(status: CombatStatus) {
-    this.combatStatus = status;
-    console.log('Nouveau statut:', status);
+  private handleStatus(statut: CombatStatus) {
+    this.combatStatus = statut;
+    console.log('Nouveau statut:', statut);
   }
 }

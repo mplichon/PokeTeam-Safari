@@ -138,16 +138,16 @@ public class RencontrePokemonService {
 
     private String finDeRencontreCapture(RencontrePokemon rencontrePokemon) {
         deleteById(rencontrePokemon.getId());
-        return "continue";
+        return "capture";
     }
 
     private String finDeRencontreFuite(RencontrePokemon rencontrePokemon) {
         deleteById(rencontrePokemon.getId());
-        return "capture";
+        return "fuite";
     }
 
     private String tourSuivant(RencontrePokemon rencontrePokemon) {
         createOrUpdate(rencontrePokemon);
-        return "fuite";
+        return "continue";
     }
 }

@@ -16,7 +16,7 @@ import poketeam.safari.service.TableApparitionService;
 
 @RestController
 @RequestMapping("/api/apparition")
-public class TablaApparitionRestController {
+public class TableApparitionRestController {
 
     @Autowired
     private TableApparitionService tableApparitionService;
