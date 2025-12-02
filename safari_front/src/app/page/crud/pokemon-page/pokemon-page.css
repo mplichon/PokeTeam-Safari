@@ -87,7 +87,6 @@
   width: fit-content;
 }
 
-/* Inputs identiques à .conxn */
 .page-poke-list .ajout input[type="text"],
 .page-poke-list .ajout input[type="number"] {
   background: #FFFFFF;
@@ -109,7 +108,6 @@
   box-shadow: 4px 4px 0 #216EAC;
 }
 
-/* Submit identique à .primary_b */
 .page-poke-list .ajout input[type="submit"] {
   background-color: #216EAC;
   color: #EDF0F6;
@@ -137,3 +135,37 @@
   font-size: 12px;
   margin-top: 4px;
 }
+
+/* Les selects de Matteo en mode bg de la mort qui tue ! (comme le reste de la page tahu)*/
+.page-poke-list .ajout select {
+  background: #FFFFFF;
+  border: 4px solid #3B3B3B;
+  padding: 8px;
+  width: 260px;
+  font-size: 14px;
+  box-shadow: 4px 4px 0 #3B3B3B;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.page-poke-list .ajout select option {
+  color: #3B3B3B;
+}
+
+.page-poke-list .ajout select:focus {
+  outline: none;
+  box-shadow: 4px 4px 0 #216EAC;
+}
+
+.page-poke-list .ajout select {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23216EAC" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 30px;
+}
+
