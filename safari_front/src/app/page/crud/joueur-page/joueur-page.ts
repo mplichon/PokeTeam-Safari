@@ -1,11 +1,98 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { JoueurDto } from '../../../dto/joueur-dto';
+import { JoueurService } from '../../../service/joueur-service';
 
 @Component({
   selector: 'app-joueur-page',
-  imports: [],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule
+  ],
   templateUrl: './joueur-page.html',
   styleUrl: './joueur-page.css',
 })
 export class JoueurPage {
+  protected joueur: JoueurDto = new JoueurDto(0, "", "", 0, 0, 0);
+  protected joueurs$!: Observable<JoueurDto[]>;
+  protected joueurForm!: FormGroup;
+  protected loginCtrl!: FormControl;
+  protected surnomCtrl!: FormControl;
+  protected nbPokeballCtrl!: FormControl;
+  protected nbFriandiseCtrl!: FormControl;
+  protected nbBoueCtrl!: FormControl;
+  protected editingJoueur!: JoueurDto | null;
 
+  constructor(private joueurService: JoueurService, private formBuilder: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.joueurs$ = this.joueurService.findAll();
+
+    this.loginCtrl = new FormControl('', Validators.required);
+    this.surnomCtrl = new FormControl('', [ Validators.required, Validators.minLength(6) ]);
+    this.nbPokeballCtrl = new FormControl('', [ Validators.required, Validators.min(0), Validators.max(999) ]);
+    this.nbFriandiseCtrl = new FormControl('', [ Validators.required, Validators.min(0), Validators.max(999) ]);
+    this.nbBoueCtrl = new FormControl('', [ Validators.required, Validators.min(0), Validators.max(999) ]);
+
+    this.joueurForm = this.formBuilder.group({
+      login: this.loginCtrl,
+      surnom: this.surnomCtrl,
+      nbPokeball: this.nbPokeballCtrl,
+      nbFriandise: this.nbFriandiseCtrl,
+      nbBoue: this.nbBoueCtrl
+    });
+  }
+
+  public ajouterModifierJoueur() {
+
+    if (this.editingJoueur) {
+      this.joueurService.save(new JoueurDto(
+        this.editingJoueur.id, 
+        this.loginCtrl.value, 
+        this.surnomCtrl.value,
+        this.nbPokeballCtrl.value,
+        this.nbFriandiseCtrl.value,
+        this.nbBoueCtrl.value
+      ));
+    }
+
+    else {
+      this.joueurService.save(new JoueurDto(
+        0, 
+        this.loginCtrl.value, 
+        this.surnomCtrl.value,
+        this.nbPokeballCtrl.value,
+        this.nbFriandiseCtrl.value,
+        this.nbBoueCtrl.value
+      ));
+    }
+
+    this.editingJoueur = null;
+    this.loginCtrl.reset();
+    this.surnomCtrl.reset();
+    this.nbPokeballCtrl.reset();
+    this.nbFriandiseCtrl.reset();
+    this.nbBoueCtrl.reset();
+  }
+
+  public editJoueur(joueur: JoueurDto): void {
+    // Clone du Joueur pour l'édition
+    this.editingJoueur = joueur;
+    this.loginCtrl.setValue(joueur.login);
+    this.surnomCtrl.setValue(joueur.surnom);
+    this.nbPokeballCtrl.setValue(joueur.nbPokeball);
+    this.nbFriandiseCtrl.setValue(joueur.nbFriandise);
+    this.nbBoueCtrl.setValue(joueur.nbBoue);
+  }
+
+  public deleteJoueur(joueur: JoueurDto): void {
+    this.joueurService.deleteById(joueur.id);
+  }
+
+  public trackJoueur(index: number, value: JoueurDto) {
+    return value.id;
+  }
 }

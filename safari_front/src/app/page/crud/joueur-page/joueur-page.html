@@ -1,1 +1,109 @@
-<p>joueur-page works!</p>
+<div class="page-poke-list">
+
+<h1>Liste des Joueurs</h1>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Login</th>
+            <th>Surnom</th>
+            <th>Pokéballs</th>
+            <th>Friandises</th>
+            <th>Boues</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let j of joueurs$ | async; trackBy: trackJoueur">
+            <td>{{ j.id }}</td>
+            <td>{{ j.login }}</td>
+            <td>{{ j.surnom }}</td>
+            <td>{{ j.nbPokeball }}</td>
+            <td>{{ j.nbFriandise }}</td>
+            <td>{{ j.nbBoue }}</td>
+            <td>
+                <button (click)="editJoueur(j)">Modifier</button>
+                <button (click)="deleteJoueur(j)">Supprimer</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="ajout">
+    <form (ngSubmit)="ajouterModifierJoueur()" [formGroup]="joueurForm">
+        <!-- login -->
+        <div>
+            <input  type="text" formControlName="login" placeholder="Identifiant"/> 
+            
+            @if (loginCtrl.hasError('required')) {
+                <div class="error-message">L'identifiant est obligatoire</div>
+            }
+        </div>
+
+        @if (!editingJoueur) {
+            <!-- mettre le input du password mais avant ça créer un dto avec password -->
+            <p>coucou</p>
+        }
+
+        <!-- surnom -->
+        <div>
+            <input type="text" formControlName="surnom" placeholder="Surnom"/>
+
+            @if (surnomCtrl.hasError('required')) {
+                <div class="error-message">Le surnom est obligatoire</div>
+            }
+        </div>
+
+        <!-- nombre de pokéball -->
+        <div>
+            <input type="number" formControlName="nbPokeball" placeholder="Nombre de pokéball"/>
+
+            @if (nbPokeballCtrl.hasError('required')) {
+                <div class="error-message">Le nombre de pokéball est obligatoire</div>
+            }
+
+            @if (nbPokeballCtrl.hasError('min') || nbPokeballCtrl.hasError('max')) {
+                <div class="error-message">Le nombre de pokéball doit être compris entre 0 et 999</div>
+            }
+        </div>
+
+        <!-- nombre de friandise -->
+        <div>
+            <input type="number" formControlName="nbFriandise" placeholder="Nombre de friandise"/>
+
+            @if (nbFriandiseCtrl.hasError('required')) {
+                <div class="error-message">Le nombre de friandise est obligatoire</div>
+            }
+
+            @if (nbFriandiseCtrl.hasError('min') || nbFriandiseCtrl.hasError('max')) {
+                <div class="error-message">Le nombre de friandise doit être compris entre 0 et 999</div>
+            }
+        </div>
+
+        <!-- nombre de boue -->
+        <div>
+            <input type="number" formControlName="nbBoue" placeholder="Nombre de boue"/>
+
+            @if (nbBoueCtrl.hasError('required')) {
+                <div class="error-message">Le nombre de boue est obligatoire</div>
+            }
+
+            @if (nbBoueCtrl.hasError('min') || nbBoueCtrl.hasError('max')) {
+                <div class="error-message">Le nombre de boue doit être compris entre 0 et 999</div>
+            }
+        </div>
+
+        @if (editingJoueur) {
+            <input type="submit" [disabled]="joueurForm.invalid" value="Modifier" />
+        }
+
+        @else {
+            <input type="submit" [disabled]="joueurForm.invalid" value="Ajouter" />
+        }
+
+    </form>
+</div>
+</div>
