@@ -14,7 +14,7 @@ export class PokemonDetail {
   defaultPokemon: Pokemon = {
     id: 0,
     name: '???',
-    sprite: 'assets/defaultPkmn.png',  // ton image noire
+    sprite: 'assets/whosthatpkmn.png',  // ton image noire
     types: ['Inconnu']
   };
 

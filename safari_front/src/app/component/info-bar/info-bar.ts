@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { JwtService } from '../../service/jwt-service';
+import { AuthService } from '../../service/auth-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-info-bar',
@@ -10,6 +13,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoBar implements OnInit {
 
+  constructor(private jwtService: JwtService, private authService: AuthService, private router: Router){}
+
+  username: string | null = null;
+
   protected datetime: string = '';
 
   ngOnInit(): void {
@@ -18,6 +25,11 @@ export class InfoBar implements OnInit {
   }
 
   updateDateTime(): void {
+
+    //token 
+    this.username = this.jwtService.username;
+
+    //date
     const now = new Date();
     const day = String(now.getDate()).padStart(2, '0');
     const month = String(now.getMonth() + 1).padStart(2, '0');
@@ -26,6 +38,11 @@ export class InfoBar implements OnInit {
     const minutes = String(now.getMinutes()).padStart(2, '0');
 
     this.datetime = `${day}/${month}/${year} ${hours}h${minutes}`;
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
 
