@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Carte } from "../../component/carte/carte";
 import { InfoBar } from '../../component/info-bar/info-bar';
@@ -7,10 +8,16 @@ import { PokemonsCaptures } from "../../component/pokemons-captures/pokemons-cap
 
 @Component({
   selector: 'app-game-page',
-  imports: [Carte, InfoBar, PokedexAccess, Inventaire, PokemonsCaptures],
+  imports: [Carte, InfoBar, PokedexAccess, Inventaire, PokemonsCaptures, CommonModule],
   templateUrl: './game-page.html',
   styleUrl: './game-page.css',
 })
 export class GamePage {
+
+    showPokemonView = false;
+
+  toggleView() {
+    this.showPokemonView = !this.showPokemonView;
+  }
 
 }

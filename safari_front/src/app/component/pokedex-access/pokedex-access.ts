@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pokedex-access',
@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './pokedex-access.css',
 })
 export class PokedexAccess {
+  
+  @Output() toggleView = new EventEmitter<void>();
 
+  onClickButton() {
+    this.toggleView.emit(); // on prévient le parent qu'on veut switcher
+  }
 }
+
