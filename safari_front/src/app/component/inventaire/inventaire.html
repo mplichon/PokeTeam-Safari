@@ -1,13 +1,22 @@
 <section class="inventaire">
 
- <h6>Inventaire</h6>
+ <h6 class="subsubtitle">Inventaire</h6>
 
- <div>
+  <ul class="selectitems">
+    <li *ngFor="let item of items" 
+        [class.selected]="selectedItem === item"
+        (click)="selectItem(item)">
+      <div class="item">
+        <p>{{ item.name }}</p>
+        <p>x{{ item.quantity }}</p>
+      </div>
+    </li>
+  </ul>
 
-
-
-    
- </div>
+  <div class="lower_inv" *ngIf="selectedItem">
+    <img class="img_inv" [src]="selectedItem.img" alt="">
+    <p class="indic">{{ selectedItem.desc }}</p>
+  </div>
 
 
 
