@@ -5,7 +5,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,14 +15,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import org.springframework.web.server.ResponseStatusException;
+
 import poketeam.safari.dto.request.JoueurCreationRequest;
 import poketeam.safari.dto.response.JoueurResponse;
 import poketeam.safari.model.Compte;
 import poketeam.safari.model.Joueur;
 import poketeam.safari.service.CompteService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -41,7 +39,7 @@ public class JoueurRestController {
 	{
 		log.info("GET /api/joueur - allJoueurs() called");
 		return compteSrv.getAllJoueurs().stream()
-				.map(joueur -> new JoueurResponse(joueur.getId(), joueur.getLogin(), joueur.getSurnom()))
+				.map(joueur -> new JoueurResponse(joueur.getId(), joueur.getLogin(), joueur.getSurnom(), joueur.getInventaire()))
 				.toList();
 	}
 	
@@ -51,7 +49,7 @@ public class JoueurRestController {
 	public JoueurResponse ficheJoueur(@PathVariable Integer id, Joueur joueur) {
 		log.info("GET /api/joueur/{} - ficheJoueur() called", id);
 		Joueur foundJoueur = compteSrv.getJoueurById(id);
-		return new JoueurResponse(foundJoueur.getId(), foundJoueur.getLogin(), foundJoueur.getSurnom());
+		return new JoueurResponse(foundJoueur.getId(), foundJoueur.getLogin(), foundJoueur.getSurnom(), foundJoueur.getInventaire());
 	}
 
 
@@ -65,7 +63,7 @@ public class JoueurRestController {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Un compte avec ce login existe déjà");
 		}
 		Joueur createdJoueur = (Joueur) compteSrv.create(joueur);
-		return new JoueurResponse(createdJoueur.getId(), createdJoueur.getLogin(), createdJoueur.getSurnom());
+		return new JoueurResponse(createdJoueur.getId(), createdJoueur.getLogin(), createdJoueur.getSurnom(), createdJoueur.getInventaire());
 	}
 
 
@@ -75,7 +73,7 @@ public class JoueurRestController {
 		log.info("PUT /api/joueur/{} - modifierJoueur() called", id);
 		joueur.setId(id);
 		Joueur updatedJoueur = (Joueur) compteSrv.update(joueur);
-		return new JoueurResponse(updatedJoueur.getId(), updatedJoueur.getLogin(), updatedJoueur.getSurnom());
+		return new JoueurResponse(updatedJoueur.getId(), updatedJoueur.getLogin(), updatedJoueur.getSurnom(), updatedJoueur.getInventaire());
 	}
 
 
