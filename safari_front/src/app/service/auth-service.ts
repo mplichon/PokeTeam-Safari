@@ -43,4 +43,9 @@ export class AuthService {
   public isLogged() {
     return !!this._token;
   }
+
+  public logout() {
+    this._token = "";
+    sessionStorage.removeItem("token");
+  }
 }

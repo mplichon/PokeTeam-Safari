@@ -26,7 +26,7 @@
       <br>
 
   <br>
-    <button  onclick="window.location.href='index.html'" [disabled]="userForm.invalid" value="Se connecter" class="primary_b">se connecter</button>
+    <button  type="submit" [disabled]="userForm.invalid" value="Se connecter" class="primary_b">se connecter</button>
   </div>
 </form>
 
@@ -42,23 +42,4 @@
     <a class="secondary_b" href="">cree ton compte</a></p>
     </div>
 
-    
-
-
-
-
-  <script>
-      const mdp = document.getElementById('password');
-      const toggle = document.getElementById('toggle');
-
-      toggle.addEventListener('click', () => {
-        if (mdp.type === 'password') {
-          mdp.type = 'text';
-          toggle.src = 'assets/openy.pngopeny.png'; 
-        } else {
-          mdp.type = 'password';
-          toggle.src = 'assets/closey.png'; 
-        }
-      });
-  </script>
 </body>
