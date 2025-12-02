@@ -4,10 +4,13 @@ import { GamePage } from './page/game-page/game-page';
 import { TestPage } from './page/test-page/test-page';
 import { PokemonPage } from './page/crud/pokemon-page/pokemon-page';
 import { authGuard } from './guard/auth-guard';
+import { RegisterPage } from './page/register-page/register-page';
 
 export const routes: Routes = [
-    {path: '', component: LoginPage, canActivate: [ authGuard ]},
+    {path: '', component: LoginPage},
+    
     {path: 'login', component: LoginPage},
+    {path: 'register', component: RegisterPage},
     {path: 'pokemon', component: PokemonPage},
     {path: 'test', component: TestPage, canActivate: [ authGuard ]},
     {path: 'game', component: GamePage, canActivate: [ authGuard ]},

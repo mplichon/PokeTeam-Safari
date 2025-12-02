@@ -4,12 +4,12 @@ package poketeam.safari.dto.response;
 public class JoueurResponse {
     
     private Integer id;
-    private String login;
+    private String username;
     private String surnom;
 
-    public JoueurResponse(Integer id, String login, String surnom) {
+    public JoueurResponse(Integer id, String username, String surnom) {
         this.id = id;
-        this.login = login;
+        this.username = username;
         this.surnom = surnom;
     }
 
@@ -21,12 +21,12 @@ public class JoueurResponse {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }   
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String login) {
+        this.username = username;
     }
 
     public String getSurnom() {

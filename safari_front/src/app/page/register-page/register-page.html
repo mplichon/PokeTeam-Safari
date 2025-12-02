@@ -1,1 +1,62 @@
-<p>register-page works!</p>
+<div class="backconnx">
+  <div class="encarco">
+
+    <div class="center_g16">
+      <img class="pokeballdeco" src="assets/pokeballpix.png" alt="pokeballpix">
+
+      <h1 class="title">Create <br> Account</h1>
+      <h2 class="subtitle">Welcome to the <br> pokefari</h2>
+    </div>
+
+    <div *ngIf="registerError">
+        Impossible de créer un compte
+    </div>
+
+    <form (ngSubmit)="register()" [formGroup]="registerForm">
+      <div class="inputs">
+
+        <input class="conxn"
+               type="text"
+               formControlName="username"
+               name="username"
+               placeholder="ton login">
+
+        <div class="password-container">
+          <input class="conxn"
+                 type="password"
+                 formControlName="password"
+                 placeholder="ton mot de passe">
+
+          <img id="toggle" src="assets/openy.png" alt="">
+        </div>
+
+        <div class="password-container">
+          <input class="conxn"
+                 type="password"
+                 formControlName="confirm"
+                 placeholder="confirme ton mot de passe">
+
+          <img id="toggle" src="assets/openy.png" alt="">
+        </div>
+
+        <button type="submit"
+                class="primary_b"
+                (click)="test()">
+          créer mon compte
+        </button>
+
+      </div>
+    </form>
+
+  </div>
+
+  <div class="inscrib">
+    <p class="txt">
+      déjà un compte ?
+      <br><br><br>
+      <a class="secondary_b" routerLink="/login" routerLinkActive="active">
+        connecte-toi
+      </a>
+    </p>
+  </div>
+</div>

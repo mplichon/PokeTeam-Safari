@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Pokemon } from '../pokemon/pokemon.interface';
+import { Pokemon } from '../../../interface/pokemon.interface';
 import { CommonModule } from '@angular/common';
 
 @Component({

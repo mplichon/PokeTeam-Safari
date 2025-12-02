@@ -3,16 +3,16 @@ package poketeam.safari.dto.request;
 import poketeam.safari.model.Inventaire;
 
 public class JoueurCreationRequest {
-    private String login;
+    private String username;
     private String surnom;
     private String password;
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getSurnom() {
@@ -22,6 +22,7 @@ public class JoueurCreationRequest {
     public void setSurnom(String surnom) {
         this.surnom = surnom;
     }
+
     public String getPassword() {
         return password;
     }

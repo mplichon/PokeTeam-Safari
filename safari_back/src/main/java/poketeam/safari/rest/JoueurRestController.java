@@ -52,7 +52,7 @@ public class JoueurRestController {
 	public JoueurResponse ajoutJoueur(@RequestBody JoueurCreationRequest joueurToCreate)
 	{
 		log.info("POST /api/joueur - ajoutJoueur() called");
-        Joueur joueur = new Joueur(joueurToCreate.getLogin(), joueurToCreate.getPassword(), joueurToCreate.getSurnom());
+        Joueur joueur = new Joueur(joueurToCreate.getUsername(), joueurToCreate.getPassword(), joueurToCreate.getSurnom());
 		Joueur createdJoueur = (Joueur) compteSrv.create(joueur);
 
 		return new JoueurResponse(createdJoueur.getId(), createdJoueur.getLogin(), createdJoueur.getSurnom());

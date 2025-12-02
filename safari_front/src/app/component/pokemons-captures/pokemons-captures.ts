@@ -3,7 +3,7 @@ import { PokemonDumbComponent } from './pokemon/pokemon.dumb.component';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { Pokemon } from './pokemon/pokemon.interface';
+import { Pokemon } from '../../interface/pokemon.interface';
 import { PokemonDetail } from './pokemon-detail/pokemon-detail';
 
 @Component({
