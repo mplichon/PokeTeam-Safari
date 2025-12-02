@@ -20,6 +20,9 @@ export class PokedexAccess implements OnInit{
     this.toggleView.emit(); // on prévient le parent qu'on veut switcher
   }
 
+  formatId(id: number): string {
+    return id.toString().padStart(3, '0');  
+  }
   ngOnInit(): void {
     this.userId = this.jwtService.userId;
 
