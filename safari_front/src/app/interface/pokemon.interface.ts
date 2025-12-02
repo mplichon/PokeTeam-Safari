@@ -2,7 +2,7 @@ export interface Pokemon {
   id: number;
   name: string;
   sprite: string; 
-  types?: string[]; 
+  types: string[]; 
 }
 
 //pokemon avec l'image nette en +
@@ -11,7 +11,8 @@ export interface PokemonDetail {
   name: string;
   sprite: string; 
   img: string;
-  types?: string[]; 
+  type1: string;
+  type2: string | null; 
 }
 
 export type ListePokemons = Pokemon[];
