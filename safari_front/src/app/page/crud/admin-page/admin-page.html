@@ -1,0 +1,42 @@
+<div class="admin-container">
+  <h2>Gestion des Admins</h2>
+
+  <!-- Formulaire ajout / modification -->
+  <form [formGroup]="adminForm" (ngSubmit)="ajouterModifierAdmin()" class="admin-form">
+    <div class="form-group">
+      <label for="login">Login :</label>
+      <input id="login" type="text" formControlName="login" placeholder="Login admin" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mot de passe :</label>
+      <input id="password" type="password" formControlName="password" placeholder="Mot de passe" required>
+    </div>
+
+    <button type="submit" [disabled]="adminForm.invalid">
+      {{ editingAdmin ? 'Modifier Admin' : 'Ajouter Admin' }}
+    </button>
+    <button type="button" (click)="adminForm.reset(); editingAdmin = null" class="cancel-btn">Annuler</button>
+  </form>
+
+  <!-- Tableau des admins -->
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Login</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let admin of admins$ | async; trackBy: trackAdmin">
+        <td>{{ admin.id }}</td>
+        <td>{{ admin.login }}</td>
+        <td>
+          <button (click)="editAdmin(admin)">Modifier</button>
+          <button (click)="deleteAdmin(admin)" class="delete-btn">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
