@@ -761,7 +761,7 @@ color: #0a5491;
 display: grid;
 grid-template-columns: auto auto;
 grid-template-rows: auto auto;
-margin-top: 20px;
+margin-top: 10px;
 
 
 }
@@ -780,6 +780,7 @@ b {
     /* uniquement les boutons directement dans .actions */
 width: 300px;
 height: 80px;
+margin: 8px;
 }
 
 
