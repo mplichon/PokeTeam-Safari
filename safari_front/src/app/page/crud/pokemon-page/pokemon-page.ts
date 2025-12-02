@@ -11,8 +11,7 @@ import { RouterLink } from '@angular/router';
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    CommonModule,
-    RouterLink
+    CommonModule
   ],
   templateUrl: './pokemon-page.html',
   styleUrl: './pokemon-page.css',
