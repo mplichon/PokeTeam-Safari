@@ -7,6 +7,7 @@ import { authGuard } from './guard/auth-guard';
 import { RegisterPage } from './page/register-page/register-page';
 import { AdminPage } from './page/crud/admin-page/admin-page';
 import { MapPage } from './page/crud/map-page/map-page';
+import { JoueurPage } from './page/crud/joueur-page/joueur-page';
 
 export const routes: Routes = [
     {path: '', component: LoginPage},
@@ -15,7 +16,8 @@ export const routes: Routes = [
     {path: 'register', component: RegisterPage},
     {path: 'test', component: TestPage, canActivate: [ authGuard ]},
     {path: 'game', component: GamePage, canActivate: [ authGuard ]},
-    {path: 'admin', component: AdminPage},
-    {path: 'map', component: MapPage},    
-    {path: 'pokemon', component: PokemonPage},
+    {path: 'gestion/admin', component: AdminPage},
+    {path: 'gestion/map', component: MapPage},    
+    {path: 'gestion/pokemon', component: PokemonPage},
+    {path: 'gestion/joueur', component: JoueurPage},
 ];
