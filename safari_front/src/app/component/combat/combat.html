@@ -1,65 +1,44 @@
-<div class="containeur">
-<div class="id_poke" >
-    <img src="{{pokemon.sprite}}">
-    <p class="pokemon-name"> {{pokemon.name}} </p>
-    <p class="type"> {{pokemon.type1}}  </p>
-    <p class="type"> {{pokemon.type2}}  </p>
-</div>
+<!-- CONTENEUR PRINCIPAL (CONTINUE) -->
+<div class="containeur" *ngIf="combatStatus === 'continue'">
+  <div class="id_poke">
+    <img [src]="pokemon.sprite">
+    <p class="pokemon-name">{{pokemon.name}}</p>
+    <p class="type">{{pokemon.type1}}</p>
+    <p class="type">{{pokemon.type2}}</p>
+  </div>
 
-
-
-
-<div class="combat_poke">
-
-    <img class="img_poke" src="{{pokemon.img}}">
+  <div class="combat_poke">
+    <img class="img_poke" [src]="pokemon.img">
     <img class="img_socle" src="assets/soclecombat.png" alt="">
+  </div>
+
+  <div class="actions_combat">
+    <button class="secondary_b" (click)="pokeball()">Pokeball</button>
+  <button class="secondary_b" (click)="boue()">Boue</button>
+  <button class="secondary_b" (click)="appat()">Appât</button>
+  <button class="secondary_b" (click)="fuite()">Fuite</button>
+  </div>
 </div>
 
-
-
-<div class="actions_combat">
-
-    <button class="secondary_b">Pokeball</button>
-    <button class="secondary_b">Boue</button>
-    <button class="secondary_b" >Appat</button>
-    <button class="secondary_b">Fuite</button>
-
-
-
-
-
+<!-- CONTENEUR CAPTURE -->
+<div class="containeur_capture" *ngIf="combatStatus === 'capture'">
+  <p class="center_txt">
+    -- pokémon capturé -- <br><br>
+    <b>{{pokemon.name}}</b> est ajouté à votre pokédex
+  </p>
 </div>
 
-
+<!-- CONTENEUR FUITES -->
+<div class="containeur_fuite" *ngIf="combatStatus === 'fuite'">
+  <p class="center_txt">
+    -- le pokémon a fuit -- <br><br>
+    <b>{{pokemon.name}}</b> a quitté le combat
+  </p>
 </div>
 
-<!--<div class="containeur_capture">
-
-
-<p class="center_txt"> -- pokémon capturé -- <br> <br>
- <b>{{pokemon.name}}</b> est ajouté à votre pokédex
-
-</p>
-
-
-</div>-->
-
-<!--<div class="containeur_fuite">
-
-
-<p class="center_txt"> -- le pokémon a fuit -- <br> <br>
- <b>{{pokemon.name}}</b> a quitté le combat
-</p>
-
-
-</div>-->
-
-<!--<div class="containeur_fuit">
-
-
-<p class="center_txt"> -- tu as fuis -- <br> <br>
- <b>Tu</b> as quitté le combat
-</p>
-
-
-</div>-->
+<div class="containeur_fuite" *ngIf="combatStatus === 'abandon'">
+  <p class="center_txt">
+    -- tu as fuis -- <br><br>
+    <b>Tu</b> as quitté le combat
+  </p>
+</div>
