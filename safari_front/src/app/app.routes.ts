@@ -16,6 +16,6 @@ export const routes: Routes = [
     {path: 'test', component: TestPage, canActivate: [ authGuard ]},
     {path: 'game', component: GamePage, canActivate: [ authGuard ]},
     {path: 'admin', component: AdminPage},
-    {path: 'map', component: MapPage}    
+    {path: 'map', component: MapPage},    
     {path: 'pokemon', component: PokemonPage},
 ];
