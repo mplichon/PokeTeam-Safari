@@ -113,7 +113,11 @@
 
         <!-- type 1 -->
         <div>
-            <input  type="text" formControlName="type1" placeholder="Type 1"/> 
+            <select formControlName="type1">
+                <option *ngFor="let t of types$ | async" [ngValue]="t.key">
+                    {{ t.nom }}
+                </option>
+            </select>
             
             @if (type1Ctrl.hasError('required')) {
                 <div class="error-message">Le 1er type est obligatoire</div>
@@ -122,7 +126,11 @@
 
         <!-- type 2 -->
         <div>
-            <input  type="text" formControlName="type2" placeholder="Type 2"/>
+            <select formControlName="type2">
+                <option *ngFor="let t of types$ | async" [ngValue]="t.key">
+                    {{ t.nom }}
+                </option>
+            </select>
         </div>
 
         @if (editingPokemon) {

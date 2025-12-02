@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { PokemonService } from '../../../service/pokemon-service';
 import { PokemonDto } from '../../../dto/pokemon-dto';
 import { CommonModule } from '@angular/common';
+import { TypeElementDto } from '../../../dto/type-element-dto';
+import { TypeElementService } from '../../../service/type-element-service';
 
 @Component({
   selector: 'app-pokemon-page',
@@ -18,6 +20,7 @@ import { CommonModule } from '@angular/common';
 export class PokemonPage implements OnInit {
   protected pokemon: PokemonDto = new PokemonDto(0, "", 0, 0, 0, "", "");
   protected pokemons$!: Observable<PokemonDto[]>;
+  protected types$!: Observable<TypeElementDto[]>;
   protected pokemonForm!: FormGroup;
   protected nomCtrl!: FormControl;
   protected tauxCaptureCtrl!: FormControl;
@@ -27,10 +30,11 @@ export class PokemonPage implements OnInit {
   protected type2Ctrl!: FormControl;
   protected editingPokemon!: PokemonDto | null;
 
-  constructor(private pokemonService: PokemonService, private formBuilder: FormBuilder) { }
+  constructor(private pokemonService: PokemonService, private typeElementService: TypeElementService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.pokemons$ = this.pokemonService.findAll();
+    this.types$ = this.typeElementService.findAll();
 
     this.nomCtrl = new FormControl('', Validators.required);
     this.tauxCaptureCtrl = new FormControl('', [Validators.required, Validators.min(0), Validators.max(255)]);
