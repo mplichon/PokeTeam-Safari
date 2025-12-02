@@ -93,4 +93,8 @@ public class CompteService {
 		daoCompte.delete(compte);
 	}
 
+	public Compte findByLogin(String login) {
+		return daoCompte.getCompteByLogin(login);
+	}
+
 }

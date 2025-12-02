@@ -12,6 +12,9 @@ import poketeam.safari.model.Joueur;
 
 public interface IDAOCompte extends JpaRepository<Compte, Integer> {
 
+    
+    public Compte getCompteByLogin(String login);
+
     @Query("FROM Joueur")
     public List<Joueur> findAllJoueurs();
 
