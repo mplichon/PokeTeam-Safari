@@ -12,6 +12,7 @@ import { ElementRef, ViewChild } from "@angular/core";
 export class Carte {
 
  @Output() toggleFromRandom = new EventEmitter<void>(); // 💥 NOUVEAU
+ @Output() childClicked = new EventEmitter<void>();
 
   @ViewChild('zone', { static: true }) zone!: ElementRef;
   zoneRef!: ElementRef;
@@ -19,7 +20,9 @@ export class Carte {
   ngAfterViewInit() {
     this.zoneRef = this.zone;
   }
-
+  onChildButtonClicked() {
+    this.childClicked.emit();
+  }
   onRandomClick() {
     this.toggleFromRandom.emit();  // 💥 on prévient le parent (GamePage)
   }
