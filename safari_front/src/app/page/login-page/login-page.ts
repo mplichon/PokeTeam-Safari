@@ -45,19 +45,11 @@ export class LoginPage implements OnInit {
       this.loginError = true;
     }
   }
+
+  showPassword: boolean = false;
+
+togglePassword() {
+  this.showPassword = !this.showPassword;
+}
 }
 
-  // <script>
-  //     const mdp = document.getElementById('password');
-  //     const toggle = document.getElementById('toggle');
-
-  //     toggle.addEventListener('click', () => {
-  //       if (mdp.type === 'password') {
-  //         mdp.type = 'text';
-  //         toggle.src = 'assets/openy.pngopeny.png'; 
-  //       } else {
-  //         mdp.type = 'password';
-  //         toggle.src = 'assets/closey.png'; 
-  //       }
-  //     });
-  // </script>

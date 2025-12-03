@@ -13,12 +13,18 @@ html, body {
 
 }
 
+body, html {
+    overflow: hidden;
+}
 
 /* -------- BACKGROUND -------- */
 .backconnx { 
   background: url("./assets/back1.png") center/cover no-repeat;
-  width: 100vw;
-  margin: 0;
+  width: 95%;
+  height: 99%;
+  margin-top: -80px;
+
+  padding: 50px;
 }
 
 
@@ -31,7 +37,7 @@ html, body {
   display: flex;
   flex-direction: column;
   padding: 48px 32px;
-  margin: 4% auto;
+  margin: 20px auto;
   transition: 0.15s;
 }
 
@@ -169,6 +175,7 @@ html, body {
   background: #D2DAEB;
   color: #216EAC;
   text-decoration: none;
+  box-shadow: 4px 4px 0 #216EAC;
 }
 
 .secondary_b:hover {
