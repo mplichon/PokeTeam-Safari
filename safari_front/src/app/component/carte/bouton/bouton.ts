@@ -56,8 +56,8 @@ scheduleNextAppearance() {
      let x = Math.floor(Math.random() * (w - btn));
      let y = Math.floor(Math.random() * (h - btn));
 
-     if (x < 0) x = 0;
-     if (y < 0) y = 0;
+     if (x < 100) x = 100;
+     if (y < 100) y = 100;
      if (x > 1150) x = 1150;
      if (y > 650) y = 550;
 
