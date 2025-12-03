@@ -1,6 +1,5 @@
 package poketeam.safari.rest;
 
-import org.hibernate.mapping.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,6 @@ import poketeam.safari.dto.response.RencontreStatutResponse;
 import poketeam.safari.model.Pokemon;
 import poketeam.safari.model.RencontrePokemon;
 import poketeam.safari.model.TableApparition;
-import poketeam.safari.service.PokemonCaptureService;
 import poketeam.safari.service.PokemonService;
 import poketeam.safari.service.RencontrePokemonService;
 import poketeam.safari.service.TableApparitionService;

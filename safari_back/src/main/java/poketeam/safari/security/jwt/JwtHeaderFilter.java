@@ -12,12 +12,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import poketeam.safari.dao.IDAOCompte;
-import poketeam.safari.model.Admin;
 import poketeam.safari.model.Compte;
-import poketeam.safari.model.Joueur;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

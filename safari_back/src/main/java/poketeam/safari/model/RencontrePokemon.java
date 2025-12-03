@@ -39,7 +39,6 @@ public class RencontrePokemon {
 		this.tauxCaptureMod = tauxCaptureMod;
 		this.aFuit = aFuit;
 		this.estCapture = estCapture;
-		this.idJoueur = idJoueur;
 	}
 
 	public Integer getId() {
