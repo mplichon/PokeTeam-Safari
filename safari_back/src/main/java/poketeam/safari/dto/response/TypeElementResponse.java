@@ -1,5 +1,5 @@
 package poketeam.safari.dto.response;
 
-public record TypeElementResponse(String key, String nom) {
+public record TypeElementResponse(String key, String nom, String couleur) {
 
 }
