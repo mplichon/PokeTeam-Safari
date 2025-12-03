@@ -18,9 +18,16 @@ export class GamePage {
 
     showPokemonView = false;
     showCombatView = false;
+    reloadCount = false;
 
   toggleView() {
     this.showPokemonView = !this.showPokemonView;
+  }
+
+  reboutCompMap() {
+    this.showCombatView = false;
+    this.reloadCounterFromCombat();
+    setTimeout(() => {}, 20);
   }
     
   ShowCombatView() {
@@ -29,5 +36,10 @@ export class GamePage {
 
   onChild2ButtonClicked() {
     this.showCombatView = true;
+  }
+
+  reloadCounterFromCombat() {
+    this.reloadCount = !this.reloadCount;
+    setTimeout(() => this.reloadCount = !this.reloadCount, 15)
   }
 }

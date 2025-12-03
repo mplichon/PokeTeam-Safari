@@ -26,8 +26,6 @@ export class BoutonComponent implements OnInit {
 
     
     setTimeout(() => {
-      console.log('Largeur du parent :', this.parentZone.clientWidth);
-      console.log('Hauteur du parent :', this.parentZone.clientHeight);
       this.scheduleNextAppearance();
     }, 500);
   }
@@ -55,8 +53,16 @@ scheduleNextAppearance() {
 
      const btn = 200;
 
-     this.position.x = Math.floor(Math.random() * (w - btn));
-     this.position.y = Math.floor(Math.random() * (h - btn));
+     let x = Math.floor(Math.random() * (w - btn));
+     let y = Math.floor(Math.random() * (h - btn));
+
+     if (x < 0) x = 0;
+     if (y < 0) y = 0;
+     if (x > 1150) x = 1150;
+     if (y > 650) y = 550;
+
+     this.position.x = x;
+     this.position.y = y;
     console.log(`Position du bouton : x=${this.position.x}, y=${this.position.y}`);
   }
 }

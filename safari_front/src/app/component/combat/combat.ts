@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { Pokemon, PokemonDetail } from '../../interface/pokemon.interface';
 import { CommonModule } from '@angular/common';
-import { JwtService } from '../../service/jwt-service';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { map, Observable } from 'rxjs';
+import { PokemonDetail } from '../../interface/pokemon.interface';
+import { JwtService } from '../../service/jwt-service';
 
 
 type CombatStatus = 'fuite' | 'capture' | 'continue' | 'abandon';
@@ -16,6 +16,7 @@ type CombatStatus = 'fuite' | 'capture' | 'continue' | 'abandon';
   styleUrl: './combat.css',
 })
 export class Combat implements OnInit {
+  @Output() reloadMap = new EventEmitter<void>();
 
   imgPokeMargLeft = 50;
   imgPokeMargRight = 50;
@@ -301,7 +302,7 @@ export class Combat implements OnInit {
     this.pokeballAngle = angleTemp; 
   }
 
-  goBackToPageGame() {
-    window.location.reload();
+  goBackToMap() {
+    this.reloadMap.emit();
   }
 }

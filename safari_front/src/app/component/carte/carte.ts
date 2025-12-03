@@ -19,12 +19,16 @@ export class Carte implements AfterViewInit{
   zoneRef!: ElementRef;
 
   ngAfterViewInit() {
-  this.parentZone = this.parentRef.nativeElement;
+  setTimeout(() => {
+      this.parentZone = this.parentRef.nativeElement;
+    }, 1000);
+  
   }
 
   onChildButtonClicked() {
     this.childClicked.emit();
   }
+
   onRandomClick() {
     this.toggleFromRandom.emit();  // 💥 on prévient le parent (GamePage)
   }
