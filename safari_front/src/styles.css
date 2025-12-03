@@ -13,9 +13,7 @@ html, body {
 
 }
 
-body, html {
-    overflow: hidden;
-}
+
 
 /* -------- BACKGROUND -------- */
 .backconnx { 
@@ -252,6 +250,7 @@ body, html {
     align-items: center;
     padding: 8px ;
    
+   
 }
 .accueil {
   
@@ -266,6 +265,7 @@ width: 80%;
     flex-direction: row;
     gap: 5%;
     margin: auto;
+    justify-content: center;
 }
 
 .iconsbtns {
@@ -273,26 +273,42 @@ width: 80%;
     flex-direction: row;
     gap: 12px;
     width: fit-content;
+    margin: auto;
 }
 
-.btninfo,
-.btnexit {
-    width: 32px;
-    height: 32px;
-    border: none;
-    cursor: pointer;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+
+
+.iconsbtns > button {
+    width: 80px;
+    height: 64px;
+    font-size: 24px ;
+
 }
 
-/* Couleurs temporaires pour repérage */
-.btninfo {
-    background-color: #FF6B6B;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.6);
+  z-index: 3;
 }
 
-.btnexit {
-    background-color: #6BCB77;
+/* POPUP CENTRÉE */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #EDF0F6;
+  padding: 20px;
+  width: 700px;
+
+  z-index:4;
+  text-align: center;
+  box-shadow: 8px 8px 0px #3B3B3B;
+  line-height: 2;
 }
 
 

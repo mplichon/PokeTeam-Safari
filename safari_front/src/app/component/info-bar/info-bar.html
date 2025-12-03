@@ -2,8 +2,23 @@
         <div class="accueil"> <p> Bienvenue {{username}}  </p> <p> ---- </p> <p>  Bon Safari!  </p>  <p>----  </p> <p> <span id="datetime">{{ datetime }}</span></p></div>
 
         <div class="iconsbtns">
-            <button class="btninfo"></button>
-            <button class="btnexit" (click)="logout()"></button>
+
+
+
+            <button (click)="openPopup()" class="primary_b">?</button>
+
+<div class="overlay" *ngIf="popupVisible" (click)="closePopup()"></div>
+
+<div class="popup" *ngIf="popupVisible">
+
+  <p>Bienvenue à PokéFari ! <br> Sur cette île sauvage, un Zarbi peut surgir à tout moment… Attrape-le du bout du doigt et laisse-toi aspirer dans un face-à-face où chaque choix compte : tenter la capture, l’appâter, l’affaiblir ou fuir. Chaque rencontre te rapproche d’un Pokédex légendaire.</p>
+  <button class="primary_b" (click)="closePopup()">Fermer</button>
+</div>
+
+
+
+
+            <button class="secondary_b" (click)="logout()"><img src="assets/logout.svg" alt=""></button>
         </div>
     </header>
 

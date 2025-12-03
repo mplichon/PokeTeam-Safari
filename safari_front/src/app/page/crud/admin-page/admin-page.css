@@ -161,3 +161,10 @@
   font-size: 12px;
   margin-top: 4px;
 }
+
+
+  body, html {
+    overflow: hidden;
+}
+
+

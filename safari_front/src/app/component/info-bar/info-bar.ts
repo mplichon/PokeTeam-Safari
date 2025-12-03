@@ -44,6 +44,17 @@ export class InfoBar implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+popupVisible = false;
+
+openPopup() {
+  this.popupVisible = true;
+}
+
+closePopup() {
+  this.popupVisible = false;
+}
+
 }
 
 
