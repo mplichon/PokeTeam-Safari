@@ -68,6 +68,12 @@ public class JoueurRestController {
 		);
 	}
 
+    @GetMapping("/{id}/pseudo")
+    public String getPseudoById(@PathVariable Integer id){
+        Joueur foundJoueur = compteSrv.getJoueurById(id);
+        return foundJoueur.getSurnom();
+    }
+
 
 	@PostMapping
 	public JoueurResponse ajoutJoueur(@RequestBody JoueurCreationRequest joueurToCreate) throws Exception

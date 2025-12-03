@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 export class PokemonDetail {
   @Input() pokemon: Pokemon | null = null;
 
-   @Output() previous = new EventEmitter<void>();
+  @Output() previous = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
 
   

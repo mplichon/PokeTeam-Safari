@@ -25,5 +25,4 @@ export const routes: Routes = [
     {path: 'gestion/map', component: MapPage, canActivate: [ adminGuard ]},    
     {path: 'gestion/pokemon', component: PokemonPage, canActivate: [ adminGuard ]},
     {path: 'gestion/joueur', component: JoueurPage, canActivate: [ adminGuard ]},
-
 ];
