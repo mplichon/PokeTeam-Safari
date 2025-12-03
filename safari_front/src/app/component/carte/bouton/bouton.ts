@@ -37,7 +37,7 @@ export class BoutonComponent implements OnInit {
    }
 
    randomPosition() {
-     const el = this.zone.nativeElement;
+     const el = this.zone;
      const w = el.clientWidth;
      const h = el.clientHeight;
 
