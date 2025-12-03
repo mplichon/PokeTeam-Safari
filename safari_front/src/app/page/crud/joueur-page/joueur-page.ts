@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { Observable } from 'rxjs';
 import { JoueurDto } from '../../../dto/joueur-dto';
 import { JoueurService } from '../../../service/joueur-service';
+import { requiredIfValidator } from '../../../validator/required-if-validator';
 
 @Component({
   selector: 'app-joueur-page',
@@ -19,7 +20,8 @@ export class JoueurPage {
   protected joueur: JoueurDto = new JoueurDto(0, "", "", 0, 0, 0);
   protected joueurs$!: Observable<JoueurDto[]>;
   protected joueurForm!: FormGroup;
-  protected loginCtrl!: FormControl;
+  protected usernameCtrl!: FormControl;
+  protected passwordCtrl!: FormControl;
   protected surnomCtrl!: FormControl;
   protected nbPokeballCtrl!: FormControl;
   protected nbFriandiseCtrl!: FormControl;
@@ -31,14 +33,16 @@ export class JoueurPage {
   ngOnInit(): void {
     this.joueurs$ = this.joueurService.findAll();
 
-    this.loginCtrl = new FormControl('', Validators.required);
+    this.usernameCtrl = new FormControl('', Validators.required);
+    this.passwordCtrl = new FormControl('', requiredIfValidator(!this.editingJoueur));
     this.surnomCtrl = new FormControl('', [ Validators.required, Validators.minLength(6) ]);
     this.nbPokeballCtrl = new FormControl('', [ Validators.required, Validators.min(0), Validators.max(999) ]);
     this.nbFriandiseCtrl = new FormControl('', [ Validators.required, Validators.min(0), Validators.max(999) ]);
     this.nbBoueCtrl = new FormControl('', [ Validators.required, Validators.min(0), Validators.max(999) ]);
 
     this.joueurForm = this.formBuilder.group({
-      login: this.loginCtrl,
+      username: this.usernameCtrl,
+      password: this.passwordCtrl,
       surnom: this.surnomCtrl,
       nbPokeball: this.nbPokeballCtrl,
       nbFriandise: this.nbFriandiseCtrl,
@@ -51,7 +55,7 @@ export class JoueurPage {
     if (this.editingJoueur) {
       this.joueurService.save(new JoueurDto(
         this.editingJoueur.id, 
-        this.loginCtrl.value, 
+        this.usernameCtrl.value, 
         this.surnomCtrl.value,
         this.nbPokeballCtrl.value,
         this.nbFriandiseCtrl.value,
@@ -62,7 +66,7 @@ export class JoueurPage {
     else {
       this.joueurService.save(new JoueurDto(
         0, 
-        this.loginCtrl.value, 
+        this.usernameCtrl.value, 
         this.surnomCtrl.value,
         this.nbPokeballCtrl.value,
         this.nbFriandiseCtrl.value,
@@ -71,25 +75,34 @@ export class JoueurPage {
     }
 
     this.editingJoueur = null;
-    this.loginCtrl.reset();
+    this.usernameCtrl.reset();
     this.surnomCtrl.reset();
     this.nbPokeballCtrl.reset();
     this.nbFriandiseCtrl.reset();
     this.nbBoueCtrl.reset();
+
+    this.passwordCtrl.setValidators(requiredIfValidator(!this.editingJoueur))
+    this.passwordCtrl.updateValueAndValidity();
   }
 
   public editJoueur(joueur: JoueurDto): void {
     // Clone du Joueur pour l'édition
     this.editingJoueur = joueur;
-    this.loginCtrl.setValue(joueur.login);
+    this.usernameCtrl.setValue(joueur.username);
     this.surnomCtrl.setValue(joueur.surnom);
     this.nbPokeballCtrl.setValue(joueur.nbPokeball);
     this.nbFriandiseCtrl.setValue(joueur.nbFriandise);
     this.nbBoueCtrl.setValue(joueur.nbBoue);
+
+    this.passwordCtrl.setValidators(requiredIfValidator(!this.editingJoueur))
+    this.passwordCtrl.updateValueAndValidity();
   }
 
   public deleteJoueur(joueur: JoueurDto): void {
     this.joueurService.deleteById(joueur.id);
+    
+    this.passwordCtrl.setValidators(requiredIfValidator(!this.editingJoueur))
+    this.passwordCtrl.updateValueAndValidity();
   }
 
   public trackJoueur(index: number, value: JoueurDto) {

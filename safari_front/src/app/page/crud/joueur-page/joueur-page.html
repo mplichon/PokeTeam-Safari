@@ -19,7 +19,7 @@
     <tbody>
         <tr *ngFor="let j of joueurs$ | async; trackBy: trackJoueur">
             <td>{{ j.id }}</td>
-            <td>{{ j.login }}</td>
+            <td>{{ j.username }}</td>
             <td>{{ j.surnom }}</td>
             <td>{{ j.nbPokeball }}</td>
             <td>{{ j.nbFriandise }}</td>
@@ -34,18 +34,24 @@
 
 <div class="ajout">
     <form (ngSubmit)="ajouterModifierJoueur()" [formGroup]="joueurForm">
-        <!-- login -->
+        <!-- username -->
         <div>
-            <input  type="text" formControlName="login" placeholder="Identifiant"/> 
+            <input  type="text" formControlName="username" placeholder="Identifiant"/> 
             
-            @if (loginCtrl.hasError('required')) {
+            @if (usernameCtrl.hasError('required')) {
                 <div class="error-message">L'identifiant est obligatoire</div>
             }
         </div>
 
-        @if (!editingJoueur) {
-            <!-- mettre le input du password mais avant ça créer un dto avec password -->
-            <p>coucou</p>
+        <!-- password -->
+        @if (!editingJoueur) { <!-- si le formulaire est en mode "ajouter" alors on affiche l'input du mdp -->
+            <div>
+                <input  type="text" formControlName="password" placeholder="Mot de passe"/> 
+                
+                @if (passwordCtrl.hasError('required')) {
+                    <div class="error-message">Le mot de passe est obligatoire</div>
+                }
+            </div>
         }
 
         <!-- surnom -->

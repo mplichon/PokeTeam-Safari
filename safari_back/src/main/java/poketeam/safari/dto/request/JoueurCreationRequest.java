@@ -1,7 +1,5 @@
 package poketeam.safari.dto.request;
 
-import poketeam.safari.model.Inventaire;
-
 public class JoueurCreationRequest {
     private String username;
     private String surnom;
