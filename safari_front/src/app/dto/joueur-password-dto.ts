@@ -1,8 +1,9 @@
-export class JoueurDto {
-
+export class JoueurPasswordDto {
+    
     constructor(
         private _id: number,
         private _username: string,
+        private _password: string,
         private _surnom: string,
         private _nbPokeball: number,
         private _nbFriandise: number,
@@ -23,6 +24,14 @@ export class JoueurDto {
 
     public set username(value: string) {
         this._username = value;
+    }
+
+    public get password(): string {
+    return this._password;
+    }
+
+    public set password(value: string) {
+    this._password = value;
     }
 
     public get surnom(): string {
@@ -60,6 +69,7 @@ export class JoueurDto {
     public toJson(): any {
         return {
             username: this.username,
+            password: this.password,
             surnom: this.surnom,
             inventaire: {
                 nbPokeball: this.nbPokeball,
@@ -73,6 +83,7 @@ export class JoueurDto {
         return {
             id: this.id,
             username: this.username,
+            password: this.password,
             surnom: this.surnom,
             inventaire: {
                 nbPokeball: this.nbPokeball,

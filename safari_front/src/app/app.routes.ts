@@ -8,16 +8,22 @@ import { RegisterPage } from './page/register-page/register-page';
 import { AdminPage } from './page/crud/admin-page/admin-page';
 import { MapPage } from './page/crud/map-page/map-page';
 import { JoueurPage } from './page/crud/joueur-page/joueur-page';
+import { joueurGuard } from './guard/joueur-guard';
+import { adminGuard } from './guard/admin-guard';
 
 export const routes: Routes = [
     {path: '', component: LoginPage},
     
     {path: 'login', component: LoginPage},
     {path: 'register', component: RegisterPage},
-    {path: 'test', component: TestPage, canActivate: [ authGuard ]},
-    {path: 'game', component: GamePage, canActivate: [ authGuard ]},
-    {path: 'gestion/admin', component: AdminPage},
-    {path: 'gestion/map', component: MapPage},    
-    {path: 'gestion/pokemon', component: PokemonPage},
-    {path: 'gestion/joueur', component: JoueurPage},
+    
+    {path: 'test', component: TestPage, canActivate: [ joueurGuard ]},
+    {path: 'game', component: GamePage, canActivate: [ joueurGuard ]},
+
+    //Routes du CRUD
+    {path: 'gestion/admin', component: AdminPage, canActivate: [ adminGuard ]},
+    {path: 'gestion/map', component: MapPage, canActivate: [ adminGuard ]},    
+    {path: 'gestion/pokemon', component: PokemonPage, canActivate: [ adminGuard ]},
+    {path: 'gestion/joueur', component: JoueurPage, canActivate: [ adminGuard ]},
+
 ];

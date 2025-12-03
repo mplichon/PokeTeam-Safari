@@ -3,6 +3,7 @@ package poketeam.safari.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import poketeam.safari.dao.IDAOCompte;
@@ -26,12 +27,12 @@ public class AuthRestController {
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
 
         // On demande à Spring Security si le user / password sont OK
-        this.am.authenticate(auth);
+        Authentication result = this.am.authenticate(auth);
 
         Compte compte = daoCompte.findByLogin(request.getUsername()).orElseThrow();
         Integer idCompte = compte.getId();
 
-        return new AuthResponse(JwtUtils.generate(auth, idCompte));
+        return new AuthResponse(JwtUtils.generate(result, idCompte));
     }
 
     @GetMapping("/test")

@@ -31,4 +31,16 @@ export class JwtService {
   get role(): string | null {
     return this.decode()?.role ?? null;
   }
+  
+  get isAdmin(): boolean {
+    return this.role === 'ADMIN';
+  }
+
+  get isJoueur(): boolean {
+    return this.role === 'JOUEUR';
+  }
+
+  get hasToken(): boolean {
+  return !!this.token;
+}
 }

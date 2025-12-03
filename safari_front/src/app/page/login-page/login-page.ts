@@ -36,8 +36,23 @@ export class LoginPage implements OnInit {
       // La méthode auth renvoyant une Promise, on peut attendre la résolution avec "await"
       await this.authService.auth(new AuthRequestDto(this.usernameCtrl.value, this.passwordCtrl.value));
 
-      // Si tout est OK, on va sur la page des matières
-      this.router.navigate([ '/game' ]);
+      const token = sessionStorage.getItem('token');
+      console.log(token)
+
+      if (!token) {
+        this.loginError = true;
+        return;
+      }
+
+      // Décoder le token JWT
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      console.log("Payload:", payload.role);
+
+      if (payload.role==="ADMIN") {
+        this.router.navigate(['/gestion/admin']);
+      } else {
+        this.router.navigate(['/game']);
+    }
     }
 
     // Si la connexion n'a pas pu se faire, affichage de l'erreur sur le template

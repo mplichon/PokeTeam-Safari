@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TypeElementService } from './type-element-service';
+import { JoueurService } from './joueur-service';
 
-describe('TypeElementService', () => {
-  let service: TypeElementService;
+describe('JoueurService', () => {
+  let service: JoueurService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TypeElementService);
+    service = TestBed.inject(JoueurService);
   });
 
   it('should be created', () => {

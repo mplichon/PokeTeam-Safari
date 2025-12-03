@@ -1,26 +1,21 @@
 package poketeam.safari.dto.response;
 
-import poketeam.safari.model.Inventaire;
-
 public class JoueurResponse {
     
     private Integer id;
     private String username;
     private String surnom;
-    private Inventaire inventaire;
+    private Integer nbPokeball;
+	private Integer nbFriandise;
+	private Integer nbBoue;
 
     public JoueurResponse(Integer id, String username, String surnom, Integer nbPokeball, Integer nbFriandise, Integer nbBoue) {
         this.id = id;
         this.username = username;
         this.surnom = surnom;
-        this.inventaire = new Inventaire(nbPokeball, nbFriandise, nbBoue);
-    }
-
-    public JoueurResponse(Integer id, String username, String surnom, Inventaire inventaire) {
-        this.id = id;
-        this.username = username;
-        this.surnom = surnom;
-        this.inventaire = inventaire;
+        this.nbPokeball = nbPokeball;
+        this.nbFriandise = nbFriandise;
+        this.nbBoue = nbBoue;
     }
 
     public Integer getId() {
@@ -47,12 +42,27 @@ public class JoueurResponse {
         this.surnom = surnom;
     }
 
-    public Inventaire getInventaire() {
-        return inventaire;
+    public Integer getNbPokeball() {
+        return nbPokeball;
     }
 
-    public void setInventaire(Inventaire inventaire) {
-        this.inventaire = inventaire;
+    public void setNbPokeball(Integer nbPokeball) {
+        this.nbPokeball = nbPokeball;
     }
-    
+
+    public Integer getNbFriandise() {
+        return nbFriandise;
+    }
+
+    public void setNbFriandise(Integer nbFriandise) {
+        this.nbFriandise = nbFriandise;
+    }
+
+    public Integer getNbBoue() {
+        return nbBoue;
+    }
+
+    public void setNbBoue(Integer nbBoue) {
+        this.nbBoue = nbBoue;
+    }
 }

@@ -22,49 +22,69 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class JwtHeaderFilter extends OncePerRequestFilter{
+public class JwtHeaderFilter extends OncePerRequestFilter {
+
     @Autowired
     private IDAOCompte daoCompte;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String header = request.getHeader("Authorization");
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain)
+            throws ServletException, IOException {
 
-        if (request.getRequestURI().equals("/api/auth")) {
+        String uri = request.getRequestURI();
+
+
+        // On laisse passer la route d'auth sans vérifier le token
+        if (uri.equals("/api/auth")) {
+            System.out.println(">>> /api/auth détecté, on ne vérifie pas le JWT");
             filterChain.doFilter(request, response);
             return;
         }
 
-        if (header != null) {
-            String token = header.substring(7); // On enlève "Bearer " pour garder que le jeton
+        String header = request.getHeader("Authorization");
+        System.out.println(">>> Authorization header = " + header);
 
-            // On vérifie le jeton, et si tout est OK, on récupère l'utilisateur associé à ce jeton
+        if (header != null && header.startsWith("Bearer ")) {
+            String token = header.substring(7);
+
             Optional<Integer> optId = JwtUtils.validateAndGetId(token);
 
             if (optId.isPresent()) {
                 Integer id = optId.get();
-                Compte compte = this.daoCompte.findById(id).orElseThrow();
+                System.out.println(">>> ID extrait du token = " + id);
 
-                // On refabrique une liste de rôles pour l'utilisateur
-                List<GrantedAuthority> autorities = new ArrayList<>();
+                Compte compte = daoCompte.findById(id).orElse(null);
 
-                if (compte instanceof Joueur) {
-                    autorities.add(new SimpleGrantedAuthority("ROLE_JOUEUR"));
+                if (compte != null) {
+                    String roleName = compte.getClass().getSimpleName().toUpperCase(); // JOUEUR / ADMIN
+                    GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + roleName);
+
+                    System.out.println(">>> Compte login = " + compte.getLogin());
+                    System.out.println(">>> Rôle calculé = ROLE_" + roleName);
+
+                    UsernamePasswordAuthenticationToken auth =
+                            new UsernamePasswordAuthenticationToken(
+                                    compte.getLogin(),
+                                    null,
+                                    List.of(authority)
+                            );
+
+                    System.out.println(">>> Authentication injectée = " + auth);
+                    System.out.println(">>> Authorities = " + auth.getAuthorities());
+
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                } else {
+                    System.out.println(">>> Aucun compte trouvé pour id = " + id);
                 }
-
-                else if (compte instanceof Admin) {
-                    autorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-                }
-
-                // Créer, pour Spring Security, un nouvel User, avec le nom d'utilisateur, pas de mdp, et la liste des autorités
-                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(compte.getLogin(), null, autorities);
-
-                // Injecter notre nouvel authentication dans le contexte de Spring Security
-                SecurityContextHolder.getContext().setAuthentication(auth);
+            } else {
+                System.out.println(">>> Token invalide ou expiré");
             }
+        } else {
+            System.out.println(">>> Aucun header Authorization Bearer trouvé");
         }
 
-        // Important pour chainer sur le filtre suivant
         filterChain.doFilter(request, response);
     }
 }
