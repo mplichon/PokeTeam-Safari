@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { JwtService } from '../../service/jwt-service';
 import { PokemonCaptureService } from '../../service/pokemon-capture-service';
+import { JoueurService } from '../../service/joueur-service';
 
 @Component({
   selector: 'app-pokedex-access',
@@ -12,9 +13,11 @@ export class PokedexAccess implements OnInit{
   @Input() isOpen: boolean = false; // etat parent
   @Output() toggleView = new EventEmitter<void>();
 
-  constructor(private jwtService: JwtService, private pokemonCaptureService: PokemonCaptureService){}
-  userId: number | null = null;
-  username: string | null = null;
+  constructor(private jwtService: JwtService, 
+    private pokemonCaptureService: PokemonCaptureService,
+    private joueurService: JoueurService
+  ){}
+  pseudo: string | null = null;
   nbPokemons = 0;
 
   onClickButton() {
@@ -25,23 +28,28 @@ export class PokedexAccess implements OnInit{
     return id.toString().padStart(3, '0');  
   }
   ngOnInit(): void {
-    this.userId = this.jwtService.userId;
-    console.log(this.userId)
+    const id = this.jwtService.userId;
+  
+      if (id != null) {
+        this.pokemonCaptureService
+          .pokemonCaptureParIdParJoueur(id)
+          .subscribe({
+            next: (pokemons) => {
+              this.nbPokemons = pokemons.length;  
+            },
+            error: err => console.error('Erreur API Pokémon capturés', err)
+        });
 
-    if (this.userId == null) {
-      console.error("Aucun userId dans le JWT");
-      return;
-    }
-    this.username = this.jwtService.username;
+        this.joueurService.getPseudoById(id).subscribe({
+          next: (pseudo) => {
+            this.pseudo = pseudo;
 
-    this.pokemonCaptureService
-      .pokemonCaptureParIdParJoueur(this.userId)
-      .subscribe({
-        next: (pokemons) => {
-          this.nbPokemons = pokemons.length;  
-        },
-        error: err => console.error('Erreur API Pokémon capturés', err)
-    });
+          },
+          error: (err) => console.error("Erreur pseudo :", err)
+        });
+      }
+
+    
   }
 }
 

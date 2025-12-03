@@ -61,4 +61,8 @@ export class JoueurService {
     this.http.delete<void>(`${this.apiUrl}/${id}`)
       .subscribe(() => this.refresh());
   }
+
+  public getPseudoById(id: number): Observable<string> {
+    return this.http.get(`${this.apiUrl}/${id}/pseudo`, { responseType: 'text' });
+  }
 }

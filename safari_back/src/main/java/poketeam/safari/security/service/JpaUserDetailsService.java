@@ -24,7 +24,7 @@ public class JpaUserDetailsService implements UserDetailsService {
             return switch (person) {
                 case Joueur j    -> "JOUEUR";
                 case Admin a    -> "ADMIN";
-                default             -> "NONE";
+                default          -> "NONE";
             };
         };
 

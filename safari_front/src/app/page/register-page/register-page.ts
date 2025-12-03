@@ -28,7 +28,7 @@ export class RegisterPage implements OnInit{
     this.registerForm = this.formBuilder.group(
       {
         username: ['', Validators.required],
-        surnom: [''],
+        surnom: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirm: ['', Validators.required]
       },
@@ -48,7 +48,7 @@ export class RegisterPage implements OnInit{
         new SubscribeRequestDto(
         this.registerForm.value.username,
         this.registerForm.value.password,
-        ""
+        this.registerForm.value.surnom
         )
       );
       this.router.navigate(['/login']);
