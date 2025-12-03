@@ -5,7 +5,7 @@
     <br>
     <br>
 
-    <h1>Liste des Admins</h1>
+    <h1>Liste des admins</h1>
 
     <div class="display_admin">
 
@@ -37,6 +37,13 @@
 
         <!-- FORMULAIRE -->
         <div class="ajout">
+            @if (editingAdmin) {
+                <h4>Modifier un admin</h4>
+            }
+
+            @else {
+                <h4>Ajouter un admin</h4>
+            }
             <form (ngSubmit)="ajouterModifierAdmin()" [formGroup]="adminForm">
 
                 <!-- login -->

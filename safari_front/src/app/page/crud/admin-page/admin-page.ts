@@ -7,6 +7,7 @@ import { AdminService } from '../../../service/admin-service';
 import { AdminDto } from '../../../dto/admin-dto';
 import { AdminPasswordDto } from '../../../dto/admin-password-dto';
 import { NavbarCrud } from '../../../component/navbar-crud/navbar-crud';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-page',
@@ -26,9 +27,10 @@ export class AdminPage implements OnInit {
   protected passwordCtrl!: FormControl;
   protected editingAdmin!: AdminDto | null;
 
-  constructor(private adminService: AdminService, private formBuilder: FormBuilder) { }
+  constructor(private adminService: AdminService, private formBuilder: FormBuilder, private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle("Gestion des admins | PokéFari");
     this.admins$ = this.adminService.findAll();
 
     this.loginCtrl = new FormControl('', Validators.required);

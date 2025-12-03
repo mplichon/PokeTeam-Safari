@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth-service';
 import { SubscribeRequestDto } from '../../component/dto/subscribe-request-dto';
 import { passwordMatchValidator } from '../../validator/password-match-validator';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register-page',
@@ -21,10 +22,13 @@ export class RegisterPage implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
+    this.title.setTitle("Inscription | PokéFari");
+
     this.registerForm = this.formBuilder.group(
       {
         username: ['', Validators.required],

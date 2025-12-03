@@ -8,6 +8,7 @@ import { TypeElementDto } from '../../../dto/type-element-dto';
 import { TypeElementService } from '../../../service/type-element-service';
 import { typeNotMatchValidator } from '../../../validator/type-not-match-validator';
 import { NavbarCrud } from '../../../component/navbar-crud/navbar-crud';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pokemon-page',
@@ -33,9 +34,10 @@ export class PokemonPage implements OnInit {
   protected type2Ctrl!: FormControl;
   protected editingPokemon!: PokemonDto | null;
 
-  constructor(private pokemonService: PokemonService, private typeElementService: TypeElementService, private formBuilder: FormBuilder) { }
+  constructor(private pokemonService: PokemonService, private typeElementService: TypeElementService, private formBuilder: FormBuilder, private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle("Gestion des Pokémons | PokéFari");
     this.pokemons$ = this.pokemonService.findAll();
     this.types$ = this.typeElementService.findAll();
 

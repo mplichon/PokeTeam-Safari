@@ -7,6 +7,7 @@ import { JoueurService } from '../../../service/joueur-service';
 import { requiredIfValidator } from '../../../validator/required-if-validator';
 import { JoueurPasswordDto } from '../../../dto/joueur-password-dto';
 import { NavbarCrud } from '../../../component/navbar-crud/navbar-crud';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-joueur-page',
@@ -31,9 +32,10 @@ export class JoueurPage {
   protected nbBoueCtrl!: FormControl;
   protected editingJoueur!: JoueurDto | null;
 
-  constructor(private joueurService: JoueurService, private formBuilder: FormBuilder) { }
+  constructor(private joueurService: JoueurService, private formBuilder: FormBuilder, private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle("Gestion des joueurs | PokéFari");
     this.joueurs$ = this.joueurService.findAll();
 
     this.usernameCtrl = new FormControl('', Validators.required);

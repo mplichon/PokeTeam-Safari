@@ -5,7 +5,7 @@
     <br>
     <br>
 
-    <h1>Liste des Joueurs</h1>
+    <h1>Liste des joueurs</h1>
 
     <div class="display_admin">
 
@@ -45,6 +45,14 @@
 
         <!-- FORMULAIRE -->
         <div class="ajout">
+            @if (editingJoueur) {
+                <h4>Modifier un joueur</h4>
+            }
+
+            @else {
+            <h4>Ajouter un joueur</h4>
+            }
+
             <form (ngSubmit)="ajouterModifierJoueur()" [formGroup]="joueurForm">
 
                 <!-- username -->
@@ -63,6 +71,9 @@
 
                         @if (passwordCtrl.hasError('required')) {
                             <div class="error-message">Le mot de passe est obligatoire</div>
+                        }
+                        @else if (passwordCtrl.hasError('minlength')) {
+                            <div class="error-message">Le mot de passe doit faire 6 caractères minimum</div>
                         }
                     </div>
                 }
