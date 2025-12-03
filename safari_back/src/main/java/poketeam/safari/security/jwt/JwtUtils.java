@@ -17,12 +17,22 @@ public class JwtUtils {
     private JwtUtils() { }
 
     public static String generate(Authentication auth, Integer idCompte) {
+
         JwtClaims claims = new JwtClaims();
         JsonWebSignature jws = new JsonWebSignature();
 
         claims.setSubject(auth.getName());
 
         claims.setClaim("id", idCompte);
+
+        //test token avec le role
+
+        String role = auth.getAuthorities().stream()
+                .findFirst()
+                .map(a -> a.getAuthority().replace("ROLE_", ""))
+                .orElse("NONE");
+
+        claims.setClaim("role", role);
 
         claims.setIssuedAtToNow();
         claims.setExpirationTimeMinutesInTheFuture((int)(JWT_EXPIRATION / 60000));
@@ -57,6 +67,7 @@ public class JwtUtils {
     }
 
     public static Optional<Integer> validateAndGetId(String token) {
+
         try {
             JwtConsumer consumer = new JwtConsumerBuilder()
                     .setVerificationKey(new HmacKey(JWT_KEY.getBytes()))
@@ -64,7 +75,13 @@ public class JwtUtils {
                     .build();
 
             JwtClaims claims = consumer.processToClaims(token);
-            return Optional.ofNullable(claims.getClaimValue("id", Integer.class));
+
+            // Récupérer l'id en Long (car jose4j stocke TOUJOURS en Long)
+            Long idLong = claims.getClaimValue("id", Long.class);
+
+            // Convertir en Integer
+            return Optional.of(idLong.intValue());
+
         } catch (Exception ex) {
             return Optional.empty();
         }

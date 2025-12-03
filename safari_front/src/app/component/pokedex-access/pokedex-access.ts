@@ -25,6 +25,7 @@ export class PokedexAccess implements OnInit{
   }
   ngOnInit(): void {
     this.userId = this.jwtService.userId;
+    console.log(this.userId)
 
     if (this.userId == null) {
       console.error("Aucun userId dans le JWT");
