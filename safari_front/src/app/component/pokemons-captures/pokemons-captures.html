@@ -6,7 +6,11 @@
         
         <!-- Zone Détail -->
         <app-pokemon-detail 
-            [pokemon]="selectedPokemon()">
+            [pokemon]="selectedPokemon()"
+              *ngIf="selectedPokemon()"
+  [pokemon]="selectedPokemon()"
+  (previous)="previousPokemon()"
+  (next)="nextPokemon()">
         </app-pokemon-detail>
 
         <!-- Zone Liste -->

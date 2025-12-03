@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Pokemon } from '../../../interface/pokemon.interface';
 import { CommonModule } from '@angular/common';
 
@@ -11,6 +11,10 @@ import { CommonModule } from '@angular/common';
 export class PokemonDetail {
   @Input() pokemon: Pokemon | null = null;
 
+   @Output() previous = new EventEmitter<void>();
+  @Output() next = new EventEmitter<void>();
+
+  
   defaultPokemon: Pokemon = {
     id: 0,
     name: '???',
@@ -21,4 +25,15 @@ export class PokemonDetail {
   get pokemonToDisplay(): Pokemon {
     return this.pokemon ?? this.defaultPokemon;
   }
+
+ Previous() {
+    console.log("previous clicked");  // ← vérifie que ça apparaît en console
+    this.previous.emit();
+  }
+
+  Next() {
+    console.log("next clicked");  // ← vérifie que ça apparaît en console
+    this.next.emit();
+  }
 }
+

@@ -311,12 +311,11 @@ width: 80%;
 .carte {
    grid-column: 2;
     grid-row: 1 / span 3;  /* occupe deux lignes */  /* occupe deux lignes */
-    background-image: url(assets/fondcarte.png);
-    background-size: cover;      /* pour que l'image remplisse le div */
+    background-image: url(assets/fondcarte1.png); /* background-image: url(assets/fondcarte.png); */
+    background-size: contain ;     /* pour que l'image remplisse le div */
     background-repeat: no-repeat; /* éviter la répétition */
-    height: 100%;
-    width: 100%;
-    border: #3B3B3B solid 4px ;
+
+
 }
 
 .combat {
@@ -618,10 +617,13 @@ padding: 8px;
 }
 
 .types {
-  margin-top: 15px;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
+width: fit-content;
+margin:  15px auto;
+
 }
 
 .type {

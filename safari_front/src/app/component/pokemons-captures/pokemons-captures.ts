@@ -73,7 +73,13 @@ export class PokemonsCaptures implements OnInit {
         });
 
         this.ListePokemons.set(adaptedList);
-      },
+
+       if (adaptedList.length > 0) {
+        this.selectedPokemon.set(adaptedList[0]);
+      }
+    },
+
+    
       error: err => {
         console.error('Erreur lors du chargement des pokémons ou des captures', err);
       }
@@ -84,4 +90,29 @@ export class PokemonsCaptures implements OnInit {
   onPokemonSelected(pokemon: Pokemon): void {
     this.selectedPokemon.set(pokemon);
   }
+
+previousPokemon(): void {
+  const list = this.ListePokemons();
+  const current = this.selectedPokemon();
+
+  if (!current) return;
+
+  let index = list.findIndex(p => p.id === current.id);
+  if (index > 0) {
+    this.selectedPokemon.set(list[index - 1]);
+  }
+}
+
+nextPokemon(): void {
+  const list = this.ListePokemons();
+  const current = this.selectedPokemon();
+
+  if (!current) return;
+
+  let index = list.findIndex(p => p.id === current.id);
+  if (index < list.length - 1) {
+    this.selectedPokemon.set(list[index + 1]);
+  }
+}
+
 }
