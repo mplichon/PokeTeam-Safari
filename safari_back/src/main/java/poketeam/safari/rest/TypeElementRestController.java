@@ -24,7 +24,7 @@ public class TypeElementRestController {
         log.info("GET /api/type - getAllTypes() called");
 
         return Arrays.stream(TypeElement.values())
-                .map(t -> new TypeElementResponse(t.name(), t.getNom()))
+                .map(t -> new TypeElementResponse(t.name(), t.getNom(), t.getCouleur()))
                 .toList();
     }
 }

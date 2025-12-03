@@ -2,7 +2,8 @@ export class TypeElementDto {
 
     constructor(
         private _key: string,
-        private _nom: string
+        private _nom: string,
+        private _couleur: string
     ) { }
 
     public get key(): string {
@@ -21,10 +22,19 @@ export class TypeElementDto {
         this._nom = value;
     }
 
+    public get couleur(): string {
+        return this._couleur;
+    }
+
+    public set couleur(value: string) {
+        this._couleur = value;
+    }
+
     public toJson(): any {
         return {
             key: this.key,
-            nom: this.nom
+            nom: this.nom,
+            couleur: this.couleur
         };
     }
 }
