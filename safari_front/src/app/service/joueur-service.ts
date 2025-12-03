@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, startWith, Subject, switchMap } from 'rxjs';
 import { JoueurDto } from '../dto/joueur-dto';
+import { JoueurPasswordDto } from '../dto/joueur-password-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,22 @@ export class JoueurService {
       this.http.put<JoueurDto>(`${this.apiUrl}/${joueurDto.id}`, payload)
         .subscribe(() => this.refresh());
     }
+  }
+
+  public createAsAdmin(joueurDto: JoueurPasswordDto): void {
+    const payload = joueurDto.toJson();
+    const apiUrlAsAdmin = this.apiUrl + "/admin"
+
+    this.http.post<JoueurPasswordDto>(apiUrlAsAdmin, payload)
+        .subscribe(() => this.refresh());
+  }
+
+  public updateAsAdmin(joueurDto: JoueurDto): void {
+    const payload = joueurDto.toJson();
+    const apiUrlAsAdmin = this.apiUrl + "/admin"
+
+    this.http.put<JoueurDto>(`${apiUrlAsAdmin}/${joueurDto.id}`, payload)
+        .subscribe(() => this.refresh());
   }
 
   public deleteById(id: number): void {

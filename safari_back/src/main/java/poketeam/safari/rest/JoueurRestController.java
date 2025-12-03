@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import poketeam.safari.dto.request.JoueurCreateAsAdminRequest;
 import poketeam.safari.dto.request.JoueurCreationRequest;
+import poketeam.safari.dto.request.JoueurUpdateAsAdminRequest;
 import poketeam.safari.dto.response.JoueurResponse;
 import poketeam.safari.model.Compte;
 import poketeam.safari.model.Joueur;
@@ -87,12 +89,55 @@ public class JoueurRestController {
 		);
 	}
 
+	@PostMapping("/admin")
+	public JoueurResponse ajoutJoueurAsAdmin(@RequestBody JoueurCreateAsAdminRequest joueurToCreate) throws Exception
+	{
+		log.info("POST /api/joueur/admin - ajoutJoueur() called");
+        Joueur joueur = joueurToCreate.convert();
+		Compte compte = compteSrv.findByLogin(joueur.getLogin());
+		if (compte != null) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Un compte avec ce login existe déjà");
+		}
+		Joueur createdJoueur = (Joueur) compteSrv.create(joueur);
+		return new JoueurResponse(
+			createdJoueur.getId(), 
+			createdJoueur.getLogin(), 
+			createdJoueur.getSurnom(), 
+			createdJoueur.getInventaire().getNbPokeball(),
+			createdJoueur.getInventaire().getNbFriandise(),
+			createdJoueur.getInventaire().getNbBoue()
+		);
+	}
+
 
 	@PutMapping("/{id}")
 	public JoueurResponse modifierJoueur(@PathVariable Integer id, @RequestBody Joueur joueur)
 	{
 		log.info("PUT /api/joueur/{} - modifierJoueur() called", id);
 		joueur.setId(id);
+		Joueur updatedJoueur = (Joueur) compteSrv.update(joueur);
+		return new JoueurResponse(
+			updatedJoueur.getId(), 
+			updatedJoueur.getLogin(), 
+			updatedJoueur.getSurnom(), 
+			updatedJoueur.getInventaire().getNbPokeball(),
+			updatedJoueur.getInventaire().getNbFriandise(),
+			updatedJoueur.getInventaire().getNbBoue()
+		);
+	}
+
+	@PutMapping("/admin/{id}")
+	public JoueurResponse modifierJoueurAsAdmin(@PathVariable Integer id, @RequestBody JoueurUpdateAsAdminRequest joueurRequest)
+	{
+		log.info("PUT /api/joueur/admin/{} - modifierJoueur() called", id);
+		
+		joueurRequest.setId(id);
+		Joueur joueur = joueurRequest.convert();
+		Joueur joueurBdd = compteSrv.getJoueurById(id);
+
+		joueur.setPassword(joueurBdd.getPassword());
+		joueur.setPositionActuelle(joueurBdd.getPositionActuelle());
+
 		Joueur updatedJoueur = (Joueur) compteSrv.update(joueur);
 		return new JoueurResponse(
 			updatedJoueur.getId(), 

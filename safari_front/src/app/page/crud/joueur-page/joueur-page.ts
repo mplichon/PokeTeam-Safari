@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { JoueurDto } from '../../../dto/joueur-dto';
 import { JoueurService } from '../../../service/joueur-service';
 import { requiredIfValidator } from '../../../validator/required-if-validator';
+import { JoueurPasswordDto } from '../../../dto/joueur-password-dto';
 
 @Component({
   selector: 'app-joueur-page',
@@ -34,7 +35,7 @@ export class JoueurPage {
     this.joueurs$ = this.joueurService.findAll();
 
     this.usernameCtrl = new FormControl('', Validators.required);
-    this.passwordCtrl = new FormControl('', requiredIfValidator(!this.editingJoueur));
+    this.passwordCtrl = new FormControl('', [ requiredIfValidator(!this.editingJoueur), Validators.minLength(6) ]);
     this.surnomCtrl = new FormControl('', [ Validators.required, Validators.minLength(6) ]);
     this.nbPokeballCtrl = new FormControl('', [ Validators.required, Validators.min(0), Validators.max(999) ]);
     this.nbFriandiseCtrl = new FormControl('', [ Validators.required, Validators.min(0), Validators.max(999) ]);
@@ -53,7 +54,7 @@ export class JoueurPage {
   public ajouterModifierJoueur() {
 
     if (this.editingJoueur) {
-      this.joueurService.save(new JoueurDto(
+      this.joueurService.updateAsAdmin(new JoueurDto(
         this.editingJoueur.id, 
         this.usernameCtrl.value, 
         this.surnomCtrl.value,
@@ -64,9 +65,10 @@ export class JoueurPage {
     }
 
     else {
-      this.joueurService.save(new JoueurDto(
+      this.joueurService.createAsAdmin(new JoueurPasswordDto(
         0, 
         this.usernameCtrl.value, 
+        this.passwordCtrl.value,
         this.surnomCtrl.value,
         this.nbPokeballCtrl.value,
         this.nbFriandiseCtrl.value,
@@ -76,12 +78,13 @@ export class JoueurPage {
 
     this.editingJoueur = null;
     this.usernameCtrl.reset();
+    this.passwordCtrl.reset();
     this.surnomCtrl.reset();
     this.nbPokeballCtrl.reset();
     this.nbFriandiseCtrl.reset();
     this.nbBoueCtrl.reset();
 
-    this.passwordCtrl.setValidators(requiredIfValidator(!this.editingJoueur))
+    this.passwordCtrl.setValidators([requiredIfValidator(!this.editingJoueur), Validators.minLength(6)])
     this.passwordCtrl.updateValueAndValidity();
   }
 
@@ -94,14 +97,14 @@ export class JoueurPage {
     this.nbFriandiseCtrl.setValue(joueur.nbFriandise);
     this.nbBoueCtrl.setValue(joueur.nbBoue);
 
-    this.passwordCtrl.setValidators(requiredIfValidator(!this.editingJoueur))
+    this.passwordCtrl.setValidators([requiredIfValidator(!this.editingJoueur), Validators.minLength(6)])
     this.passwordCtrl.updateValueAndValidity();
   }
 
   public deleteJoueur(joueur: JoueurDto): void {
     this.joueurService.deleteById(joueur.id);
     
-    this.passwordCtrl.setValidators(requiredIfValidator(!this.editingJoueur))
+    this.passwordCtrl.setValidators([requiredIfValidator(!this.editingJoueur), Validators.minLength(6)])
     this.passwordCtrl.updateValueAndValidity();
   }
 
