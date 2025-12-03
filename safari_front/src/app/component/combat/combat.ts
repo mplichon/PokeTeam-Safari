@@ -15,9 +15,21 @@ type CombatStatus = 'fuite' | 'capture' | 'continue' | 'abandon';
 })
 export class Combat implements OnInit {
 
-  
+  imgPokeMargLeft = 50;
+  imgPokeMargRight = 50;
+  imgPokeMargTop = 0;
+  imgPokeMargBottom = 0;
 
-  username = 0; 
+  messageContent = '';
+
+  imgPokeballMargBottom = -170;
+  pokeballAngle = 0;
+
+  allButtonsDisabled = false;
+  pokemonHidden = 'false';
+  pokeballHidden = 'true';
+  username = ''; 
+  userid = 0; 
   pokemon: PokemonDetail = {
     id: 0,
     name: '',
@@ -56,16 +68,20 @@ export class Combat implements OnInit {
       })
     );
   }
-
+  
   // Appel API selon l'action choisie
 
   initRencontre() {
-  this.username = this.jwtService.userId ?? 0;
-  this.http.get<{idRencontre: number, idPokemon: number, nom: string}>('http://localhost:8080/api/rencontre/initialiser/' + this.username)
+  this.userid = this.jwtService.userId ?? 0;
+  this.username = this.jwtService.username ?? 'SashaSansCompte';
+  this.http.get<{idRencontre: number, idPokemon: number, nom: string}>('http://localhost:8080/api/rencontre/initialiser/' + this.userid)
     .subscribe(res => {
       this.idRencontre = res.idRencontre;
       this.getPokemon(res.idPokemon).subscribe({
-      next: (p) => this.pokemon = p,
+      next: (p) => {
+        this.pokemon = p;
+        this.messageContent = 'Un ' + this.pokemon.name + ' sauvage est apparu !';
+      },
       error: (err) => console.error('Erreur API Pokémon', err)
     });
       console.log('Rencontre initialisée avec id', this.idRencontre);
@@ -73,27 +89,210 @@ export class Combat implements OnInit {
 }
 
 pokeball() {
+  this.allButtonsDisabled = true;
+    this.pokeballHidden = 'false';
+    this.pokemonHidden = 'true';
+    this.messageContent = this.username + ' lance une Pokéball !';
+  setTimeout(() => {
+  this.pokeballRolling();
+  }, 500);
+  setTimeout(() => {
+  this.pokeballRolling();
+  }, 1700);
+  setTimeout(() => {
+  this.pokeballRolling();
+  }, 2900);
+  setTimeout(() => {
+  this.pokeballRolling();
+  }, 4100);
+  setTimeout(() => {
   this.http.get<{statut: string}>(`http://localhost:8080/api/rencontre/pokeball/${this.idRencontre}`)
-    .subscribe(res => this.combatStatus = res.statut as any);
+    .subscribe(res => {
+      if (res.statut === 'fuite') {
+        this.pokeballHidden = 'true';
+        this.pokemonHidden = 'false';
+        this.pokemonSlidingOut();
+        this.messageContent = this.pokemon.name + ' a fui le combat !';
+        setTimeout(() => {
+          this.handleStatus(res.statut as CombatStatus);
+        }, 1000);
+      } else { 
+        this.handleStatus(res.statut as CombatStatus);
+      }
+      this.pokeballHidden = 'true';
+      this.pokemonHidden = 'false';
+      this.allButtonsDisabled = false;
+    });
+    if (this.combatStatus === 'capture') {
+      this.messageContent = 'Félicitations ! ' + this.pokemon.name + ' a été capturé !';
+    }
+  }, 5900);
+
 }
 
+
 appat() {
+  this.allButtonsDisabled = true;
+  this.pokemonShakingV();
+  this.messageContent = this.pokemon.name + ' mange !';
+  setTimeout(() => {
   this.http.get<{statut: string}>(`http://localhost:8080/api/rencontre/appat/${this.idRencontre}`)
-    .subscribe(res => this.combatStatus = res.statut as any);
+    .subscribe(res => {
+      if (res.statut === 'fuite') {
+        this.pokemonSlidingOut();
+        this.messageContent = this.pokemon.name + ' a fui le combat !';
+        setTimeout(() => {
+          this.handleStatus(res.statut as CombatStatus);
+        }, 1000);
+      } else { 
+        this.handleStatus(res.statut as CombatStatus);
+      }
+      this.allButtonsDisabled = false;
+    });
+  }, 1000);
 }
 
 boue() {
+  this.allButtonsDisabled = true;
+  this.pokemonShakingH();
+  this.messageContent = this.pokemon.name + " s'énerve !";
+  setTimeout(() => {
   this.http.get<{statut: string}>(`http://localhost:8080/api/rencontre/boue/${this.idRencontre}`)
-    .subscribe(res => this.combatStatus = res.statut as any);
+    .subscribe(res => {
+      if (res.statut === 'fuite') {
+        this.pokemonSlidingOut();
+        this.messageContent = this.pokemon.name + ' a fui le combat !';
+        setTimeout(() => {
+          this.handleStatus(res.statut as CombatStatus);
+        }, 1000);
+      } else { 
+        this.handleStatus(res.statut as CombatStatus);
+      }
+      this.allButtonsDisabled = false;
+    });
+  }, 1000);
+
 }
 
 fuite() {
+  this.allButtonsDisabled = true;
   this.http.get<{statut: string}>(`http://localhost:8080/api/rencontre/fuir/${this.idRencontre}`)
     .subscribe(res => this.combatStatus = res.statut as any);
 }
 
-  private handleStatus(statut: CombatStatus) {
-    this.combatStatus = statut;
-    console.log('Nouveau statut:', statut);
-  }
+private handleStatus(statut: CombatStatus) {
+  this.combatStatus = statut;
+  console.log('Nouveau statut:', statut);
+}
+
+pokemonShakingH() {
+  let margLeftTemp = this.imgPokeMargLeft;
+  let margRightTemp = this.imgPokeMargRight;
+  let mod = 0;
+  let switchVar = true;
+  let counter = 0;
+  let intervalle = setInterval(() => {
+      counter++;
+      console.log(counter + " : " + mod + " : " + this.imgPokeMargLeft + " : " + this.imgPokeMargRight);
+      if (counter >= 200) {
+        clearInterval(intervalle);
+      }
+      if (switchVar === true) {
+        mod += 1;
+        if (mod >= 25) {
+          switchVar = false;
+          console.log("switch");
+        }
+      } else {
+        mod -= 1;
+        if (mod <=-25) {
+          switchVar = true;
+          console.log("switch");
+        }
+      }
+      this.imgPokeMargLeft = margLeftTemp - mod;
+      this.imgPokeMargRight = margRightTemp + mod;
+    }, 5);
+    this.imgPokeMargLeft = margLeftTemp;
+    this.imgPokeMargRight = margRightTemp;
+}
+
+pokemonShakingV() {
+  let margTopTemp = this.imgPokeMargTop;
+  let margBottomTemp = this.imgPokeMargBottom;
+  let mod = 0;
+  let switchVar = true;
+  let counter = 0;
+  let intervalle = setInterval(() => {
+      counter++;
+      console.log(counter + " : " + mod + " : " + this.imgPokeMargLeft + " : " + this.imgPokeMargRight);
+      if (counter >= 100) {
+        clearInterval(intervalle);
+      }
+      if (switchVar === true) {
+        mod += 1;
+        if (mod >= 25) {
+          switchVar = false;
+          console.log("switch");
+        }
+      } else {
+        mod -= 1;
+        if (mod <=0) {
+          switchVar = true;
+          console.log("switch");
+        }
+      }
+      this.imgPokeMargTop = margTopTemp - mod;
+      this.imgPokeMargBottom = margBottomTemp + mod;
+    }, 10);
+    this.imgPokeMargTop = margTopTemp;
+    this.imgPokeMargBottom = margBottomTemp;
+}
+pokemonSlidingOut() {
+  let margLeftTemp = this.imgPokeMargLeft;
+  let margRightTemp = this.imgPokeMargRight;
+  let mod = 0;
+  let counter = 0;
+  let intervalle = setInterval(() => {
+      counter++;
+      console.log(counter + " : " + mod + " : " + this.imgPokeMargLeft + " : " + this.imgPokeMargRight);
+      if (counter >= 200) {
+        clearInterval(intervalle);
+      }
+      mod += 1;
+      this.imgPokeMargLeft = margLeftTemp + mod;
+      this.imgPokeMargRight = margRightTemp - mod;
+    }, 5);
+}
+
+
+pokeballRolling() {
+  let angleTemp = this.pokeballAngle;
+  let mod = 0;
+  let switchVar = true;
+  let counter = 0;
+  let intervalle = setInterval(() => {
+      counter++;
+      console.log(counter + " : " + mod + " : " + this.imgPokeMargLeft + " : " + this.imgPokeMargRight);
+      if (counter >= 100) {
+        clearInterval(intervalle);
+      }
+      if (switchVar === true) {
+        mod += 1;
+        if (mod >= 25) {
+          switchVar = false;
+          console.log("switch");
+        }
+      } else {
+        mod -= 1;
+        if (mod <=-25) {
+          switchVar = true;
+          console.log("switch");
+        }
+      }
+      this.pokeballAngle = angleTemp + mod;
+    }, 10);
+  this.pokeballAngle = angleTemp; 
+}
+
 }

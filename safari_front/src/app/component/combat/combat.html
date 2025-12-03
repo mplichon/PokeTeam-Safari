@@ -1,22 +1,46 @@
 <!-- CONTENEUR PRINCIPAL (CONTINUE) -->
-<div class="containeur" *ngIf="combatStatus === 'continue'">
-  <div class="id_poke">
-    <img [src]="pokemon.sprite">
-    <p class="pokemon-name">{{pokemon.name}}</p>
-    <p class="type">{{pokemon.type1}}</p>
-    <p class="type">{{pokemon.type2}}</p>
+<div class="containeur" *ngIf="combatStatus === 'continue'" >
+  <div class="top_combat">
+    <div class="id_poke">
+      <img [src]="pokemon.sprite">
+      <p class="pokemon-name">{{pokemon.name}}</p>
+      <p class="type">{{pokemon.type1}}</p>
+      <p class="type">{{pokemon.type2}}</p>
+    </div>
+    <div class="message_poke">
+      <p>
+        {{messageContent}}
+      </p>
+    </div>
   </div>
 
   <div class="combat_poke">
-    <img class="img_poke" [src]="pokemon.img">
+    <div class="slot_img_Pokemon">
+    <img class="img_pokeball" src="assets\pokeballV1.png" [ngStyle]="{
+    marginLeft: imgPokeMargLeft +'px',
+    marginRight: imgPokeMargRight + 'px',
+    marginTop: imgPokeMargTop + 'px',
+    marginBottom: imgPokeballMargBottom + 'px',
+    display: pokeballHidden === 'true' ? 'none' : 'block',
+    transform: 'rotate(' + pokeballAngle + 'deg)'
+  }">
+    <img class="img_poke" [src]="pokemon.img" [ngStyle]="{
+    marginLeft: imgPokeMargLeft +'px',
+    marginRight: imgPokeMargRight + 'px',
+    marginTop: imgPokeMargTop + 'px',
+    marginBottom: imgPokeMargBottom + 'px',
+    display: pokemonHidden === 'true' ? 'none' : 'block',
+
+  }">
+  </div>
     <img class="img_socle" src="assets/soclecombat.png" alt="">
   </div>
 
   <div class="actions_combat">
-    <button class="secondary_b" (click)="pokeball()">Pokeball</button>
-  <button class="secondary_b" (click)="boue()">Boue</button>
-  <button class="secondary_b" (click)="appat()">Appât</button>
-  <button class="secondary_b" (click)="fuite()">Fuite</button>
+    <button class="secondary_b" (click)="pokeball()" [disabled]="allButtonsDisabled">Pokeball</button>
+  <button class="secondary_b" (click)="boue()" [disabled]="allButtonsDisabled">Boue</button>
+  <button class="secondary_b" (click)="appat()" [disabled]="allButtonsDisabled">Appât</button>
+  <button class="secondary_b" (click)="fuite()" [disabled]="allButtonsDisabled">Fuite</button>
   </div>
 </div>
 
@@ -39,6 +63,6 @@
 <div class="containeur_fuit" *ngIf="combatStatus === 'abandon'">
   <p class="center_txt">
     -- tu as fuis -- <br><br>
-    <b>Tu</b> as quitté le combat
+    Tu as quitté le combat
   </p>
 </div>
