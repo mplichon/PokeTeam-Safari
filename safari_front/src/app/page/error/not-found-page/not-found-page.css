@@ -1,0 +1,19 @@
+.background404{
+
+background-image: url(../../../../assets/404.png);
+background-size: cover;
+width: 100%;
+height: 100%;
+
+}
+
+.txt_404{
+    padding: 10%;
+text-align: center;
+}
+
+h1{
+
+font-size: 70px;
+
+}

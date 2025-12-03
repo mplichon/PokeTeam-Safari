@@ -10,6 +10,7 @@ import { MapPage } from './page/crud/map-page/map-page';
 import { JoueurPage } from './page/crud/joueur-page/joueur-page';
 import { joueurGuard } from './guard/joueur-guard';
 import { adminGuard } from './guard/admin-guard';
+import { NotFoundPage } from './page/error/not-found-page/not-found-page';
 
 export const routes: Routes = [
     {path: '', component: LoginPage},
@@ -25,4 +26,7 @@ export const routes: Routes = [
     {path: 'gestion/map', component: MapPage, canActivate: [ adminGuard ]},    
     {path: 'gestion/pokemon', component: PokemonPage, canActivate: [ adminGuard ]},
     {path: 'gestion/joueur', component: JoueurPage, canActivate: [ adminGuard ]},
+
+//404
+    { path: '**', component: NotFoundPage },
 ];
