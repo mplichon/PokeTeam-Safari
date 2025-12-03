@@ -11,6 +11,7 @@ import { JoueurPage } from './page/crud/joueur-page/joueur-page';
 import { joueurGuard } from './guard/joueur-guard';
 import { adminGuard } from './guard/admin-guard';
 import { NotFoundPage } from './page/error/not-found-page/not-found-page';
+import { ForbiddenPage } from './page/error/forbidden-page/forbidden-page';
 
 export const routes: Routes = [
     {path: '', component: LoginPage},
@@ -27,6 +28,7 @@ export const routes: Routes = [
     {path: 'gestion/pokemon', component: PokemonPage, canActivate: [ adminGuard ]},
     {path: 'gestion/joueur', component: JoueurPage, canActivate: [ adminGuard ]},
 
-//404
+    //Erreurs
+    { path: 'error-403', component: ForbiddenPage },
     { path: '**', component: NotFoundPage },
 ];

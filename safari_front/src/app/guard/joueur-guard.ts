@@ -14,7 +14,7 @@ export const joueurGuard: CanActivateFn = () => {
 
   // Si admin → interdit
   if (jwt.isAdmin) {
-    return router.createUrlTree(['/admin']); // ou une page 403
+    return router.createUrlTree(['/error-403']); // ou une page 403
   }
 
   // OK pour un joueur
