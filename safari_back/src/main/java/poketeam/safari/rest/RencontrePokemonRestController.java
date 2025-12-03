@@ -22,6 +22,7 @@ import poketeam.safari.service.TableApparitionService;
 @CrossOrigin("*")
 public class RencontrePokemonRestController {
     
+    
     @Autowired
     private RencontrePokemonService rencontrePokemonService;
 
