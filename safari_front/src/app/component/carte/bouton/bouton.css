@@ -1,0 +1,13 @@
+.zone {
+  position: relative;
+  width: 500px;
+  height: 500px;
+}
+
+.random-img {
+  position: absolute;
+  cursor: pointer;
+  zoom: 120%;
+  user-select: none;
+  z-index: 99999; 
+}
