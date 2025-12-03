@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth-service';
 import { AuthRequestDto } from '../../component/dto/auth-request-dto';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-login-page',
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
@@ -18,9 +19,10 @@ export class LoginPage implements OnInit {
   protected usernameCtrl!: FormControl;
   protected passwordCtrl!: FormControl;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router, private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle("Connexion | PokéFari");
 
     this.usernameCtrl = this.formBuilder.control('', Validators.required);
     this.passwordCtrl = this.formBuilder.control('', [ Validators.required, Validators.minLength(6) ]);

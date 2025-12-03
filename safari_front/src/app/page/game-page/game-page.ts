@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Carte } from "../../component/carte/carte";
 import { InfoBar } from '../../component/info-bar/info-bar';
 import { PokedexAccess } from '../../component/pokedex-access/pokedex-access';
 import { Inventaire } from '../../component/inventaire/inventaire';
 import { PokemonsCaptures } from "../../component/pokemons-captures/pokemons-captures";
 import { Combat } from "../../component/combat/combat";
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -14,10 +15,16 @@ import { Combat } from "../../component/combat/combat";
   templateUrl: './game-page.html',
   styleUrl: './game-page.css',
 })
-export class GamePage {
+export class GamePage implements OnInit {
 
     showPokemonView = false;
     showCombatView = false;
+  
+  constructor(private title: Title) {}
+
+  ngOnInit(): void {
+    this.title.setTitle("Jeu | PokéFari");
+  }
 
   toggleView() {
     this.showPokemonView = !this.showPokemonView;

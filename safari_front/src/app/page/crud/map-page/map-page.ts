@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { MapDto } from '../../../dto/map-dto';
 import { Observable } from 'rxjs';
 import { MapService } from '../../../service/map-service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-map-page',
@@ -23,9 +24,10 @@ export class MapPage implements OnInit {
   protected lienImageCtrl!: FormControl;
   protected editingMap!: MapDto | null;
 
-  constructor(private mapService: MapService, private formBuilder: FormBuilder) { }
+  constructor(private mapService: MapService, private formBuilder: FormBuilder, private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle("Gestion des cartes | PokéFari");
     this.maps$ = this.mapService.findAll();
 
     this.nomCtrl = new FormControl('', Validators.required);
