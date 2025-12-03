@@ -7,13 +7,15 @@ import { CommonModule } from '@angular/common';
 import { TypeElementDto } from '../../../dto/type-element-dto';
 import { TypeElementService } from '../../../service/type-element-service';
 import { typeNotMatchValidator } from '../../../validator/type-not-match-validator';
+import { NavbarCrud } from '../../../component/navbar-crud/navbar-crud';
 
 @Component({
   selector: 'app-pokemon-page',
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    NavbarCrud
   ],
   templateUrl: './pokemon-page.html',
   styleUrl: './pokemon-page.css',

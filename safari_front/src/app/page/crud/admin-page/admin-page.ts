@@ -6,13 +6,14 @@ import { CommonModule } from '@angular/common';
 import { AdminService } from '../../../service/admin-service';
 import { AdminDto } from '../../../dto/admin-dto';
 import { AdminPasswordDto } from '../../../dto/admin-password-dto';
+import { NavbarCrud } from '../../../component/navbar-crud/navbar-crud';
 
 @Component({
   selector: 'app-admin-page',
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,NavbarCrud
   ],
   templateUrl: './admin-page.html',
   styleUrls: ['./admin-page.css']

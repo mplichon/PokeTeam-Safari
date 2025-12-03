@@ -6,13 +6,15 @@ import { JoueurDto } from '../../../dto/joueur-dto';
 import { JoueurService } from '../../../service/joueur-service';
 import { requiredIfValidator } from '../../../validator/required-if-validator';
 import { JoueurPasswordDto } from '../../../dto/joueur-password-dto';
+import { NavbarCrud } from '../../../component/navbar-crud/navbar-crud';
 
 @Component({
   selector: 'app-joueur-page',
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    NavbarCrud
   ],
   templateUrl: './joueur-page.html',
   styleUrl: './joueur-page.css',

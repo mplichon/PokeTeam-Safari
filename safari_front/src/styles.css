@@ -269,6 +269,41 @@ width: 80%;
     justify-content: center;
 }
 
+.nav-btn{
+
+
+text-decoration: none;
+color: white;
+ margin: auto;
+
+
+}
+
+.nav-btn:hover{
+
+
+text-decoration: none;
+color: rgba(255, 255, 255, 0.521);
+ margin: auto;
+
+
+}
+
+
+.navbar-item{
+  padding: 16px 0 ;
+  list-style: none;
+ 
+ 
+}
+
+.navbar-item:not(:last-child)::after {
+  content: "|";
+  margin: 0 10px;
+  color: #999;
+  font-weight: bold;
+}
+
 .iconsbtns {
     display: flex;
     flex-direction: row;

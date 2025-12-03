@@ -4,13 +4,15 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { MapDto } from '../../../dto/map-dto';
 import { Observable } from 'rxjs';
 import { MapService } from '../../../service/map-service';
+import { NavbarCrud } from '../../../component/navbar-crud/navbar-crud';
 
 @Component({
   selector: 'app-map-page',
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    NavbarCrud
   ],
   templateUrl: './map-page.html',
   styleUrl: './map-page.css',
