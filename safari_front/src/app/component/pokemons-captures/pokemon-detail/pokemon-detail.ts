@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Pokemon } from '../../../interface/pokemon.interface';
 import { CommonModule } from '@angular/common';
+import { getColorForType } from '../../../model/type-element-enum';
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -24,6 +25,12 @@ export class PokemonDetail {
 
   get pokemonToDisplay(): Pokemon {
     return this.pokemon ?? this.defaultPokemon;
+  }
+  
+  get typesEtCouleurs(): string[][] {
+    let types: string[] = this.pokemonToDisplay.types;
+    let couleurs: string[] = types.map(getColorForType);
+    return types.map((t, i) => [t, couleurs[i]]);
   }
 
  Previous() {

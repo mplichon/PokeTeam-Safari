@@ -17,8 +17,8 @@
     </div>
 
     <div class="types">
-      <span class="type" *ngFor="let t of pokemonToDisplay.types">
-        {{ t }}
+      <span *ngFor="let tc of typesEtCouleurs">
+        <span class="type" style="background-color: {{tc[1]}}">{{ tc[0] }}</span>
       </span>
     </div>
 
