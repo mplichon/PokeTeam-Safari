@@ -14,6 +14,7 @@ export class PokedexAccess implements OnInit{
 
   constructor(private jwtService: JwtService, private pokemonCaptureService: PokemonCaptureService){}
   userId: number | null = null;
+  username: string | null = null;
   nbPokemons = 0;
 
   onClickButton() {
@@ -31,6 +32,7 @@ export class PokedexAccess implements OnInit{
       console.error("Aucun userId dans le JWT");
       return;
     }
+    this.username = this.jwtService.username;
 
     this.pokemonCaptureService
       .pokemonCaptureParIdParJoueur(this.userId)
