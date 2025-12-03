@@ -107,7 +107,7 @@ pokeball() {
   this.pokeballRolling();
   }, 4100);
   setTimeout(() => {
-  this.http.get<{statut: string}>(`http://localhost:8080/api/rencontre/pokeball/${this.idRencontre}`)
+  this.http.get<{statut: string}>(`${this.apiUrl}/rencontre/pokeball/${this.idRencontre}`)
     .subscribe(res => {
       if (res.statut === 'fuite') {
         this.pokeballHidden = 'true';
@@ -137,7 +137,7 @@ appat() {
   this.pokemonShakingV();
   this.messageContent = this.pokemon.name + ' mange !';
   setTimeout(() => {
-  this.http.get<{statut: string}>(`http://localhost:8080/api/rencontre/appat/${this.idRencontre}`)
+  this.http.get<{statut: string}>(`${this.apiUrl}/rencontre/appat/${this.idRencontre}`)
     .subscribe(res => {
       if (res.statut === 'fuite') {
         this.pokemonSlidingOut();
@@ -158,7 +158,7 @@ boue() {
   this.pokemonShakingH();
   this.messageContent = this.pokemon.name + " s'énerve !";
   setTimeout(() => {
-  this.http.get<{statut: string}>(`http://localhost:8080/api/rencontre/boue/${this.idRencontre}`)
+  this.http.get<{statut: string}>(`${this.apiUrl}/rencontre/boue/${this.idRencontre}`)
     .subscribe(res => {
       if (res.statut === 'fuite') {
         this.pokemonSlidingOut();
@@ -177,7 +177,7 @@ boue() {
 
 fuite() {
   this.allButtonsDisabled = true;
-  this.http.get<{statut: string}>(`http://localhost:8080/api/rencontre/fuir/${this.idRencontre}`)
+  this.http.get<{statut: string}>(`${this.apiUrl}/rencontre/fuir/${this.idRencontre}`)
     .subscribe(res => this.combatStatus = res.statut as any);
 }
 
