@@ -1,0 +1,8 @@
+.containeur_capture_div, .containeur_fuit_div, .containeur_fuite_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+
+}

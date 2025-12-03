@@ -1,13 +1,14 @@
-.zone {
-  position: relative;
-  width: 500px;
-  height: 500px;
-}
 
-.random-img {
+
+.btn-zarbi {
   position: absolute;
   cursor: pointer;
   zoom: 120%;
   user-select: none;
   z-index: 99999; 
+  
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
 }

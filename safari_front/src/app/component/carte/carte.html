@@ -1,5 +1,4 @@
-<section class="carte">
-    <div class="carte-zone" #zone>
-        <app-bouton (clicked)="onChildButtonClicked()"></app-bouton>
+
+    <div class="zone" #parentRef>
+        <app-bouton (clicked)="onChildButtonClicked()" [parentZone]="parentZone"></app-bouton>
     </div>
-</section>

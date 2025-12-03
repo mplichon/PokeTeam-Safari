@@ -1,6 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, AfterViewInit, ElementRef, ViewChild  } from '@angular/core';
 import { BoutonComponent } from "./bouton/bouton";
-import { ElementRef, ViewChild } from "@angular/core";
 
 @Component({
   selector: 'app-carte',
@@ -9,17 +8,20 @@ import { ElementRef, ViewChild } from "@angular/core";
   templateUrl: './carte.html',
   styleUrls: ['./carte.css'],
 })
-export class Carte {
+export class Carte implements AfterViewInit{
 
- @Output() toggleFromRandom = new EventEmitter<void>(); // 💥 NOUVEAU
- @Output() childClicked = new EventEmitter<void>();
+  @Output() toggleFromRandom = new EventEmitter<void>(); // 💥 NOUVEAU
+  @Output() childClicked = new EventEmitter<void>();
 
-  @ViewChild('zone', { static: true }) zone!: ElementRef;
+  @ViewChild('parentRef', { static: false }) parentRef!: ElementRef;
+
+  parentZone!: Element;
   zoneRef!: ElementRef;
 
   ngAfterViewInit() {
-    this.zoneRef = this.zone;
+  this.parentZone = this.parentRef.nativeElement;
   }
+
   onChildButtonClicked() {
     this.childClicked.emit();
   }

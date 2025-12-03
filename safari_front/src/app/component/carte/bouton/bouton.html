@@ -1,8 +1,10 @@
-<section class="zone">
-  <button class="btn-test" (click)="onButtonClick()">
-    <img
+
+<button class="btn-zarbi" (click)="onButtonClick()"
+[style.left.px]="position.x"
+[style.top.px]="position.y"
+*ngIf="showButton">
+    <img 
     class="random-img"
     src="assets/Zarbi1.png"
     alt="bouton">
-  </button>
-</section>
+</button>

@@ -45,23 +45,32 @@
 
 <!-- CONTENEUR CAPTURE -->
 <div class="containeur_capture" *ngIf="combatStatus === 'capture'">
-  <p class="center_txt">
-    -- pokémon capturé -- <br><br>
-    <b>{{pokemon.name}}</b> est ajouté à votre pokédex
-  </p>
+  <div class="containeur_capture_div">
+    <p class="center_txt">
+      -- pokémon capturé -- <br><br>
+      <b>{{pokemon.name}}</b> est ajouté à votre pokédex
+    </p>
+    <button class="secondary_b" (click)="goBackToPageGame()" >Retour à la carte</button>
+  </div>
 </div>
 
 <!-- CONTENEUR FUITES -->
 <div class="containeur_fuite" *ngIf="combatStatus === 'fuite'">
-  <p class="center_txt">
-    -- le pokémon a fuit -- <br><br>
-    <b>{{pokemon.name}}</b> a quitté le combat
-  </p>
+  <div class="containeur_fuite_div">
+    <p class="center_txt">
+      -- le pokémon a fuit -- <br><br>
+      <b>{{pokemon.name}}</b> a quitté le combat
+    </p>
+    <button class="secondary_b" (click)="goBackToPageGame()" >Retour à la carte</button>
+  </div>
 </div>
 
 <div class="containeur_fuit" *ngIf="combatStatus === 'abandon'">
-  <p class="center_txt">
-    -- tu as fuis -- <br><br>
-    Tu as quitté le combat
-  </p>
+  <div class="containeur_fuit_div">
+    <p class="center_txt">
+      -- tu as fuis -- <br><br>
+      Tu as quitté le combat
+    </p>
+    <button class="secondary_b" (click)="goBackToPageGame()" >Retour à la carte</button>
+  </div>
 </div>
