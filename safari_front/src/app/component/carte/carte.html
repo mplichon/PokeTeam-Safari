@@ -1,10 +1,5 @@
 <section class="carte">
-
-    <app-bouton></app-bouton>
-
-<div class="carte-zone" #zone>
-    <app-bouton [zone]="zoneRef" (randomClick)="onRandomClick()"></app-bouton>
-</div>
-
-
+    <div class="carte-zone" #zone>
+        <app-bouton (clicked)="onChildButtonClicked()"></app-bouton>
+    </div>
 </section>

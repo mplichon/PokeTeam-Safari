@@ -17,15 +17,17 @@ import { Combat } from "../../component/combat/combat";
 export class GamePage {
 
     showPokemonView = false;
+    showCombatView = false;
 
   toggleView() {
     this.showPokemonView = !this.showPokemonView;
   }
-
-    showCombatView = false;
     
   ShowCombatView() {
     this.showCombatView =  !this.showCombatView;
   }
 
+  onChild2ButtonClicked() {
+    this.showCombatView = true;
+  }
 }
