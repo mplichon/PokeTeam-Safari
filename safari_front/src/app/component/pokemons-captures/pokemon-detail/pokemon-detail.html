@@ -18,7 +18,13 @@
 
     <div class="types">
       <span *ngFor="let tc of typesEtCouleurs">
-        <span class="type" style="background-color: {{tc[1]}}">{{ tc[0] }}</span>
+        <span
+          class="type"
+          *ngFor="let tc of typesEtCouleurs"
+          [style.backgroundColor]="tc[1]"
+        >
+          {{ tc[0] }}
+        </span>
       </span>
     </div>
 

@@ -15,7 +15,7 @@ public enum TypeElement {
 	POISON("Poison", "#923FCC"),
 	PSY("Psy", "#EF3F7A"),
 	ROCHE("Roche", "#B0AA82"),
-	SOL("Sol", "#B0AA82"),
+	SOL("Sol", "#92501B"),
 	SPECTRE("Spectre", "#703F70"),
 	TENEBRES("Ténèbres", "#4F3F3D"),
 	VOL("Vol", "#82BAEF");

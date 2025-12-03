@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Pokemon, PokemonDetail } from '../../interface/pokemon.interface';
@@ -9,7 +9,7 @@ type CombatStatus = 'fuite' | 'capture' | 'continue' | 'abandon';
 
 @Component({
   selector: 'app-combat',
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule ],
   templateUrl: './combat.html',
   styleUrl: './combat.css',
 })
@@ -42,6 +42,7 @@ export class Combat implements OnInit {
   combatStatus: CombatStatus = 'continue'; // statut par défaut
   idRencontre!: number;
 
+  private apiUrl = '/rencontre'
   private baseUrl = 'https://pokebuildapi.fr/api/v1/pokemon';
 
   constructor(private http: HttpClient,private jwtService: JwtService) {}
@@ -74,7 +75,7 @@ export class Combat implements OnInit {
   initRencontre() {
   this.userid = this.jwtService.userId ?? 0;
   this.username = this.jwtService.username ?? 'SashaSansCompte';
-  this.http.get<{idRencontre: number, idPokemon: number, nom: string}>('http://localhost:8080/api/rencontre/initialiser/' + this.userid)
+  this.http.get<{idRencontre: number, idPokemon: number, nom: string}>(`${this.apiUrl}/initialiser/${this.userid}`)
     .subscribe(res => {
       this.idRencontre = res.idRencontre;
       this.getPokemon(res.idPokemon).subscribe({
