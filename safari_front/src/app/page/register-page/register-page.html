@@ -1,4 +1,4 @@
-<body class="backconnx">
+<div class="backconnx">
   <div class="encarco">
 
     <div class="center_g16">
@@ -19,23 +19,53 @@
                type="text"
                formControlName="username"
                placeholder="ton login">
+<br>
 
-        <div class="password-container">
-          <input class="conxn"
-                 type="password"
-                 formControlName="password"
-                 placeholder="ton mot de passe">
-        </div>
+ <div class="password-container">
+  <input
+    class="conxn"
+    [type]="showPassword ? 'text' : 'password'"
+    formControlName="password"
+    name="password"
+    id="password"
+    placeholder="ton mot de passe"
+  />
 
-        <div class="password-container">
-          <input class="conxn"
-                 type="password"
-                 formControlName="confirm"
-                 placeholder="confirme ton mot de passe">
+  <img
+    id="toggle"
+    [src]="showPassword ? 'assets/openy.png' : 'assets/closey.png'"
+    (click)="togglePassword()"
+    style="cursor: pointer;"
+    alt=""
+  />
+</div>
 
-          <img id="toggle" src="assets/openy.png" alt="">
-        </div>
 
+
+<br>
+
+
+
+ <div class="password-container">
+  <input
+    class="conxn"
+    [type]="showPassword ? 'text' : 'password'"
+    formControlName="confirm"
+    name="password"
+    id="password"
+    placeholder="confirme ton mdp"
+  />
+
+  <img
+    id="toggle"
+    [src]="showPassword ? 'assets/openy.png' : 'assets/closey.png'"
+    (click)="togglePassword()"
+    style="cursor: pointer;"
+    alt=""
+  />
+</div>
+
+<br>
         <button class="primary_b"
                 type="submit"
                 [disabled]="registerForm.invalid">
@@ -45,7 +75,7 @@
       </div>
     </form>
 
-  </div>
+
 
   <div class="inscrib">
     <p class="txt">
@@ -55,5 +85,26 @@
         connecte-toi
       </a>
     </p>
+      </div>
   </div>
-</body>
+</div>
+
+<!--
+
+        <div class="password-container">
+          <input class="conxn"
+                 type="password"
+                 formControlName="password"
+                 placeholder="ton mot de passe">
+        </div>
+
+                <div class="password-container">
+          <input class="conxn"
+                 type="password"
+                 formControlName="confirm"
+                 placeholder="confirme ton mdp">
+
+          <img id="toggle" src="assets/openy.png" alt="">
+        </div>
+
+-->

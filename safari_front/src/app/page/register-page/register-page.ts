@@ -57,5 +57,9 @@ export class RegisterPage implements OnInit{
       this.registerError = true;
     }
   }
+
+  togglePassword() {
+  this.showPassword = !this.showPassword;
+}
   
 }
