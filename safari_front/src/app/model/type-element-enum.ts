@@ -34,7 +34,7 @@ const typeColors: Record<PokemonType, string> = {
   [PokemonType.POISON]: "#923FCC",
   [PokemonType.PSY]: "#EF3F7A",
   [PokemonType.ROCHE]: "#B0AA82",
-  [PokemonType.SOL]: "#B0AA82",
+  [PokemonType.SOL]: "#92501B",
   [PokemonType.SPECTRE]: "#703F70",
   [PokemonType.TENEBRES]: "#4F3F3D",
   [PokemonType.VOL]: "#82BAEF",
