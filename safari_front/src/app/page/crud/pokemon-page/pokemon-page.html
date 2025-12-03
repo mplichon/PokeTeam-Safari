@@ -2,40 +2,55 @@
 
 <h1>Liste des Pokémons</h1>
 
-
-<table>
-    <thead>
+<div class="display_admin">
+<div class="scrollable">
+<table class="table_admin">
+    <thead class="thead_admin">
         <tr>
-            <th>Id</th>
-            <th>Nom</th>
-            <th>Taux de capture</th>
-            <th>Taux de fuite</th>
-            <th>Facteur d'apparition</th>
-            <th>Type 1</th>
-            <th>Type 2</th>
-            <th>Actions</th>
+            <th class="th_admin">Id</th>
+            <th class="th_admin" >Nom</th>
+            <th class="th_admin" >Taux de capture</th>
+            <th class="th_admin" >Taux de fuite</th>
+            <th class="th_admin" >Facteur d'apparition</th>
+            <th class="th_admin" >Type 1</th>
+            <th class="th_admin" >Type 2</th>
+            <th class="th_admin" >Actions</th>
         </tr>
     </thead>
 
     <tbody>
         <tr *ngFor="let p of pokemons$ | async; trackBy: trackPokemon">
-            <td>{{ p.id }}</td>
-            <td>{{ p.nom }}</td>
-            <td>{{ p.tauxCapture }}</td>
-            <td>{{ p.tauxFuite }}</td>
-            <td>{{ p.facteurApparition }}</td>
-            <td>{{ p.type1 }}</td>
-            <td>{{ p.type2 }}</td>
+            <td class="td_admin">{{ p.id }}</td>
+            <td class="td_admin">{{ p.nom }}</td>
+            <td class="taux">{{ p.tauxCapture }}</td>
+            <td class="taux" >{{ p.tauxFuite }}</td>
+            <td class="taux" >{{ p.facteurApparition }}</td>
+            <td class="td_admin">{{ p.type1 }}</td>
+            <td class="td_admin">{{ p.type2 }}</td>
 
-            <td>
-                <button (click)="editPokemon(p)">Modifier</button>
-                <button (click)="deletePokemon(p)">Supprimer</button>
+            <td class="buttonaction">
+                <button class="primary_bad"  (click)="editPokemon(p)">Modifier</button>
+                <button class="secondary_bad" (click)="deletePokemon(p)">Supprimer</button>
             </td>
         </tr>
     </tbody>
 </table>
+</div>
 
 <div class="ajout">
+
+
+    
+
+      @if (editingPokemon) {
+            <h4>Modifier un pokemon</h4>
+        }
+
+        @else {
+           <h4>Ajouter un pokemon</h4>
+        }
+
+
     <form (ngSubmit)="ajouterModifierPokemon()" [formGroup]="pokemonForm">
         <!-- nom -->
         <div>
@@ -45,7 +60,7 @@
                 <div class="error-message">Le nom est obligatoire</div>
             }
         </div>
-
+<br>
         <!-- taux de capture -->
         <div>
             <input type="number" formControlName="tauxCapture" placeholder="Taux de capture"/>
@@ -58,7 +73,7 @@
                 <div class="error-message">Le taux de capture doit être compris entre 0 et 255</div>
             }
         </div>
-
+<br>
         <!-- taux de fuite -->
         <div>
             <input  type="number" formControlName="tauxFuite" placeholder="Taux de fuite"/> 
@@ -71,7 +86,7 @@
                 <div class="error-message">Le taux de fuite doit être compris entre 0 et 255</div>
             }
         </div>
-
+<br>
         <!-- facteur d'apparition -->
         <div>
             <input  type="number" formControlName="facteurApparition" placeholder="Facteur d'apparition"/> 
@@ -84,7 +99,7 @@
                 <div class="error-message">Le facteur d'apparition doit être compris entre 0 et 255</div>
             }
         </div>
-
+<br>
         <!-- type 1 -->
         <div>
             <select formControlName="type1">
@@ -98,7 +113,7 @@
                 <div class="error-message">Le 1er type est obligatoire</div>
             }
         </div>
-
+<br>
         <!-- type 2 -->
         <div>
             <select formControlName="type2">
@@ -112,7 +127,7 @@
                 <div class="error-message">Les 2 types doivent être différents</div>
             }
         </div>
-
+<br>
         @if (editingPokemon) {
             <input type="submit" [disabled]="pokemonForm.invalid" value="Modifier" />
         }
@@ -122,5 +137,7 @@
         }
 
     </form>
+
+</div>
 </div>
 </div>

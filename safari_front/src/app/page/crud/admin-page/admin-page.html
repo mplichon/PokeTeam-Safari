@@ -1,61 +1,69 @@
 <div class="page-poke-list">
 
-<h1>Liste des Admins</h1>
+    <h1>Liste des Admins</h1>
 
+    <div class="display_admin">
 
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Login</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+        <!-- TABLEAU -->
+        <div class="scrollable">
+            <table class="table_admin">
+                <thead class="thead_admin">
+                    <tr>
+                        <th>Id</th>
+                        <th>Login</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
 
-    <tbody>
-        <tr *ngFor="let a of admins$ | async; trackBy: trackAdmin">
-            <td>{{ a.id }}</td>
-            <td>{{ a.login }}</td>
-            <td>
-                <button (click)="editAdmin(a)">Modifier</button>
-                <button (click)="deleteAdmin(a)">Supprimer</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<div class="ajout">
-    <form (ngSubmit)="ajouterModifierAdmin()" [formGroup]="adminForm">
-        <!-- login -->
-        <div>
-            <input  type="text" formControlName="login" placeholder="Identifiant"/> 
-            
-            @if (loginCtrl.hasError('required')) {
-                <div class="error-message">L'identifiant est obligatoire</div>
-            }
+                <tbody>
+                    <tr *ngFor="let a of admins$ | async; trackBy: trackAdmin">
+                        <td class="td_admin">{{ a.id }}</td>
+                        <td class="td_admin">{{ a.login }}</td>
+                        <td class="td_admin">
+                            <div class="buttonaction">
+                                <button class="primary_bad" (click)="editAdmin(a)">Modifier</button>
+                                <button class="secondary_bad" (click)="deleteAdmin(a)">Supprimer</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <!-- password -->
-        <div>
-            <input type="text" formControlName="password" placeholder="Mot de passe"/>
+        <!-- FORMULAIRE -->
+        <div class="ajout">
+            <form (ngSubmit)="ajouterModifierAdmin()" [formGroup]="adminForm">
 
-            @if (passwordCtrl.hasError('required')) {
-                <div class="error-message">Le mot de passe est obligatoire</div>
-            }
+                <!-- login -->
+                <div>
+                    <input type="text" formControlName="login" placeholder="Identifiant" />
 
-            @else if (passwordCtrl.hasError('minlength')) {
-                <div class="error-message">Le mot de passe doit faire 6 caractères minimum</div>
-            }
+                    @if (loginCtrl.hasError('required')) {
+                        <div class="error-message">L'identifiant est obligatoire</div>
+                    }
+                </div>
+
+                <!-- password -->
+                <div>
+                    <input type="text" formControlName="password" placeholder="Mot de passe" />
+
+                    @if (passwordCtrl.hasError('required')) {
+                        <div class="error-message">Le mot de passe est obligatoire</div>
+                    }
+                    @else if (passwordCtrl.hasError('minlength')) {
+                        <div class="error-message">Le mot de passe doit faire 6 caractères minimum</div>
+                    }
+                </div>
+
+                @if (editingAdmin) {
+                    <input type="submit" [disabled]="adminForm.invalid" value="Modifier" />
+                }
+                @else {
+                    <input type="submit" [disabled]="adminForm.invalid" value="Ajouter" />
+                }
+
+            </form>
         </div>
 
-        @if (editingAdmin) {
-            <input type="submit" [disabled]="adminForm.invalid" value="Modifier" />
-        }
-
-        @else {
-            <input type="submit" [disabled]="adminForm.invalid" value="Ajouter" />
-        }
-
-    </form>
-</div>
+    </div>
 </div>

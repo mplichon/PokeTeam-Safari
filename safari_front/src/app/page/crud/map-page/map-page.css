@@ -1,0 +1,184 @@
+/* ------------------- WRAPPER ------------------- */
+.page-poke-list {
+  padding: 32px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: repeating-linear-gradient(
+    0deg,
+    #D2DAEB,
+    #D2DAEB 20px,
+    #EDF0F6 20px,
+    #EDF0F6 40px
+  );
+}
+
+/* ------------------- TITRE ------------------- */
+.page-poke-list h1 {
+  font-size: 20px;
+  text-align: center;
+  color: #216EAC;
+  margin-bottom: 32px;
+}
+
+/* ------------------- LAYOUT ------------------- */
+.display_admin {
+  display: flex;
+  gap: 32px;
+}
+
+.scrollable {
+  width: 80%;
+  height: 85vh;
+  overflow-y: auto;
+}
+
+/* ------------------- TABLE ------------------- */
+.table_admin {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 6px solid #3B3B3B;
+  box-shadow: 6px 6px 0 #3B3B3B;
+  font-size: 14px;
+}
+
+.thead_admin th {
+  background: #216EAC;
+  color: #EDF0F6;
+  padding: 14px 10px;
+  border-bottom: 4px solid #3B3B3B;
+  text-align: center;
+  font-weight: lighter;
+}
+
+.td_admin,
+.taux {
+  background: #fff;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 3px solid #D2DAEB;
+  color: #3B3B3B;
+}
+
+tbody tr:nth-child(even) td {
+  background: #F4F6FB;
+}
+
+.taux {
+  width: 120px;
+}
+
+/* ------------------- BOUTONS TABLEAU ------------------- */
+.buttonaction {
+  display: flex;
+  gap: 16px;
+}
+
+.primary_bad,
+.secondary_bad {
+  padding: 8px 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  transition: 0.1s;
+}
+
+.primary_bad {
+  background: #216EAC;
+  color: #D2DAEB;
+  box-shadow: 4px 4px 0 #3B3B3B;
+}
+
+.primary_bad:hover {
+  background-color: #C4CDDF;
+}
+
+.secondary_bad {
+  background: #D2DAEB;
+  color: #216EAC;
+  box-shadow: 4px 4px 0 #216EAC;
+}
+
+.secondary_bad:hover {
+  background: #C4CDDF;
+}
+
+/* ------------------- FORMULAIRE AJOUT ------------------- */
+.ajout {
+  width: 400px;
+  background: #FFF;
+  border: 6px solid #216EAC;
+  box-shadow: 6px 6px 0 #3B3B3B;
+  padding: 28px;
+  height: fit-content;
+}
+
+.ajout h4 {
+  color: #3B3B3B;
+  margin: 8px auto 24px;
+  text-align: center;
+}
+
+/* Inputs & selects */
+.ajout input[type="text"],
+.ajout input[type="number"],
+.ajout select {
+  width: 100%;
+  background: #FFF;
+  border: 4px solid #3B3B3B;
+  padding: 8px;
+  font-size: 14px;
+  box-shadow: 4px 4px 0 #3B3B3B;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.ajout input::placeholder {
+  color: #A7B5C9;
+}
+
+.ajout input:focus,
+.ajout select:focus {
+  outline: none;
+  box-shadow: 4px 4px 0 #216EAC;
+}
+
+/* Submit */
+.ajout input[type="submit"] {
+  background: #216EAC;
+  color: #EDF0F6;
+  border: 4px solid #3B3B3B;
+  padding: 12px 18px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #3B3B3B;
+  transition: 0.1s;
+}
+
+.ajout input[type="submit"]:hover {
+  background-color: #1A5A8A;
+}
+
+.ajout input[type="submit"]:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #3B3B3B;
+}
+
+/* Messages d'erreur */
+.error-message {
+  color: #D10700;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Select custom arrow */
+.ajout select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23216EAC" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 30px;
+}
+

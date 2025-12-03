@@ -1,59 +1,68 @@
 <div class="page-poke-list">
 
-<h1>Liste des Maps</h1>
+    <h1>Liste des Maps</h1>
 
+    <div class="display_admin">
 
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nom</th>
-            <th>Image</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+        <!-- TABLEAU -->
+        <div class="scrollable">
+            <table class="table_admin">
+                <thead class="thead_admin">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
 
-    <tbody>
-        <tr *ngFor="let m of maps$ | async; trackBy: trackMap">
-            <td>{{ m.id }}</td>
-            <td>{{ m.nom }}</td>
-            <td>{{ m.lienImage }}</td>
-            <td>
-                <button (click)="editMap(m)">Modifier</button>
-                <button (click)="deleteMap(m)">Supprimer</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<div class="ajout">
-    <form (ngSubmit)="ajouterModifierMap()" [formGroup]="mapForm">
-        <!-- nom -->
-        <div>
-            <input  type="text" formControlName="nom" placeholder="Nom"/> 
-            
-            @if (nomCtrl.hasError('required')) {
-                <div class="error-message">Le nom est obligatoire</div>
-            }
+                <tbody>
+                    <tr *ngFor="let m of maps$ | async; trackBy: trackMap">
+                        <td class="td_admin">{{ m.id }}</td>
+                        <td class="td_admin">{{ m.nom }}</td>
+                        <td class="td_admin">{{ m.lienImage }}</td>
+                        <td class="td_admin">
+                            <div class="buttonaction">
+                                <button class="primary_bad" (click)="editMap(m)">Modifier</button>
+                                <button class="secondary_bad" (click)="deleteMap(m)">Supprimer</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <!-- chemin de l'image -->
-        <div>
-            <input type="text" formControlName="lienImage" placeholder="Chemin de l'image"/>
+        <!-- FORMULAIRE -->
+        <div class="ajout">
+            <form (ngSubmit)="ajouterModifierMap()" [formGroup]="mapForm">
 
-            @if (lienImageCtrl.hasError('required')) {
-                <div class="error-message">Le chemin de l'image est obligatoire</div>
-            }
+                <!-- nom -->
+                <div>
+                    <input type="text" formControlName="nom" placeholder="Nom" />
+
+                    @if (nomCtrl.hasError('required')) {
+                        <div class="error-message">Le nom est obligatoire</div>
+                    }
+                </div>
+
+                <!-- chemin de l'image -->
+                <div>
+                    <input type="text" formControlName="lienImage" placeholder="Chemin de l'image" />
+
+                    @if (lienImageCtrl.hasError('required')) {
+                        <div class="error-message">Le chemin de l'image est obligatoire</div>
+                    }
+                </div>
+
+                @if (editingMap) {
+                    <input type="submit" [disabled]="mapForm.invalid" value="Modifier" />
+                }
+                @else {
+                    <input type="submit" [disabled]="mapForm.invalid" value="Ajouter" />
+                }
+
+            </form>
         </div>
 
-        @if (editingMap) {
-            <input type="submit" [disabled]="mapForm.invalid" value="Modifier" />
-        }
-
-        @else {
-            <input type="submit" [disabled]="mapForm.invalid" value="Ajouter" />
-        }
-
-    </form>
-</div>
+    </div>
 </div>

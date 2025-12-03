@@ -36,7 +36,7 @@ export class JoueurPage {
 
     this.usernameCtrl = new FormControl('', Validators.required);
     this.passwordCtrl = new FormControl('', [ requiredIfValidator(!this.editingJoueur), Validators.minLength(6) ]);
-    this.surnomCtrl = new FormControl('', [ Validators.required, Validators.minLength(6) ]);
+    this.surnomCtrl = new FormControl('', Validators.required);
     this.nbPokeballCtrl = new FormControl('', [ Validators.required, Validators.min(0), Validators.max(999) ]);
     this.nbFriandiseCtrl = new FormControl('', [ Validators.required, Validators.min(0), Validators.max(999) ]);
     this.nbBoueCtrl = new FormControl('', [ Validators.required, Validators.min(0), Validators.max(999) ]);
