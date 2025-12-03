@@ -4,13 +4,13 @@
 
 
 <main class="layout-grid">
-<app-pokedex-access class="pokedex" [isOpen]="showPokemonView" (toggleView)="toggleView()" ></app-pokedex-access>
+<app-pokedex-access class="pokedex" [isOpen]="showPokemonView" (toggleView)="toggleView()" [showCombatViewParent]="showCombatView"></app-pokedex-access>
 <app-inventaire class="inventaire"></app-inventaire>
 
 
-<app-carte class="carte"  *ngIf="!showPokemonView" ></app-carte>
-<app-pokemons-captures class="pokemoncapture"  *ngIf="showPokemonView" ></app-pokemons-captures>
-<!--<app-combat class="combat" ></app-combat>-->
+<app-carte class="carte"  *ngIf="!showPokemonView && !showCombatView" (toggleFromRandom)="ShowCombatView()" (childClicked)="onChild2ButtonClicked()"> </app-carte>
+<app-pokemons-captures class="pokemoncapture"  *ngIf="showPokemonView" ></app-pokemons-captures> 
+<app-combat class="combat" *ngIf="!showPokemonView && showCombatView" (toggleFromRandom)="ShowCombatView()" ></app-combat>
 
 </main>
 

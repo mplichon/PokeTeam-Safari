@@ -11,6 +11,7 @@ import { JoueurService } from '../../service/joueur-service';
 })
 export class PokedexAccess implements OnInit{
   @Input() isOpen: boolean = false; // etat parent
+  @Input() showCombatViewParent: boolean = true; // etat parent
   @Output() toggleView = new EventEmitter<void>();
 
   constructor(private jwtService: JwtService, 
