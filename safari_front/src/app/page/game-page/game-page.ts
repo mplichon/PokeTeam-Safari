@@ -7,6 +7,7 @@ import { Inventaire } from '../../component/inventaire/inventaire';
 import { PokemonsCaptures } from "../../component/pokemons-captures/pokemons-captures";
 import { Combat } from "../../component/combat/combat";
 
+
 @Component({
   selector: 'app-game-page',
   imports: [Carte, InfoBar, PokedexAccess, Inventaire, PokemonsCaptures, CommonModule, Combat],
@@ -19,6 +20,12 @@ export class GamePage {
 
   toggleView() {
     this.showPokemonView = !this.showPokemonView;
+  }
+
+    showCombatView = false;
+    
+  ShowCombatView() {
+    this.showCombatView =  !this.showCombatView;
   }
 
 }

@@ -8,9 +8,9 @@
 <app-inventaire class="inventaire"></app-inventaire>
 
 
-<app-carte class="carte"  *ngIf="!showPokemonView" ></app-carte>
-<app-pokemons-captures class="pokemoncapture"  *ngIf="showPokemonView" ></app-pokemons-captures>
-<!--<app-combat class="combat" ></app-combat>-->
+<app-carte class="carte"  *ngIf="!showPokemonView && !showCombatView" (toggleFromRandom)="ShowCombatView()" > </app-carte>
+<app-pokemons-captures class="pokemoncapture"  *ngIf="showPokemonView" ></app-pokemons-captures> 
+<app-combat class="combat" *ngIf="showCombatView"(toggleFromRandom)="ShowCombatView()" ></app-combat>
 
 </main>
 
