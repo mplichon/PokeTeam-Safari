@@ -325,11 +325,11 @@ width: 80%;
 }
 
 /* Bloc C prend les deux lignes */
-.carte {
+.cartes {
    grid-column: 2;
     grid-row: 1 / span 3;  /* occupe deux lignes */  /* occupe deux lignes */
     background-image: url(assets/fondcarte1.png); /* background-image: url(assets/fondcarte.png); */
-    background-size: contain ;     /* pour que l'image remplisse le div */
+    background-size: contain  ;     /* pour que l'image remplisse le div */
     background-repeat: no-repeat; /* éviter la répétition */
 
 
