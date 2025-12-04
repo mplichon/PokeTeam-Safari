@@ -29,11 +29,11 @@ pipeline {
                         dir('safari_front') {
                             withSonarQubeEnv('SonarQube') {
                                 sh '''
-                                    chmod +x ./node_modules/.bin/sonar-scanner
-                                    ./node_modules/.bin/sonar-scanner \
-                                        -Dsonar.projectKey=safari_front \
-                                        -Dsonar.sources=src \
-                                        -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+                                    npx sonarqube-scanner \
+                                    -Dsonar.projectKey=safari_front \
+                                    -Dsonar.sources=src \
+                                    -Dsonar.host.url=$SONAR_HOST_URL \
+                                    -Dsonar.login=$SONAR_AUTH_TOKEN
                                 '''
                             }
                         }
