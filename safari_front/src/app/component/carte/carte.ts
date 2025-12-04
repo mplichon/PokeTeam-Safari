@@ -20,15 +20,30 @@ export class Carte implements AfterViewInit{
     ) {}
     
   userId: number | null = null;
-
+  pseudo: string | null = null;
 
   @Output() toggleFromRandom = new EventEmitter<void>(); 
   @Output() childClicked = new EventEmitter<void>();
+  @Output() reloadInventaireOut = new EventEmitter<void>();
 
   @ViewChild('parentRef', { static: false }) parentRef!: ElementRef;
 
   parentZone!: Element;
   zoneRef!: ElementRef;
+
+
+    ngOnInit(): void {
+    const id = this.jwtService.userId;
+
+    if (id != null) {
+      this.joueurService.getPseudoById(id).subscribe({
+        next: (pseudo) => {
+          this.pseudo = pseudo;
+        },
+        error: (err) => console.error("Erreur pseudo :", err)
+      });
+    }
+  }
 
   ngAfterViewInit() {
   setTimeout(() => {
@@ -85,11 +100,12 @@ export class Carte implements AfterViewInit{
 
         // Envoyer la mise à jour en base
         this.joueurService.updateAsAdmin(joueurDto);
-
+       
         console.log("Récompense appliquée :", joueurDto);
-      },
+        setTimeout(() => this.reloadInventaireOut.emit(), 10);
+      },  
       error: (err) => console.error("Erreur JoueurService :", err)
     });
   }
-  
+
 }
