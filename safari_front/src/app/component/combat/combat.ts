@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { PokemonDetail } from '../../interface/pokemon.interface';
 import { JwtService } from '../../service/jwt-service';
+import { JoueurService } from '../../service/joueur-service';
 
 
 type CombatStatus = 'fuite' | 'capture' | 'continue' | 'abandon';
@@ -33,6 +34,7 @@ export class Combat implements OnInit {
   pokemonHidden = 'false';
   pokeballHidden = 'true';
   username = ''; 
+  surnom = ''; 
   userid = 0; 
   pokemon: PokemonDetail = {
     id: 0,
@@ -49,8 +51,9 @@ export class Combat implements OnInit {
   private apiUrl = '/rencontre'
   private baseUrl = 'https://pokebuildapi.fr/api/v1/pokemon';
 
-  constructor(private http: HttpClient,private jwtService: JwtService, private router: Router) {}
+  constructor(private http: HttpClient,private jwtService: JwtService, private router: Router,    private joueurService: JoueurService) {}
   
+pseudo: string | null = null;
 
   ngOnInit(): void {
     this.initRencontre();
@@ -79,6 +82,18 @@ export class Combat implements OnInit {
   initRencontre() {
   this.userid = this.jwtService.userId ?? 0;
   this.username = this.jwtService.username ?? 'SashaSansCompte';
+
+  const id = this.jwtService.userId;
+
+    if (id != null) {
+      this.joueurService.getPseudoById(id).subscribe({
+        next: (pseudo) => {
+          this.pseudo = pseudo;
+        },
+        error: (err) => console.error("Erreur pseudo :", err)
+      });
+    }
+
   this.http.get<{idRencontre: number, idPokemon: number, nom: string}>(`${this.apiUrl}/initialiser/${this.userid}`)
     .subscribe(res => {
       this.idRencontre = res.idRencontre;
@@ -97,7 +112,7 @@ export class Combat implements OnInit {
     this.allButtonsDisabled = true;
       this.pokeballHidden = 'false';
       this.pokemonHidden = 'true';
-      this.messageContent = this.username + ' lance une Pokéball !';
+      this.messageContent = this.pseudo + ' lance une Pokéball !';
     setTimeout(() => {
     this.pokeballRolling();
     }, 500);
