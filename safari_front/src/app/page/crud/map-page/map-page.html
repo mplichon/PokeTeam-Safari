@@ -1,80 +1,75 @@
 <div class="page-poke-list">
+  <app-navbar-crud></app-navbar-crud>
 
-    <app-navbar-crud></app-navbar-crud>
+  <br />
+  <br />
 
-    <br>
-    <br>
+  <h1>Liste des cartes</h1>
 
-    <h1>Liste des cartes</h1>
+  <div class="display_admin">
+    <!-- TABLEAU -->
+    <div class="scrollable">
+      <table class="table_admin">
+        <thead class="thead_admin">
+          <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Image</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
 
-    <div class="display_admin">
-
-        <!-- TABLEAU -->
-        <div class="scrollable">
-            <table class="table_admin">
-                <thead class="thead_admin">
-                    <tr>
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>Image</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr *ngFor="let m of maps$ | async; trackBy: trackMap">
-                        <td class="td_admin">{{ m.id }}</td>
-                        <td class="td_admin">{{ m.nom }}</td>
-                        <td class="td_admin">{{ m.lienImage }}</td>
-                        <td class="td_admin">
-                            <div class="buttonaction">
-                                <button class="primary_bad" (click)="editMap(m)">Modifier</button>
-                                <button class="secondary_bad" (click)="deleteMap(m)">Supprimer</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- FORMULAIRE -->
-        <div class="ajout">
-            @if (editingMap) {
-                <h4>Modifier une carte</h4>
-            }
-
-            @else {
-                <h4>Ajouter une carte</h4>
-            }
-            <form (ngSubmit)="ajouterModifierMap()" [formGroup]="mapForm">
-
-                <!-- nom -->
-                <div>
-                    <input type="text" formControlName="nom" placeholder="Nom" />
-
-                    @if (nomCtrl.hasError('required')) {
-                        <div class="error-message">Le nom est obligatoire</div>
-                    }
-                </div>
-
-                <!-- chemin de l'image -->
-                <div>
-                    <input type="text" formControlName="lienImage" placeholder="Chemin de l'image" />
-
-                    @if (lienImageCtrl.hasError('required')) {
-                        <div class="error-message">Le chemin de l'image est obligatoire</div>
-                    }
-                </div>
-
-                @if (editingMap) {
-                    <input type="submit" [disabled]="mapForm.invalid" value="Modifier" />
-                }
-                @else {
-                    <input type="submit" [disabled]="mapForm.invalid" value="Ajouter" />
-                }
-
-            </form>
-        </div>
-
+        <tbody>
+          <tr *ngFor="let m of maps$ | async; trackBy: trackMap">
+            <td class="td_admin">{{ m.id }}</td>
+            <td class="td_admin">{{ m.nom }}</td>
+            <td class="td_admin">{{ m.lienImage }}</td>
+            <td class="td_admin">
+              <div class="buttonaction">
+                <button class="primary_bad" (click)="editMap(m)">Modifier</button>
+                <button class="secondary_bad" (click)="deleteMap(m)">Supprimer</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
+    <!-- FORMULAIRE -->
+    <div class="ajout">
+      @if (editingMap) {
+      <h4>Modifier une carte</h4>
+      } @else {
+      <h4>Ajouter une carte</h4>
+      }
+      <form (ngSubmit)="ajouterModifierMap()" [formGroup]="mapForm">
+        <!-- nom -->
+        <div>
+          <label for="nom">Nom</label>
+          <input type="text" formControlName="nom" placeholder="Nom" />
+
+          @if (nomCtrl.hasError('required')) {
+          <div class="error-message">Le nom est obligatoire</div>
+          }
+        </div>
+        <br>
+
+        <!-- chemin de l'image -->
+        <div>
+          <label for="lienImage">Lien maps</label>
+          <input type="text" formControlName="lienImage" placeholder="Chemin de l'image" />
+
+          @if (lienImageCtrl.hasError('required')) {
+          <div class="error-message">Le chemin de l'image est obligatoire</div>
+          }
+        </div>
+
+        @if (editingMap) {
+        <input type="submit" [disabled]="mapForm.invalid" value="Modifier" />
+        } @else {
+        <input type="submit" [disabled]="mapForm.invalid" value="Ajouter" />
+        }
+      </form>
+    </div>
+  </div>
 </div>
