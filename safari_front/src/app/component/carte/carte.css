@@ -3,3 +3,58 @@
   width: 100%;
   height: 100%;
 }
+
+.popup-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+
+.popup-text {
+  flex: 2;
+}
+
+.popup-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.popup-img img {
+  image-rendering: pixelated; /* effet pixel-art */
+  height: 350px;
+  width:  auto;
+  object-fit: contain;
+}
+
+.btn-maison {
+  position: absolute;
+  top: 260px;      /* à ajuster */
+  left: 100px;     /* à ajuster */
+  width: 85px;     /* largeur de la maison */
+  height: 75px;   /* hauteur de la maison */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.gifts{
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.gift-poke{
+  height: 40px;
+}
+
+.gift-boue{
+  height: 60px;
+}
+
+.gift-appat{
+  height: 40px;
+}

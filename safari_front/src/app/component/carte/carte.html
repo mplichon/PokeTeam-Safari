@@ -1,4 +1,48 @@
 
     <div class="zone" #parentRef>
         <app-bouton (clicked)="onChildButtonClicked()" [parentZone]="parentZone"></app-bouton>
+        
+        <button (click)="openPopup()" class="btn-maison"></button>
+
+                <div class="overlay" *ngIf="popupVisible" (click)="closePopup()">?</div>
+
+                <div class="popup" *ngIf="popupVisible">
+
+                    <div class="popup-content">
+                        
+                        <div class="popup-text">
+                            <p>
+                            Je suis le professeur Perrouault<br>
+                            J'ai un cadeau pour vous<br>
+
+                            </p>
+
+                            <div class="gifts">
+                                <img class="gift-poke" src="assets/pokeitem.png">
+                                <p>x10</p>
+                                <img class="gift-boue" src="assets/boueitem.png">
+                                <p>x10</p>
+                                <img class="gift-appat" src="assets/appatitem.png">
+                                <p>x10</p>
+                            </div>
+
+                            <div class="popup-footer">
+                                <button class="primary_b" (click)="recupererRecompense()">Récupérer votre récompense</button>
+                            </div>
+                        </div>
+                        
+
+                        <div class="popup-img">
+                            <img src="assets/Prof_Perrouault.png" alt="Professeur P">
+                        </div>
+
+                    </div>
+                    
+
+                    <div class="popup-footer">
+                        <button class="primary_b" (click)="closePopup()">Fermer</button>
+                    </div>
+
+                    </div>
+    
     </div>

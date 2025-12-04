@@ -107,8 +107,7 @@ public class SecurityConfig {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        System.out.println("\r\nMot de passe ===> " + passwordEncoder.encode("usermdp") + "\r\n");
-        System.out.println("\r\nMot de passe ===> " + passwordEncoder.encode("adminmdp") + "\r\n");
+        System.out.println("\r\nMot de passe ===> " + passwordEncoder.encode("123456") + "\r\n");
 
         return passwordEncoder;
     }
