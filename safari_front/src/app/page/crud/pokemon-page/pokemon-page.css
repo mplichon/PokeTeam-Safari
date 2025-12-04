@@ -40,6 +40,13 @@
   border: 6px solid #3B3B3B;
   box-shadow: 6px 6px 0 #3B3B3B;
   font-size: 14px;
+
+}
+
+.thead_admin tr {
+ height: 20px;
+
+
 }
 
 .thead_admin th {
@@ -62,6 +69,7 @@
 
 tbody tr:nth-child(even) td {
   background: #F4F6FB;
+  
 }
 
 .taux {
@@ -72,6 +80,7 @@ tbody tr:nth-child(even) td {
 .buttonaction {
   display: flex;
   gap: 16px;
+  justify-content: center;
 }
 
 .primary_bad,

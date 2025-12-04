@@ -31,11 +31,12 @@
             <td class="taux">{{ p.facteurApparition }}</td>
             <td class="td_admin">{{ p.type1 }}</td>
             <td class="td_admin">{{ p.type2 }}</td>
-
-            <td class="buttonaction">
+<td class="td_admin" >
+            <div class="buttonaction">
               <button class="primary_bad" (click)="editPokemon(p)">Modifier</button>
               <button class="secondary_bad" (click)="deletePokemon(p)">Supprimer</button>
-            </td>
+            </div>
+</td>
           </tr>
         </tbody>
       </table>
