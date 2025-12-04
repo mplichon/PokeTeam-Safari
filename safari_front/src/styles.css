@@ -140,6 +140,7 @@ body {
   margin: auto;
   text-transform: uppercase;
   transition: 0.15s;
+  display: inline-block;
 }
 
 /* Primary */
@@ -150,6 +151,8 @@ body {
 
 .primary_b:hover {
   background: #1a5a8a;
+  transform: translateY(4px); /* descendre le bouton de 4px */
+  box-shadow: 0px 0px 0 #216eac;
 }
 
 .primary_b:active {
@@ -167,6 +170,8 @@ body {
 
 .secondary_b:hover {
   background: #c4cddf;
+    transform: translateY(4px); /* descendre le bouton de 4px */
+  box-shadow: 0px 0px 0 #216eac;
 }
 
 .secondary_b:active {

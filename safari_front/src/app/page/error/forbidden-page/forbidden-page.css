@@ -17,3 +17,21 @@ h1{
 font-size: 70px;
 
 }
+
+.buttonretour {
+  text-decoration: none;
+  padding: 16px 24px;
+  border: none;
+  box-shadow: 4px 4px 0 #216eac;
+  text-transform: uppercase;
+  background: #d2daeb;
+  color: #216eac;
+  transition: transform 0.2s ease, background 0.2s ease;
+  display: inline-block; /* important pour que transform fonctionne correctement */
+}
+
+.buttonretour:hover {
+  background: #c4cddf;
+  transform: translateY(4px); /* descendre le bouton de 4px */
+  box-shadow: 0px 0px 0 #216eac;
+}
