@@ -8,33 +8,21 @@
 </div>
 <br>
 
-<div *ngIf="loginError">
+<div class="erreurconx" *ngIf="loginError">
     Nom d'utilisateur ou <br> Mot de passe incorrect
 </div>
 
 <form (ngSubmit)="connecter()" [formGroup]="userForm">
     <div class="inputs">
 
-      <input class="conxn" type="text" formControlName="username" name="username" id="username" placeholder="Identifiant" >
-      <br>
+     <input class="conxn"  [class.input-error]="loginError" type="text" formControlName="username"  name="username"  id="username" placeholder="Identifiant">
+  <br>
       
         <div class="password-container">
-  <input
-    class="conxn"
-    [type]="showPassword ? 'text' : 'password'"
-    formControlName="password"
-    name="password"
-    id="password"
-    placeholder="Mot de passe"
-  />
+<input  class="conxn"  [class.input-error]="loginError" type="password"  formControlName="password"  name="password"  id="password"  placeholder="ton mot de passe">
 
-  <img
-    id="toggle"
-    [src]="showPassword ? 'assets/openy.png' : 'assets/closey.png'"
-    (click)="togglePassword()"
-    style="cursor: pointer;"
-    alt=""
-  />
+
+  <img id="toggle" [src]="showPassword ? 'assets/openy.png' : 'assets/closey.png'" (click)="togglePassword()" style="cursor: pointer;" alt="" />
 </div>
     
       <br>
