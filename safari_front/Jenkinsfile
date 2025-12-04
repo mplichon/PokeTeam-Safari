@@ -18,7 +18,7 @@ pipeline {
             stages {
                 stage('Installation dependances') {
                     steps {
-                        dir('POKETEAM-SAFARI/safari_front') {
+                        dir('safari_front') {
                             sh 'npm install'
                         }
                     }
@@ -26,7 +26,7 @@ pipeline {
 
                 stage('Analyse Sonar') {
                     steps {
-                        dir('POKETEAM-SAFARI/safari_front') {
+                        dir('safari_front') {
                             withSonarQubeEnv('SonarQube') {
                                 sh './node_modules/.bin/sonar-scanner -Dsonar.projectKey=safari_front'
                             }
@@ -36,7 +36,7 @@ pipeline {
 
                 stage('Build Angular') {
                     steps {
-                        dir('POKETEAM-SAFARI/safari_front') {
+                        dir('safari_front') {
                             sh './node_modules/.bin/ng build'
                         }
                     }
@@ -46,7 +46,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                dir('POKETEAM-SAFARI/safari_front') {
+                dir('safari_front') {
                     sh 'docker build -t poketeam/safari:angular .'
                 }
             }
@@ -54,7 +54,7 @@ pipeline {
 
         stage('Docker Deploy') {
             steps {
-                dir('POKETEAM-SAFARI') {
+                dir('') {
                     sh 'docker compose up -d --no-deps --build angular'
                 }
             }
