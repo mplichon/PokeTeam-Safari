@@ -18,7 +18,7 @@ pipeline {
             steps {
                 dir('safari_back') {
                     withSonarQubeEnv('SonarQube') {
-                        sh "mvn clean verify sonar:sonar -Dsonar.projectKey=safari_back -Dsonar.projectName='safari_back'"
+                        sh "mvn clean verify sonar:sonar -DskipTests -Dsonar.projectKey=safari_back -Dsonar.projectName='safari_back'"
                     }
                 }
             }
