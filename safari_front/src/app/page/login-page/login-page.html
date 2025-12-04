@@ -1,48 +1,88 @@
-<div class="backconnx" >
-<div class="encarco">
+<div class="backconnx">
+  <div class="encarco">
     <div class="center_g16">
- <img class="pokeballdeco" src="assets/pokeballpix.png" alt="pokeballpix">
+      <img class="pokeballdeco" src="assets/pokeballpix.png" alt="pokeballpix" />
 
-    <h1 class="title">Welcome <br> back</h1>
-    <h2 class="subtitle">to the <br> pokéfari</h2>
-</div>
-<br>
+      <h1 class="title">
+        Welcome <br />
+        back
+      </h1>
+      <h2 class="subtitle">
+        to the <br />
+        pokéfari
+      </h2>
+    </div>
+    <br />
 
-<div class="erreurconx" *ngIf="loginError">
-    Nom d'utilisateur ou <br> Mot de passe incorrect
-</div>
+    <div class="erreurconx" *ngIf="loginError">
+      Nom d'utilisateur ou <br />
+      Mot de passe incorrect
+    </div>
 
-<form (ngSubmit)="connecter()" [formGroup]="userForm">
-    <div class="inputs">
+    <form (ngSubmit)="connecter()" [formGroup]="userForm">
+      <div class="inputs">
+        <input
+          class="conxn"
+          [class.input-error]="loginError"
+          type="text"
+          formControlName="username"
+          name="username"
+          id="username"
+          placeholder="Identifiant"
+        />
+        <br />
 
-     <input class="conxn"  [class.input-error]="loginError" type="text" formControlName="username"  name="username"  id="username" placeholder="Identifiant">
-  <br>
-      
         <div class="password-container">
-<input  class="conxn"  [class.input-error]="loginError" type="password"  formControlName="password"  name="password"  id="password"  placeholder="ton mot de passe">
+          <input class="conxn"  [class.input-error]="loginError" [type]="showPassword ? 'text' : 'password'" formControlName="password" name="password" id="password" placeholder="Mot de passe"
+          />
+          @if (passwordCtrl.hasError('required')) {
+          <div class="error-message">Le mot de passe est obligatoire</div>
+          } @else if (passwordCtrl.hasError('minlength')) {
+          <div class="error-message">Le mot de passe doit faire 6 caractères minimum</div>
+          }
 
+          <img
+            id="toggle"
+            [src]="showPassword ? 'assets/openy.png' : 'assets/closey.png'"
+            (click)="togglePassword()"
+            style="cursor: pointer"
+            alt=""
+          />
 
-  <img id="toggle" [src]="showPassword ? 'assets/openy.png' : 'assets/closey.png'" (click)="togglePassword()" style="cursor: pointer;" alt="" />
-</div>
-    
-      <br>
+          <img
+            id="toggle"
+            [src]="showPassword ? 'assets/openy.png' : 'assets/closey.png'"
+            (click)="togglePassword()"
+            style="cursor: pointer"
+            alt=""
+          />
+        </div>
 
-  <br>
-    <button  type="submit" [disabled]="userForm.invalid" value="Se connecter" class="primary_b" style="cursor: pointer;">Se connecter</button>
-  </div>
-</form>
+        <br />
 
+        <br />
+        <button
+          type="submit"
+          [disabled]="userForm.invalid"
+          value="Se connecter"
+          class="primary_b"
+          style="cursor: pointer"
+        >
+          Se connecter
+        </button>
+      </div>
+    </form>
 
+    <br />
 
-<br>
-  
     <div class="inscrib">
-      <p class="txt">Pas encore de compte ? 
-    <br>
-    <br>
-    <br>
-    <a class="secondary_b" routerLink="/register" routerLinkActive="active">Crée ton compte</a></p>
+      <p class="txt">
+        Pas encore de compte ?
+        <br />
+        <br />
+        <br />
+        <a class="secondary_b" routerLink="/register" routerLinkActive="active">Crée ton compte</a>
+      </p>
     </div>
-    </div>
-
+  </div>
 </div>

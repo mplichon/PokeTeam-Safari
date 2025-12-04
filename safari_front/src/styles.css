@@ -47,6 +47,10 @@ color: #d10700;
   100% { transform: translateX(0); }
 }
 
+.error-message{
+  font-size: 10px;
+}
+
 /* -------- ENCAR DE CO -------- */
 .encarco {
   background: #edf0f6;

@@ -21,7 +21,7 @@
                placeholder="Identifiant"
               [class.input-error]="registerError">
                @if (usernameCtrl.hasError('required')) {
-          <div class="error-message">L'identifiant est obligatoire</div>
+          <div class="error-message"> <br> L'identifiant est obligatoire</div>
           }
     <br>
 
@@ -73,9 +73,7 @@
     id="password"
     placeholder="Confirmation du mdp"
   />
-  @if (confirmCtrl.hasError('passwordMismatch')) {
-  <div class="error-message">Veuillez confirmez votre mot de passe</div>
-  }
+
 
   <img
     id="toggle"
@@ -84,7 +82,12 @@
     style="cursor: pointer;"
     alt=""
   />
+
+  
 </div>
+  @if (confirmCtrl.hasError('passwordMismatch')) {
+  <div class="error-message"> <br>Confirmation du mot de passe</div>
+  }
 
 <br>
         <button class="primary_b"
