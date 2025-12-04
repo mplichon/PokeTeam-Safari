@@ -36,7 +36,7 @@
   </div>
 
   <div class="actions_combat">
-    <button class="secondary_b" (click)="pokeball()" [disabled]="allButtonsDisabled">Pokeball</button>
+    <button class="secondary_b" (click)="pokeball()" [disabled]="allButtonsDisabled">Pokéball</button>
   <button class="secondary_b" (click)="boue()" [disabled]="allButtonsDisabled">Boue</button>
   <button class="secondary_b" (click)="appat()" [disabled]="allButtonsDisabled">Appât</button>
   <button class="secondary_b" (click)="fuite()" [disabled]="allButtonsDisabled">Fuite</button>
@@ -48,14 +48,14 @@
   <div class="containeur_capture_div">
     <p class="center_txt">
       -- pokémon capturé -- <br><br>
-      <b>{{pokemon.name}}</b> est ajouté à votre pokédex
+      <b>{{pokemon.name}}</b> est ajouté à votre Pokédex
     </p>
     <br>
 
     <button class="secondary_b" (click)="goBackToMap()" >Retour à la carte</button>
 <br>
 
- <button class="tertiary_b" (click)="goToPoke()" >Acces au Pokedex</button>
+ <button class="tertiary_b" (click)="goToPoke()" >Accès au Pokédex</button>
 
   </div>
 </div>
@@ -64,7 +64,7 @@
 <div class="containeur_fuite" *ngIf="combatStatus === 'fuite'">
   <div class="containeur_fuite_div">
     <p class="center_txt">
-      -- le pokémon a fuit -- <br><br>
+      -- le pokémon a fui -- <br><br>
       <b>{{pokemon.name}}</b> a quitté le combat
     </p>
     <br>
@@ -75,7 +75,7 @@
 <div class="containeur_fuit" *ngIf="combatStatus === 'abandon'">
   <div class="containeur_fuit_div">
     <p class="center_txt">
-      -- tu as fuis -- <br><br>
+      -- tu as fui -- <br><br>
       Tu as quitté le combat
     </p>
     <br>
