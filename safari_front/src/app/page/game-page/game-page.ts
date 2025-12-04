@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { Carte } from "../../component/carte/carte";
-import { InfoBar } from '../../component/info-bar/info-bar';
-import { PokedexAccess } from '../../component/pokedex-access/pokedex-access';
-import { Inventaire } from '../../component/inventaire/inventaire';
-import { PokemonsCaptures } from "../../component/pokemons-captures/pokemons-captures";
-import { Combat } from "../../component/combat/combat";
+import { Component, EventEmitter, OnInit, Input, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Carte } from "../../component/carte/carte";
+import { Combat } from "../../component/combat/combat";
+import { InfoBar } from '../../component/info-bar/info-bar';
+import { Inventaire } from '../../component/inventaire/inventaire';
+import { PokedexAccess } from '../../component/pokedex-access/pokedex-access';
+import { PokemonsCaptures } from "../../component/pokemons-captures/pokemons-captures";
 
 
 @Component({
@@ -20,7 +20,8 @@ export class GamePage implements OnInit {
     showPokemonView = false;
     showCombatView = false;
     reloadCount = false;
-  
+
+  @ViewChild(Inventaire) inventaireComponent!: Inventaire;
   constructor(private title: Title) {}
 
   ngOnInit(): void {
@@ -51,9 +52,11 @@ export class GamePage implements OnInit {
   }
 
   ShowPokeCapt() {
+  this.reboutCompMap();
+  this.showPokemonView = true;
+  }
 
-this.reboutCompMap();
-this.showPokemonView = true;
-
+  reloadInventaire() {
+    this.inventaireComponent.reloadInventaire();
   }
 }

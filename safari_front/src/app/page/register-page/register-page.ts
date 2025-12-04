@@ -16,6 +16,10 @@ import { Title } from '@angular/platform-browser';
 export class RegisterPage implements OnInit{
 
   protected registerForm!: FormGroup;
+  protected usernameCtrl!: FormControl;
+  protected passwordCtrl!: FormControl;
+  protected confirmCtrl!: FormControl;
+  protected surnomCtrl!: FormControl;
   protected registerError = false;
   showPassword = false;
 
@@ -29,12 +33,17 @@ export class RegisterPage implements OnInit{
   ngOnInit(): void {
     this.title.setTitle("Inscription | PokéFari");
 
+    this.usernameCtrl = new FormControl('', Validators.required);
+    this.passwordCtrl = new FormControl('', [ Validators.required, Validators.minLength(6) ]);
+    this.surnomCtrl = new FormControl('', Validators.required);
+    this.confirmCtrl = new FormControl('', Validators.required);
+
     this.registerForm = this.formBuilder.group(
       {
-        username: ['', Validators.required],
-        surnom: ['', Validators.required],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirm: ['', Validators.required]
+        username: this.usernameCtrl,
+        password: this.passwordCtrl,
+        surnom: this.surnomCtrl,
+        confirm: this.confirmCtrl
       },
       {
         validators: passwordMatchValidator('password', 'confirm')
@@ -50,9 +59,9 @@ export class RegisterPage implements OnInit{
     try {
       await this.authService.register(
         new SubscribeRequestDto(
-        this.registerForm.value.username,
-        this.registerForm.value.password,
-        this.registerForm.value.surnom
+        this.usernameCtrl.value,
+        this.passwordCtrl.value,
+        this.surnomCtrl.value
         )
       );
       this.router.navigate(['/login']);
