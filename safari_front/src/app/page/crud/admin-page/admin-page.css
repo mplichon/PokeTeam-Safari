@@ -91,7 +91,7 @@ tbody tr:nth-child(even) td {
 }
 
 .primary_bad:hover {
-  background-color: #C4CDDF;
+  background-color: #1A5A8A;
 }
 
 .secondary_bad {
@@ -101,7 +101,7 @@ tbody tr:nth-child(even) td {
 }
 
 .secondary_bad:hover {
-  background: #C4CDDF;
+  background: #a7b2c7;
 }
 
 /* ------------------- FORMULAIRE AJOUT ------------------- */
@@ -112,6 +112,7 @@ tbody tr:nth-child(even) td {
   box-shadow: 6px 6px 0 #3B3B3B;
   padding: 28px;
   height: fit-content;
+  overflow-y: scroll;
 }
 
 .ajout h4 {
@@ -146,14 +147,14 @@ tbody tr:nth-child(even) td {
 
 /* Submit */
 .ajout input[type="submit"] {
+  padding: 16px 24px;
+  border: none;
+  box-shadow: 4px 4px 0 #3B3B3B;
+  margin: 16px 0;
+  text-transform: uppercase;
+  transition: 0.15s;
   background: #216EAC;
   color: #EDF0F6;
-  border: 4px solid #3B3B3B;
-  padding: 12px 18px;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-shadow: 4px 4px 0 #3B3B3B;
-  transition: 0.1s;
 }
 
 .ajout input[type="submit"]:hover {
@@ -180,5 +181,12 @@ tbody tr:nth-child(even) td {
   background-position: right 10px center;
   background-size: 16px;
   padding-right: 30px;
+}
+
+label {
+
+color: #3B3B3B;
+
+
 }
 

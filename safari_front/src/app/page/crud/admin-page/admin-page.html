@@ -48,15 +48,18 @@
 
                 <!-- login -->
                 <div>
+                    <label for="login">Identifiant</label>
                     <input type="text" formControlName="login" placeholder="Identifiant" />
 
                     @if (loginCtrl.hasError('required')) {
                         <div class="error-message">L'identifiant est obligatoire</div>
                     }
                 </div>
+                <br>
 
                 <!-- password -->
                 <div>
+                    <label for="password">Mot de passe</label>
                     <input type="text" formControlName="password" placeholder="Mot de passe" />
 
                     @if (passwordCtrl.hasError('required')) {

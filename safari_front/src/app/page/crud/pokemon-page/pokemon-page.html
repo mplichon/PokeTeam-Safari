@@ -1,148 +1,157 @@
 <div class="page-poke-list">
+  <app-navbar-crud></app-navbar-crud>
 
-        <app-navbar-crud></app-navbar-crud>
+  <br />
+  <br />
 
-    <br>
-    <br>
+  <h1>Liste des Pokémons</h1>
 
-<h1>Liste des Pokémons</h1>
-
-<div class="display_admin">
-<div class="scrollable">
-<table class="table_admin">
-    <thead class="thead_admin">
-        <tr>
+  <div class="display_admin">
+    <div class="scrollable">
+      <table class="table_admin">
+        <thead class="thead_admin">
+          <tr>
             <th class="th_admin">Id</th>
-            <th class="th_admin" >Nom</th>
-            <th class="th_admin" >Taux de capture</th>
-            <th class="th_admin" >Taux de fuite</th>
-            <th class="th_admin" >Facteur d'apparition</th>
-            <th class="th_admin" >Type 1</th>
-            <th class="th_admin" >Type 2</th>
-            <th class="th_admin" >Actions</th>
-        </tr>
-    </thead>
+            <th class="th_admin">Nom</th>
+            <th class="th_admin">Taux de capture</th>
+            <th class="th_admin">Taux de fuite</th>
+            <th class="th_admin">Facteur d'apparition</th>
+            <th class="th_admin">Type 1</th>
+            <th class="th_admin">Type 2</th>
+            <th class="th_admin">Actions</th>
+          </tr>
+        </thead>
 
-    <tbody>
-        <tr *ngFor="let p of pokemons$ | async; trackBy: trackPokemon">
+        <tbody>
+          <tr *ngFor="let p of pokemons$ | async; trackBy: trackPokemon">
             <td class="td_admin">{{ p.id }}</td>
             <td class="td_admin">{{ p.nom }}</td>
             <td class="taux">{{ p.tauxCapture }}</td>
-            <td class="taux" >{{ p.tauxFuite }}</td>
-            <td class="taux" >{{ p.facteurApparition }}</td>
+            <td class="taux">{{ p.tauxFuite }}</td>
+            <td class="taux">{{ p.facteurApparition }}</td>
             <td class="td_admin">{{ p.type1 }}</td>
             <td class="td_admin">{{ p.type2 }}</td>
 
             <td class="buttonaction">
-                <button class="primary_bad"  (click)="editPokemon(p)">Modifier</button>
-                <button class="secondary_bad" (click)="deletePokemon(p)">Supprimer</button>
+              <button class="primary_bad" (click)="editPokemon(p)">Modifier</button>
+              <button class="secondary_bad" (click)="deletePokemon(p)">Supprimer</button>
             </td>
-        </tr>
-    </tbody>
-</table>
-</div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<div class="ajout">
-
-
-    
-
+    <div class="ajout">
       @if (editingPokemon) {
-            <h4>Modifier un Pokémon</h4>
-        }
+      <h4>Modifier un Pokémon</h4>
+      } @else {
+      <h4>Ajouter un Pokémon</h4>
+      }
 
-        @else {
-           <h4>Ajouter un Pokémon</h4>
-        }
-
-
-    <form (ngSubmit)="ajouterModifierPokemon()" [formGroup]="pokemonForm">
+      <form (ngSubmit)="ajouterModifierPokemon()" [formGroup]="pokemonForm">
         <!-- nom -->
         <div>
-            <input  type="text" formControlName="nom" placeholder="Nom"/> 
-            
-            @if (nomCtrl.hasError('required')) {
-                <div class="error-message">Le nom est obligatoire</div>
-            }
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" formControlName="nom" placeholder="Nom" />
+
+          @if (nomCtrl.hasError('required')) {
+          <div class="error-message">Le nom est obligatoire</div>
+          }
         </div>
-<br>
+        <br>
+
         <!-- taux de capture -->
         <div>
-            <input type="number" formControlName="tauxCapture" placeholder="Taux de capture"/>
+          <label for="tauxCapture">Taux de capture</label>
+          <input
+            type="number"
+            id="tauxCapture"
+            formControlName="tauxCapture"
+            placeholder="Taux de capture"
+          />
 
-            @if (tauxCaptureCtrl.hasError('required')) {
-                <div class="error-message">Le taux de capture est obligatoire</div>
-            }
-
-            @if (tauxCaptureCtrl.hasError('min') || tauxCaptureCtrl.hasError('max')) {
-                <div class="error-message">Le taux de capture doit être compris entre 0 et 255</div>
-            }
+          @if (tauxCaptureCtrl.hasError('required')) {
+          <div class="error-message">Le taux de capture est obligatoire</div>
+          } @if (tauxCaptureCtrl.hasError('min') || tauxCaptureCtrl.hasError('max')) {
+          <div class="error-message">Le taux de capture doit être compris entre 0 et 255</div>
+          }
         </div>
-<br>
+        <br>
+
         <!-- taux de fuite -->
         <div>
-            <input  type="number" formControlName="tauxFuite" placeholder="Taux de fuite"/> 
-            
-            @if (tauxFuiteCtrl.hasError('required')) {
-                <div class="error-message">Le taux de fuite est obligatoire</div>
-            }
+          <label for="tauxFuite">Taux de fuite</label>
+          <input
+            type="number"
+            id="tauxFuite"
+            formControlName="tauxFuite"
+            placeholder="Taux de fuite"
+          />
 
-            @if (tauxFuiteCtrl.hasError('min') || tauxFuiteCtrl.hasError('max')) {
-                <div class="error-message">Le taux de fuite doit être compris entre 0 et 255</div>
-            }
+          @if (tauxFuiteCtrl.hasError('required')) {
+          <div class="error-message">Le taux de fuite est obligatoire</div>
+          } @if (tauxFuiteCtrl.hasError('min') || tauxFuiteCtrl.hasError('max')) {
+          <div class="error-message">Le taux de fuite doit être compris entre 0 et 255</div>
+          }
         </div>
-<br>
+        <br>
+
         <!-- facteur d'apparition -->
         <div>
-            <input  type="number" formControlName="facteurApparition" placeholder="Facteur d'apparition"/> 
-            
-            @if (facteurApparitionCtrl.hasError('required')) {
-                <div class="error-message">Le facteur d'apparition est obligatoire</div>
-            }
+          <label for="facteurApparition">Facteur d'apparition</label>
+          <input
+            type="number"
+            id="facteurApparition"
+            formControlName="facteurApparition"
+            placeholder="Facteur d'apparition"
+          />
 
-            @if (facteurApparitionCtrl.hasError('min') || facteurApparitionCtrl.hasError('max')) {
-                <div class="error-message">Le facteur d'apparition doit être compris entre 0 et 255</div>
-            }
+          @if (facteurApparitionCtrl.hasError('required')) {
+          <div class="error-message">Le facteur d'apparition est obligatoire</div>
+          } @if (facteurApparitionCtrl.hasError('min') || facteurApparitionCtrl.hasError('max')) {
+          <div class="error-message">Le facteur d'apparition doit être compris entre 0 et 255</div>
+          }
         </div>
-<br>
+        <br>
+
         <!-- type 1 -->
         <div>
-            <select formControlName="type1">
-                <option [ngValue]="null">-- Aucun --</option>
-                <option *ngFor="let t of types$ | async" [ngValue]="t.key">
-                    {{ t.nom }}
-                </option>
-            </select>
-            
-            @if (type1Ctrl.hasError('required')) {
-                <div class="error-message">Le 1er type est obligatoire</div>
-            }
+          <label for="type1">Type 1</label>
+          <select id="type1" formControlName="type1">
+            <option [ngValue]="null">-- Aucun --</option>
+            <option *ngFor="let t of types$ | async" [ngValue]="t.key">
+              {{ t.nom }}
+            </option>
+          </select>
+
+          @if (type1Ctrl.hasError('required')) {
+          <div class="error-message">Le 1er type est obligatoire</div>
+          }
         </div>
-<br>
+        <br>
+
         <!-- type 2 -->
         <div>
-            <select formControlName="type2">
-                <option [ngValue]="null">-- Aucun --</option>
-                <option *ngFor="let t of types$ | async" [ngValue]="t.key">
-                    {{ t.nom }}
-                </option>
-            </select>
+          <label for="type2">Type 2</label>
+          <select id="type2" formControlName="type2">
+            <option [ngValue]="null">-- Aucun --</option>
+            <option *ngFor="let t of types$ | async" [ngValue]="t.key">
+              {{ t.nom }}
+            </option>
+          </select>
 
-            @if (type2Ctrl.hasError('typeNotMatch')) {
-                <div class="error-message">Les 2 types doivent être différents</div>
-            }
+          @if (type2Ctrl.hasError('typeNotMatch')) {
+          <div class="error-message">Les 2 types doivent être différents</div>
+          }
         </div>
-<br>
+        <br>
+
         @if (editingPokemon) {
-            <input type="submit" [disabled]="pokemonForm.invalid" value="Modifier" />
+        <input type="submit" [disabled]="pokemonForm.invalid" value="Modifier" />
+        } @else {
+        <input type="submit" [disabled]="pokemonForm.invalid" value="Ajouter" />
         }
-
-        @else {
-            <input type="submit" [disabled]="pokemonForm.invalid" value="Ajouter" />
-        }
-
-    </form>
-
-</div>
-</div>
+      </form>
+    </div>
+  </div>
 </div>

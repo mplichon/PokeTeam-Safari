@@ -1,140 +1,146 @@
 <div class="page-poke-list">
+  <app-navbar-crud></app-navbar-crud>
 
-        <app-navbar-crud></app-navbar-crud>
+  <br />
+  <br />
 
-    <br>
-    <br>
+  <h1>Liste des joueurs</h1>
 
-    <h1>Liste des joueurs</h1>
+  <div class="display_admin">
+    <!-- TABLEAU -->
+    <div class="scrollable">
+      <table class="table_admin">
+        <thead class="thead_admin">
+          <tr>
+            <th>Id</th>
+            <th>Login</th>
+            <th>Surnom</th>
+            <th>Pokéballs</th>
+            <th>Friandises</th>
+            <th>Boues</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
 
-    <div class="display_admin">
-
-        <!-- TABLEAU -->
-        <div class="scrollable">
-            <table class="table_admin">
-                <thead class="thead_admin">
-                    <tr>
-                        <th>Id</th>
-                        <th>Login</th>
-                        <th>Surnom</th>
-                        <th>Pokéballs</th>
-                        <th>Friandises</th>
-                        <th>Boues</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr *ngFor="let j of joueurs$ | async; trackBy: trackJoueur">
-                        <td class="td_admin">{{ j.id }}</td>
-                        <td class="td_admin">{{ j.username }}</td>
-                        <td class="td_admin">{{ j.surnom }}</td>
-                        <td class="td_admin">{{ j.nbPokeball }}</td>
-                        <td class="td_admin">{{ j.nbFriandise }}</td>
-                        <td class="td_admin">{{ j.nbBoue }}</td>
-                        <td class="td_admin">
-                            <div class="buttonaction">
-                                <button class="primary_bad" (click)="editJoueur(j)">Modifier</button>
-                                <button class="secondary_bad" (click)="deleteJoueur(j)">Supprimer</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- FORMULAIRE -->
-        <div class="ajout">
-            @if (editingJoueur) {
-                <h4>Modifier un joueur</h4>
-            }
-
-            @else {
-            <h4>Ajouter un joueur</h4>
-            }
-
-            <form (ngSubmit)="ajouterModifierJoueur()" [formGroup]="joueurForm">
-
-                <!-- username -->
-                <div>
-                    <input type="text" formControlName="username" placeholder="Identifiant" />
-
-                    @if (usernameCtrl.hasError('required')) {
-                        <div class="error-message">L'identifiant est obligatoire</div>
-                    }
-                </div>
-
-                <!-- password (uniquement si ajout) -->
-                @if (!editingJoueur) {
-                    <div>
-                        <input type="text" formControlName="password" placeholder="Mot de passe" />
-
-                        @if (passwordCtrl.hasError('required')) {
-                            <div class="error-message">Le mot de passe est obligatoire</div>
-                        }
-                        @else if (passwordCtrl.hasError('minlength')) {
-                            <div class="error-message">Le mot de passe doit faire 6 caractères minimum</div>
-                        }
-                    </div>
-                }
-
-                <!-- surnom -->
-                <div>
-                    <input type="text" formControlName="surnom" placeholder="Surnom" />
-
-                    @if (surnomCtrl.hasError('required')) {
-                        <div class="error-message">Le surnom est obligatoire</div>
-                    }
-                </div>
-
-                <!-- pokeballs -->
-                <div>
-                    <input type="number" formControlName="nbPokeball" placeholder="Nombre de pokéball" />
-
-                    @if (nbPokeballCtrl.hasError('required')) {
-                        <div class="error-message">Le nombre de pokéball est obligatoire</div>
-                    }
-
-                    @if (nbPokeballCtrl.hasError('min') || nbPokeballCtrl.hasError('max')) {
-                        <div class="error-message">Le nombre de pokéball doit être compris entre 0 et 999</div>
-                    }
-                </div>
-
-                <!-- friandises -->
-                <div>
-                    <input type="number" formControlName="nbFriandise" placeholder="Nombre de friandise" />
-
-                    @if (nbFriandiseCtrl.hasError('required')) {
-                        <div class="error-message">Le nombre de friandise est obligatoire</div>
-                    }
-
-                    @if (nbFriandiseCtrl.hasError('min') || nbFriandiseCtrl.hasError('max')) {
-                        <div class="error-message">Le nombre de friandise doit être compris entre 0 et 999</div>
-                    }
-                </div>
-
-                <!-- boue -->
-                <div>
-                    <input type="number" formControlName="nbBoue" placeholder="Nombre de boue" />
-
-                    @if (nbBoueCtrl.hasError('required')) {
-                        <div class="error-message">Le nombre de boue est obligatoire</div>
-                    }
-
-                    @if (nbBoueCtrl.hasError('min') || nbBoueCtrl.hasError('max')) {
-                        <div class="error-message">Le nombre de boue doit être compris entre 0 et 999</div>
-                    }
-                </div>
-
-                @if (editingJoueur) {
-                    <input type="submit" [disabled]="joueurForm.invalid" value="Modifier" />
-                }
-                @else {
-                    <input type="submit" [disabled]="joueurForm.invalid" value="Ajouter" />
-                }
-
-            </form>
-        </div>
-
+        <tbody>
+          <tr *ngFor="let j of joueurs$ | async; trackBy: trackJoueur">
+            <td class="td_admin">{{ j.id }}</td>
+            <td class="td_admin">{{ j.username }}</td>
+            <td class="td_admin">{{ j.surnom }}</td>
+            <td class="td_admin">{{ j.nbPokeball }}</td>
+            <td class="td_admin">{{ j.nbFriandise }}</td>
+            <td class="td_admin">{{ j.nbBoue }}</td>
+            <td class="td_admin">
+              <div class="buttonaction">
+                <button class="primary_bad" (click)="editJoueur(j)">Modifier</button>
+                <button class="secondary_bad" (click)="deleteJoueur(j)">Supprimer</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
+    <!-- FORMULAIRE -->
+    <div class="ajout">
+      @if (editingJoueur) {
+      <h4>Modifier un joueur</h4>
+      } @else {
+      <h4>Ajouter un joueur</h4>
+      }
+
+      <form (ngSubmit)="ajouterModifierJoueur()" [formGroup]="joueurForm">
+        <!-- username -->
+        <div>
+          <label class="label" for="username">Identifiant</label>
+          <input type="text" formControlName="username" placeholder="Identifiant" />
+
+          @if (usernameCtrl.hasError('required')) {
+          <div class="error-message">L'identifiant est obligatoire</div>
+          }
+        </div>
+        <br>
+
+        <!-- password (uniquement si ajout) -->
+        @if (!editingJoueur) {
+        <div>
+          <label for="password">Mot de passe</label>
+          <input type="text" id="password" formControlName="password" placeholder="Mot de passe" />
+
+          @if (passwordCtrl.hasError('required')) {
+          <div class="error-message">Le mot de passe est obligatoire</div>
+          } @else if (passwordCtrl.hasError('minlength')) {
+          <div class="error-message">Le mot de passe doit faire 6 caractères minimum</div>
+          }
+        </div>
+        <br>
+        }
+
+        <!-- surnom -->
+        <div>
+          <label for="surnom">Surnom</label>
+          <input type="text" id="surnom" formControlName="surnom" placeholder="Surnom" />
+
+          @if (surnomCtrl.hasError('required')) {
+          <div class="error-message">Le surnom est obligatoire</div>
+          }
+        </div>
+        <br>
+
+        <!-- pokeballs -->
+        <div>
+          <label for="nbPokeball">Nombre de pokéball</label>
+          <input
+            type="number"
+            id="nbPokeball"
+            formControlName="nbPokeball"
+            placeholder="Nombre de pokéball"
+          />
+
+          @if (nbPokeballCtrl.hasError('required')) {
+          <div class="error-message">Le nombre de pokéball est obligatoire</div>
+          } @if (nbPokeballCtrl.hasError('min') || nbPokeballCtrl.hasError('max')) {
+          <div class="error-message">Le nombre de pokéball doit être compris entre 0 et 999</div>
+          }
+        </div>
+        <br>
+
+        <!-- friandises -->
+        <div>
+          <label for="nbFriandise">Nombre de friandise</label>
+          <input
+            type="number"
+            id="nbFriandise"
+            formControlName="nbFriandise"
+            placeholder="Nombre de friandise"
+          />
+
+          @if (nbFriandiseCtrl.hasError('required')) {
+          <div class="error-message">Le nombre de friandise est obligatoire</div>
+          } @if (nbFriandiseCtrl.hasError('min') || nbFriandiseCtrl.hasError('max')) {
+          <div class="error-message">Le nombre de friandise doit être compris entre 0 et 999</div>
+          }
+        </div>
+        <br>
+
+        <!-- boue -->
+        <div>
+          <label for="nbBoue">Nombre de boue</label>
+          <input type="number" id="nbBoue" formControlName="nbBoue" placeholder="Nombre de boue" />
+
+          @if (nbBoueCtrl.hasError('required')) {
+          <div class="error-message">Le nombre de boue est obligatoire</div>
+          } @if (nbBoueCtrl.hasError('min') || nbBoueCtrl.hasError('max')) {
+          <div class="error-message">Le nombre de boue doit être compris entre 0 et 999</div>
+          }
+        </div>
+
+        @if (editingJoueur) {
+        <input type="submit" [disabled]="joueurForm.invalid" value="Modifier" />
+        } @else {
+        <input type="submit" [disabled]="joueurForm.invalid" value="Ajouter" />
+        }
+      </form>
+    </div>
+  </div>
 </div>
