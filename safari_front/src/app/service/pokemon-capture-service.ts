@@ -56,4 +56,13 @@ import { PokemonCaptureDto } from '../dto/pokemon-capture-dto';
             )
         )
   }
+
+  public verificationJoueurPokemon(idJoueur: number, idPokemon: number): Observable<boolean> {
+    // La fonction vérifie si un joueur a déjà capturé un pokémon en particulier
+    const idsPokemonsCaptures$: Observable<number[]> = this.pokemonCaptureParIdParJoueur(idJoueur);
+    const estCapture$: Observable<boolean> = idsPokemonsCaptures$.pipe(
+      map(ids => ids.includes(idPokemon))
+    );
+    return estCapture$;
+  }
 }
