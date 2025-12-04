@@ -12,6 +12,7 @@ import { joueurGuard } from './guard/joueur-guard';
 import { adminGuard } from './guard/admin-guard';
 import { NotFoundPage } from './page/error/not-found-page/not-found-page';
 import { ForbiddenPage } from './page/error/forbidden-page/forbidden-page';
+import { retourAccueilGuardGuard } from './guard/retour-accueil-guard-guard';
 
 export const routes: Routes = [
     {path: '', component: LoginPage},
@@ -21,6 +22,7 @@ export const routes: Routes = [
     
     {path: 'test', component: TestPage, canActivate: [ joueurGuard ]},
     {path: 'game', component: GamePage, canActivate: [ joueurGuard ]},
+    {path: 'home', component: TestPage, canActivate: [ retourAccueilGuardGuard ]},
 
     //Routes du CRUD
     {path: 'gestion/admin', component: AdminPage, canActivate: [ adminGuard ]},
