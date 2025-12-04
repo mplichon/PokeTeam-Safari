@@ -21,7 +21,7 @@ export class Inventaire implements OnInit {
   ) {}
 
   items = [
-    { id: "pokeball", name: "Pokeball", quantity: 0, img: "assets/pokeitem.png", desc: "Permet de capturer un Pokémon" },
+    { id: "pokeball", name: "Pokéball", quantity: 0, img: "assets/pokeitem.png", desc: "Permet de capturer un Pokémon" },
     { id: "appat",    name: "Appât",    quantity: 0, img: "assets/appatitem.png", desc: "Permet d’amadouer un Pokémon" },
     { id: "boue",     name: "Boue",     quantity: 0, img: "assets/boueitem.png", desc: "Permet d’aveugler un Pokémon" }
   ];
