@@ -54,4 +54,8 @@ export class Inventaire implements OnInit {
     console.log("Item sélectionné :", item);
     this.selectedItem = item;
   }
+
+  unselectItem(item: any) {
+      this.selectedItem = null;
+  }
 }

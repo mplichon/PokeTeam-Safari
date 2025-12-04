@@ -30,7 +30,6 @@ export class BoutonComponent implements OnInit {
     }, 500);
   }
 
-  
 scheduleNextAppearance() {
      const delay = 2000 + Math.random() * 5000; //Temps avant apparition (fréquence)
   
