@@ -10,7 +10,7 @@ import { BoutonComponent } from "./bouton/bouton";
 })
 export class Carte implements AfterViewInit{
 
-  @Output() toggleFromRandom = new EventEmitter<void>(); // 💥 NOUVEAU
+  @Output() toggleFromRandom = new EventEmitter<void>(); 
   @Output() childClicked = new EventEmitter<void>();
 
   @ViewChild('parentRef', { static: false }) parentRef!: ElementRef;
@@ -30,6 +30,6 @@ export class Carte implements AfterViewInit{
   }
 
   onRandomClick() {
-    this.toggleFromRandom.emit();  // 💥 on prévient le parent (GamePage)
+    this.toggleFromRandom.emit(); 
   }
 }

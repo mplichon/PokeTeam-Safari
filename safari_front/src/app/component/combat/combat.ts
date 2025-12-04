@@ -17,6 +17,7 @@ type CombatStatus = 'fuite' | 'capture' | 'continue' | 'abandon';
 })
 export class Combat implements OnInit {
   @Output() reloadMap = new EventEmitter<void>();
+  @Output() openPoke = new EventEmitter<void>();
 
   imgPokeMargLeft = 50;
   imgPokeMargRight = 50;
@@ -305,4 +306,12 @@ export class Combat implements OnInit {
   goBackToMap() {
     this.reloadMap.emit();
   }
+  
+  goToPoke(){
+
+this.openPoke.emit();
+
+  }
+
+
 }

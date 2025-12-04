@@ -9,8 +9,8 @@
 
 
 <app-carte class="cartes"  *ngIf="!showPokemonView && !showCombatView" (toggleFromRandom)="ShowCombatView()" (childClicked)="onChild2ButtonClicked()"> </app-carte>
-<app-pokemons-captures class="pokemoncapture"  *ngIf="showPokemonView" ></app-pokemons-captures> 
-<app-combat class="combat" *ngIf="!showPokemonView && showCombatView" (toggleFromRandom)="ShowCombatView()" (reloadMap)="reboutCompMap()"></app-combat>
+<app-pokemons-captures class="pokemoncapture"  *ngIf="showPokemonView"></app-pokemons-captures> 
+<app-combat class="combat" *ngIf="!showPokemonView && showCombatView" (toggleFromRandom)="ShowCombatView()" (reloadMap)="reboutCompMap()" (openPoke)="ShowPokeCapt()" ></app-combat>
 
 </main>
 

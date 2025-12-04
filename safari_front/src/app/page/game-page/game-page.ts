@@ -49,4 +49,11 @@ export class GamePage implements OnInit {
     this.reloadCount = !this.reloadCount;
     setTimeout(() => this.reloadCount = !this.reloadCount, 15)
   }
+
+  ShowPokeCapt() {
+
+this.reboutCompMap();
+this.showPokemonView = true;
+
+  }
 }
