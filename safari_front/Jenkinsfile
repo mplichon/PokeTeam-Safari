@@ -23,46 +23,22 @@ pipeline {
                         }
                     }
                 }
-            }
-        }
-
-        stage('Analyse Sonar') {
-            agent {
-                docker {
-                    image 'sonarsource/sonar-scanner-cli:latest'
-                    args '--network devops'
-                    reuseNode true
-                }
-            }
-            steps {
-                dir('safari_front') {
-                    withSonarQubeEnv('SonarQube') {
-                        sh '''
-                          sonar-scanner \
-                            -Dsonar.projectKey=safari_front \
-                            -Dsonar.sources=src \
-                            -Dsonar.exclusions="**/*.spec.ts,**/node_modules/**,dist/**"
-                        '''
+            stage('Analyse Sonar') {
+                steps {
+                    dir('safari_front') {
+                        withSonarQubeEnv('SonarQube') {
+                            sh './node_modules/.bin/sonar-scanner -Dsonar.projectKey=safari_front'
+                        }
                     }
                 }
-            }
-        }
 
-        stage('Build Angular') {
-            agent {
-                docker {
-                    image 'node:lts-bullseye'
-                    args '''
-                        -v $HOME/.npm:/root/.npm:z
-                        -u root
-                        --network devops
-                    '''
-                    reuseNode true
-                }
             }
-            steps {
-                dir('safari_front') {
-                    sh 'npm run build -- --configuration production'
+            stage('Build Angular') {
+                    steps {
+                        dir('safari-front') {
+                            sh './node_modules/.bin/ng build'
+                        }
+                    }
                 }
             }
         }
