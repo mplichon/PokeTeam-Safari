@@ -55,7 +55,7 @@ public class JoueurRestController {
 
 
 	@GetMapping("/{id}")
-	public JoueurResponse ficheJoueur(@PathVariable Integer id, Joueur joueur) {
+	public JoueurResponse ficheJoueur(@PathVariable Integer id) {
 		log.info("GET /api/joueur/{} - ficheJoueur() called", id);
 		Joueur foundJoueur = compteSrv.getJoueurById(id);
 		return new JoueurResponse(
