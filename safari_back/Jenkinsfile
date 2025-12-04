@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Maven package') {
+            agent {
+                docker {
+                    image 'maven:3.9.11-eclipse-temurin-21'
+                    args '''
+                        -v $HOME/.m2:/root/.m2:z
+                        -u root
+                        --network devops
+                    '''
+                    reuseNode true // Sans ça, il y aura un 2eme workspace
+                }
+            }
+
+            steps {
+                dir('POKETEAM-SAFARI/safari_back') {
+                    withSonarQubeEnv('SonarQube') {
+                        sh "mvn clean verify sonar:sonar -Dsonar.projectKey=safari_back -Dsonar.projectName='safari_back'"
+                    }
+                }
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                dir('POKETEAM-SAFARI/safari_back') {
+                    sh 'docker build -t poketeam/safari:boot .'
+                }
+            }
+        }
+
+        stage('Docker Deploy') {
+            steps {
+                dir('POKETEAM-SAFARI') {
+                    sh 'docker compose up -d --no-deps --build boot'
+                }
+            }
+        }
+    }
+}

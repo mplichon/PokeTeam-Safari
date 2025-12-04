@@ -1,0 +1,59 @@
+name: safari-compose
+
+services:
+  mysql:
+    image: mysql:8.0.44
+    container_name: safari-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: poketeam_dc
+
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 10s
+      retries: 10
+
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./poketeam-init.sql:/docker-entrypoint-initdb.d/setup.sql
+
+    networks:
+      - safari
+
+
+  boot:
+    image: poketeam/safari:boot
+    container_name: safari-boot
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql/poketeam_dc
+      SPRING_DATASOURCE_PASSWORD: root
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+    networks:
+      - safari
+
+
+  angular:
+    image: poketeam/safari:angular
+    container_name: safari-angular
+
+    ports:
+      - 5000:80
+
+    depends_on:
+      - boot
+
+    networks:
+      - safari
+
+volumes:
+  db_data:
+    name: safari-db-data
+
+networks:
+  safari:
+    name: safari
