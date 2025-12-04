@@ -5,7 +5,7 @@
   cursor: pointer;
   zoom: 120%;
   user-select: none;
-  z-index: 99999; 
+  z-index: 2; 
   
   background: none;
   border: none;
