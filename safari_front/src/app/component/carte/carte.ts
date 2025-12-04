@@ -20,7 +20,7 @@ export class Carte implements AfterViewInit{
     ) {}
     
   userId: number | null = null;
-
+  pseudo: string | null = null;
 
   @Output() toggleFromRandom = new EventEmitter<void>(); 
   @Output() childClicked = new EventEmitter<void>();
@@ -29,6 +29,20 @@ export class Carte implements AfterViewInit{
 
   parentZone!: Element;
   zoneRef!: ElementRef;
+
+
+    ngOnInit(): void {
+    const id = this.jwtService.userId;
+
+    if (id != null) {
+      this.joueurService.getPseudoById(id).subscribe({
+        next: (pseudo) => {
+          this.pseudo = pseudo;
+        },
+        error: (err) => console.error("Erreur pseudo :", err)
+      });
+    }
+  }
 
   ngAfterViewInit() {
   setTimeout(() => {
