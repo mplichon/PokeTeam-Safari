@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-forbidden-page',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './forbidden-page.html',
   styleUrl: './forbidden-page.css',
 })
