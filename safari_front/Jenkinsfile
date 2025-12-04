@@ -8,7 +8,7 @@ pipeline {
                     image 'node:lts-bullseye'
                     args '''
                         -v $HOME/.npm:/root/.npm:z
-                        
+                        -u root
                         --network devops
                     '''
                     reuseNode true
