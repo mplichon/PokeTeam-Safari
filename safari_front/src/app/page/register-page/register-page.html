@@ -8,7 +8,7 @@
       <h2 class="subtitle">to the <br> pokéfari</h2>
     </div>
 
-    <div *ngIf="registerError">
+    <div class="erreurconx" *ngIf="registerError">
         Impossible de créer un compte
     </div>
 
@@ -18,13 +18,20 @@
         <input class="conxn"
                type="text"
                formControlName="username"
-               placeholder="Identifiant">
+               placeholder="Identifiant"
+              [class.input-error]="registerError">
+               @if (usernameCtrl.hasError('required')) {
+          <div class="error-message">L'identifiant est obligatoire</div>
+          }
     <br>
 
             <input class="conxn"
                   type="text"
                   formControlName="surnom"
                   placeholder="Surnom">
+            @if (surnomCtrl.hasError('required')) {
+          <div class="error-message">Le surnom est obligatoire</div>
+          }
     <br>
 
  <div class="password-container">
@@ -36,6 +43,11 @@
     id="password"
     placeholder="Mot de passe"
   />
+  @if (passwordCtrl.hasError('required')) {
+          <div class="error-message">Le mot de passe est obligatoire</div>
+          } @else if (passwordCtrl.hasError('minlength')) {
+          <div class="error-message">Le mot de passe doit faire 6 caractères minimum</div>
+          }
 
   <img
     id="toggle"
@@ -61,6 +73,9 @@
     id="password"
     placeholder="Confirmation du mdp"
   />
+  @if (confirmCtrl.hasError('passwordMismatch')) {
+  <div class="error-message">Veuillez confirmez votre mot de passe</div>
+  }
 
   <img
     id="toggle"
