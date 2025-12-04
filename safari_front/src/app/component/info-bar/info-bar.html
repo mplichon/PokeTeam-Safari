@@ -7,20 +7,42 @@
 
             <button (click)="openPopup()" class="primary_b">?</button>
 
-<div class="overlay" *ngIf="popupVisible" (click)="closePopup()"></div>
+                <div class="overlay" *ngIf="popupVisible" (click)="closePopup()"></div>
 
-<div class="popup" *ngIf="popupVisible">
+                <div class="popup" *ngIf="popupVisible">
 
-    <h2>Bienvenue à PokéFari ! </h2>
-  <p><br> Sur cette île sauvage, <br> un Zarbi peut surgir à tout moment… <br> Attrape-le du bout du doigt et laisse-toi aspirer dans un face-à-face où chaque choix compte <br> tenter la capture, l’appâter, l’affaiblir ou fuir. <br> Chaque rencontre te rapproche d’un Pokédex légendaire.</p> <br>
-  <button class="primary_b" (click)="closePopup()">Fermer</button>
-  
-</div>
+                    <h2 class="popup-title">Bienvenue a PokéFari !</h2>
 
+                    <div class="popup-content">
+                        
+                        <div class="popup-text">
+                            <p>
+                            Sur cette île sauvage,<br>
+                            un Zarbi peut surgir à tout moment…<br>
+                            Attrape-le du bout du doigt et <br>
+                            laisse-toi aspirer dans un face-à-face<br>
+                             où chaque choix compte.<br>
+                            tu peux tenter de le capturer, l’appâter, l’affaiblir ou fuir.<br>
+                            Chaque rencontre te rapproche d’un Pokédex légendaire.
+                            </p>
+                        </div>
 
+                        <div class="popup-img">
+                            <img src="assets/Prof_Jordan.png" alt="Professeur J">
+                        </div>
 
+                    </div>
+
+                    <div class="popup-footer">
+                        <button class="primary_b" (click)="closePopup()">Fermer</button>
+                    </div>
+
+                    </div>
+
+                
 
             <button class="secondary_b" (click)="logout()"><img src="assets/logout.svg" alt=""></button>
+     
         </div>
     </header>
 
