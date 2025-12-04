@@ -38,6 +38,8 @@ public class SecurityConfig {
             // On autorise tout le monde sur connexion
             auth.requestMatchers(HttpMethod.POST, "/api/auth").permitAll();
             auth.requestMatchers(HttpMethod.POST, "/api/joueur").permitAll();
+            auth.requestMatchers(HttpMethod.POST, "/api/apparition/init").permitAll();
+
 
             // Sinon, accès restreint aux utilisateurs authentifiés
 
