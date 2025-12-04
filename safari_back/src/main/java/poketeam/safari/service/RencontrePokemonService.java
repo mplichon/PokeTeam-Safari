@@ -34,6 +34,7 @@ public class RencontrePokemonService {
     }
     
     public String lancerBoue(RencontrePokemon rencontrePokemon) {
+        inventaireMaj(0,1,0, rencontrePokemon);
 		int tauxCaptureModtemp = rencontrePokemon.getTauxCaptureMod();
 		int tauxFuiteModtemp = rencontrePokemon.getTauxFuiteMod();
 		if(Math.random() < 0.9) {
@@ -57,6 +58,7 @@ public class RencontrePokemonService {
 	}
 
     public String donnerAppat(RencontrePokemon rencontrePokemon) {
+        inventaireMaj(0,0,1, rencontrePokemon);
 		int tauxCaptureModtemp = rencontrePokemon.getTauxCaptureMod();
 		int tauxFuiteModtemp = rencontrePokemon.getTauxFuiteMod();
 		if(Math.random() < 0.9) {
@@ -81,6 +83,7 @@ public class RencontrePokemonService {
 
     //En travaux 
 	public String lancerPokeball(RencontrePokemon rencontrePokemon) {
+        inventaireMaj(1,0,0, rencontrePokemon);
 		boolean capture = true;
 		double safBall = 1.5;
 		double tauxCaptureTemp = rencontrePokemon.getPokemon().getTauxCapture();
@@ -159,5 +162,13 @@ public class RencontrePokemonService {
     private String tourSuivant(RencontrePokemon rencontrePokemon) {
         createOrUpdate(rencontrePokemon);
         return "continue";
+    }
+
+    private void inventaireMaj(int nbPokeball, int nbBoue, int nbFriandise, RencontrePokemon rencontrePokemon){
+        Joueur joueur = (Joueur) compteService.getById(rencontrePokemon.getIdJoueur());
+        joueur.getInventaire().setNbPokeball(joueur.getInventaire().getNbPokeball() - nbPokeball);
+        joueur.getInventaire().setNbBoue(joueur.getInventaire().getNbBoue() - nbBoue);
+        joueur.getInventaire().setNbFriandise(joueur.getInventaire().getNbFriandise() - nbFriandise);
+        compteService.updateWithEncryptedPassword(joueur);
     }
 }
