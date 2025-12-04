@@ -30,7 +30,7 @@
                   formControlName="surnom"
                   placeholder="Surnom">
             @if (surnomCtrl.hasError('required')) {
-          <div class="error-message">Le surnom est obligatoire</div>
+          <div class="error-message"> <br> Le surnom est obligatoire</div>
           }
     <br>
 
@@ -43,11 +43,7 @@
     id="password"
     placeholder="Mot de passe"
   />
-  @if (passwordCtrl.hasError('required')) {
-          <div class="error-message">Le mot de passe est obligatoire</div>
-          } @else if (passwordCtrl.hasError('minlength')) {
-          <div class="error-message">Le mot de passe doit faire 6 caractères minimum</div>
-          }
+
 
   <img
     id="toggle"
@@ -58,7 +54,11 @@
   />
 </div>
 
-
+  @if (passwordCtrl.hasError('required')) {
+          <div class="error-message"></div>
+          } @else if (passwordCtrl.hasError('minlength')) {
+          <div class="error-message"> <br>Le mot de passe doit faire <br><br> 6 caractères minimum</div>
+          }
 
 <br>
 
