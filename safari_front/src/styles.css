@@ -420,7 +420,6 @@ h3 {
 }
 
 .inventaire {
-  background-color: #f8f8c8; /* Bloc B */
   min-height: 150px; /* juste pour visualisation */
   width: 272px;
   grid-column: 1;
