@@ -325,7 +325,21 @@ body {
   z-index: 5;
   text-align: center;
   box-shadow: 8px 8px 0px #3b3b3b;
-  line-height: 2;
+  line-height: 2.2;
+}
+
+.popup-text{
+
+font-size: 14px;
+  text-align: right;
+
+}
+
+.popup-text img {
+
+height: 32px;
+
+
 }
 
 /* ----------------- GRID LAYOUT ----------------- */
