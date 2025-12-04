@@ -8,7 +8,7 @@ pipeline {
                     image 'node:lts-bullseye'
                     args '''
                         -v $HOME/.npm:/root/.npm:z
-                        
+                        -u root
                         --network devops
                     '''
                     reuseNode true
@@ -28,13 +28,7 @@ pipeline {
                     steps {
                         dir('safari_front') {
                             withSonarQubeEnv('SonarQube') {
-                                sh '''
-                                    chmod +x ./node_modules/.bin/sonar-scanner
-                                    ./node_modules/.bin/sonar-scanner \
-                                        -Dsonar.projectKey=safari_front \
-                                        -Dsonar.sources=src \
-                                        -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-                                '''
+                                sh './node_modules/.bin/sonar-scanner -Dsonar.projectKey=bibliotek-angular'
                             }
                         }
                     }
@@ -42,7 +36,7 @@ pipeline {
                 }
                 stage('Build Angular') {
                         steps {
-                            dir('safari-front') {
+                            dir('safari_front') {
                                 sh './node_modules/.bin/ng build'
                             }
                         }
