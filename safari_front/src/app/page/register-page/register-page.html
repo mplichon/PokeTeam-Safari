@@ -5,7 +5,7 @@
       <img class="pokeballdeco" src="assets/pokeballpix.png" alt="pokeballpix">
 
       <h1 class="title">welcome</h1>
-      <h2 class="subtitle">to the <br> pokefari</h2>
+      <h2 class="subtitle">to the <br> pokéfari</h2>
     </div>
 
     <div *ngIf="registerError">
@@ -18,13 +18,13 @@
         <input class="conxn"
                type="text"
                formControlName="username"
-               placeholder="ton login">
+               placeholder="Identifiant">
     <br>
 
             <input class="conxn"
                   type="text"
                   formControlName="surnom"
-                  placeholder="ton pseudo">
+                  placeholder="Surnom">
     <br>
 
  <div class="password-container">
@@ -34,7 +34,7 @@
     formControlName="password"
     name="password"
     id="password"
-    placeholder="ton mot de passe"
+    placeholder="Mot de passe"
   />
 
   <img
@@ -59,7 +59,7 @@
     formControlName="confirm"
     name="password"
     id="password"
-    placeholder="confirme ton mdp"
+    placeholder="Confirmation du mdp"
   />
 
   <img
@@ -74,7 +74,8 @@
 <br>
         <button class="primary_b"
                 type="submit"
-                [disabled]="registerForm.invalid">
+                [disabled]="registerForm.invalid"
+                style="cursor: pointer;">
           créer mon compte
         </button>
 
