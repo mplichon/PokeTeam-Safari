@@ -144,7 +144,7 @@ public class JoueurRestController {
 		joueur.setPassword(joueurBdd.getPassword());
 		joueur.setPositionActuelle(joueurBdd.getPositionActuelle());
 
-		Joueur updatedJoueur = (Joueur) compteSrv.update(joueur);
+		Joueur updatedJoueur = (Joueur) compteSrv.updateWithEncryptedPassword(joueur);
 		return new JoueurResponse(
 			updatedJoueur.getId(), 
 			updatedJoueur.getLogin(), 

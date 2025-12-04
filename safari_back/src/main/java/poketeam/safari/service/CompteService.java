@@ -85,6 +85,10 @@ public class CompteService {
 		return daoCompte.save(compte);
 	}
 
+	public Compte updateWithEncryptedPassword(Compte compte) {
+		return daoCompte.save(compte);
+	}
+
 	public void deleteById(Integer id) {
 		daoCompte.deleteById(id);
 	}
