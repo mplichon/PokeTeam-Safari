@@ -104,7 +104,6 @@ pseudo: string | null = null;
       },
       error: (err) => console.error('Erreur API Pokémon', err)
     });
-      console.log('Rencontre initialisée avec id', this.idRencontre);
     });
   }
 
@@ -205,7 +204,6 @@ pseudo: string | null = null;
 
   private handleStatus(statut: CombatStatus) {
     this.combatStatus = statut;
-    console.log('Nouveau statut:', statut);
   }
 
   pokemonShakingH() {
@@ -216,7 +214,6 @@ pseudo: string | null = null;
     let counter = 0;
     let intervalle = setInterval(() => {
         counter++;
-        console.log(counter + " : " + mod + " : " + this.imgPokeMargLeft + " : " + this.imgPokeMargRight);
         if (counter >= 200) {
           clearInterval(intervalle);
         }
@@ -224,13 +221,11 @@ pseudo: string | null = null;
           mod += 1;
           if (mod >= 25) {
             switchVar = false;
-            console.log("switch");
           }
         } else {
           mod -= 1;
           if (mod <=-25) {
             switchVar = true;
-            console.log("switch");
           }
         }
         this.imgPokeMargLeft = margLeftTemp - mod;
@@ -248,7 +243,6 @@ pseudo: string | null = null;
     let counter = 0;
     let intervalle = setInterval(() => {
         counter++;
-        console.log(counter + " : " + mod + " : " + this.imgPokeMargLeft + " : " + this.imgPokeMargRight);
         if (counter >= 100) {
           clearInterval(intervalle);
         }
@@ -256,13 +250,11 @@ pseudo: string | null = null;
           mod += 1;
           if (mod >= 25) {
             switchVar = false;
-            console.log("switch");
           }
         } else {
           mod -= 1;
           if (mod <=0) {
             switchVar = true;
-            console.log("switch");
           }
         }
         this.imgPokeMargTop = margTopTemp - mod;
@@ -278,7 +270,6 @@ pseudo: string | null = null;
     let counter = 0;
     let intervalle = setInterval(() => {
         counter++;
-        console.log(counter + " : " + mod + " : " + this.imgPokeMargLeft + " : " + this.imgPokeMargRight);
         if (counter >= 200) {
           clearInterval(intervalle);
         }
@@ -296,7 +287,6 @@ pseudo: string | null = null;
     let counter = 0;
     let intervalle = setInterval(() => {
         counter++;
-        console.log(counter + " : " + mod + " : " + this.imgPokeMargLeft + " : " + this.imgPokeMargRight);
         if (counter >= 100) {
           clearInterval(intervalle);
         }
@@ -304,13 +294,11 @@ pseudo: string | null = null;
           mod += 1;
           if (mod >= 25) {
             switchVar = false;
-            console.log("switch");
           }
         } else {
           mod -= 1;
           if (mod <=-25) {
             switchVar = true;
-            console.log("switch");
           }
         }
         this.pokeballAngle = angleTemp + mod;
