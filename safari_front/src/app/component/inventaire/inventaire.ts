@@ -58,4 +58,8 @@ export class Inventaire implements OnInit {
   unselectItem(item: any) {
       this.selectedItem = null;
   }
+
+  reloadInventaire() {
+    this.ngOnInit();
+  }
 }

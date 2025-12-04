@@ -24,6 +24,7 @@ export class Carte implements AfterViewInit{
 
   @Output() toggleFromRandom = new EventEmitter<void>(); 
   @Output() childClicked = new EventEmitter<void>();
+  @Output() reloadInventaireOut = new EventEmitter<void>();
 
   @ViewChild('parentRef', { static: false }) parentRef!: ElementRef;
 
@@ -85,11 +86,12 @@ export class Carte implements AfterViewInit{
 
         // Envoyer la mise à jour en base
         this.joueurService.updateAsAdmin(joueurDto);
-
+       
         console.log("Récompense appliquée :", joueurDto);
-      },
+        setTimeout(() => this.reloadInventaireOut.emit(), 10);
+      },  
       error: (err) => console.error("Erreur JoueurService :", err)
     });
   }
-  
+
 }
