@@ -1,0 +1,24 @@
+.popup-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+
+.popup-text {
+  flex: 2;
+}
+
+.popup-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.popup-img img {
+  image-rendering: pixelated; /* effet pixel-art */
+  height: 350px;
+  width:  auto;
+  object-fit: contain;
+}
