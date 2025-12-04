@@ -10,7 +10,7 @@
 
 <app-carte class="cartes"  *ngIf="!showPokemonView && !showCombatView" (toggleFromRandom)="ShowCombatView()" (childClicked)="onChild2ButtonClicked()" (reloadInventaireOut)="reloadInventaire()"></app-carte>
 <app-pokemons-captures class="pokemoncapture"  *ngIf="showPokemonView"></app-pokemons-captures> 
-<app-combat class="combat" *ngIf="!showPokemonView && showCombatView" (toggleFromRandom)="ShowCombatView()" (reloadMap)="reboutCompMap()" (openPoke)="ShowPokeCapt()" ></app-combat>
+<app-combat class="combat" *ngIf="!showPokemonView && showCombatView" (toggleFromRandom)="ShowCombatView()" (reloadMap)="reboutCompMap()" (openPoke)="ShowPokeCapt()" (reloadInventaireOut)="reloadInventaire()"></app-combat>
 
 </main>
 

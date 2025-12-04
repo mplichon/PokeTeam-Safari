@@ -20,6 +20,7 @@ type CombatStatus = 'fuite' | 'capture' | 'continue' | 'abandon';
 export class Combat implements OnInit {
   @Output() reloadMap = new EventEmitter<void>();
   @Output() openPoke = new EventEmitter<void>();
+  @Output() reloadInventaireOut = new EventEmitter<void>();
 
   imgPokeMargLeft = 50;
   imgPokeMargRight = 50;
@@ -165,14 +166,15 @@ verifyCapture() {
         }
         this.pokeballHidden = 'true';
         this.pokemonHidden = 'false';
-        this.allButtonsDisabled = false;
       });
       if (this.combatStatus === 'continue') {
         this.messageContent = this.pokemon.name + ' s\'est libéré !';
+        this.allButtonsDisabled = false;
       }
       if (this.combatStatus === 'capture') {
         this.messageContent = 'Félicitations ! ' + this.pokemon.name + ' a été capturé !';
       }
+      this.reloadInventaire();
     }, 5900);
 
   }
@@ -193,8 +195,9 @@ verifyCapture() {
           }, 1000);
         } else { 
           this.handleStatus(res.statut as CombatStatus);
+          this.allButtonsDisabled = false;
         }
-        this.allButtonsDisabled = false;
+        this.reloadInventaire();
       });
     }, 1000);
   }
@@ -214,8 +217,9 @@ verifyCapture() {
           }, 1000);
         } else { 
           this.handleStatus(res.statut as CombatStatus);
+          this.allButtonsDisabled = false;
         }
-        this.allButtonsDisabled = false;
+        this.reloadInventaire();
       });
     }, 1000);
 
@@ -336,10 +340,11 @@ verifyCapture() {
   }
   
   goToPoke(){
-
-this.openPoke.emit();
-
+    this.openPoke.emit();
   }
-
+  
+  reloadInventaire() {
+    setTimeout(() => this.reloadInventaireOut.emit(), 10);
+  }
 
 }
