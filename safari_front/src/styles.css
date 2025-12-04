@@ -468,6 +468,15 @@ h3 {
   box-sizing: border-box;
 }
 
+.pokeballmini{
+
+width: 16px;
+height: 16px;
+margin: auto;
+padding: 16px;
+
+}
+
 .item:hover {
   width: 100%;
   display: flex;

@@ -3,7 +3,11 @@
   <div class="top_combat">
     <div class="id_poke">
       <img [src]="pokemon.sprite">
+      
       <p class="pokemon-name">{{pokemon.name}}</p>
+
+      <img *ngIf="dejaCapture" class="pokeballmini" src="assets/pokeitem.png" alt=""> <!--  *ngIf="dejaCapture" -->
+
  
     </div>
     <div class="message_poke">

@@ -1,3 +1,4 @@
+import { PokemonCaptureService } from './../../service/pokemon-capture-service';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
@@ -45,13 +46,15 @@ export class Combat implements OnInit {
     type2: ''
   };
 
+  dejaCapture: boolean = false;
+
   combatStatus: CombatStatus = 'continue'; // statut par défaut
   idRencontre!: number;
 
   private apiUrl = '/rencontre'
   private baseUrl = 'https://pokebuildapi.fr/api/v1/pokemon';
 
-  constructor(private http: HttpClient,private jwtService: JwtService, private router: Router,    private joueurService: JoueurService) {}
+  constructor(private http: HttpClient,private jwtService: JwtService, private router: Router,    private joueurService: JoueurService, private pokemonCaptureService: PokemonCaptureService,) {}
   
 pseudo: string | null = null;
 
@@ -101,11 +104,33 @@ pseudo: string | null = null;
       next: (p) => {
         this.pokemon = p;
         this.messageContent = 'Un ' + this.pokemon.name + ' sauvage est apparu !';
+       this.verifyCapture();
+      
       },
+
+       
+
       error: (err) => console.error('Erreur API Pokémon', err)
     });
     });
+
+
   }
+
+
+
+verifyCapture() {
+  if (!this.userid || !this.pokemon.id) return;
+
+  this.pokemonCaptureService
+    .verificationJoueurPokemon(this.userid, this.pokemon.id)
+    .subscribe((res: boolean) => {
+      this.dejaCapture = res;
+      console.log('Déjà capturé ?', res); // pour debug
+    });
+}
+
+
 
   pokeball() {
     this.allButtonsDisabled = true;
