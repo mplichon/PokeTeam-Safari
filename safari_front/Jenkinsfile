@@ -28,13 +28,7 @@ pipeline {
                     steps {
                         dir('safari_front') {
                             withSonarQubeEnv('SonarQube') {
-                                sh '''
-                                    npx sonarqube-scanner \
-                                    -Dsonar.projectKey=safari_front \
-                                    -Dsonar.sources=src \
-                                    -Dsonar.host.url=$SONAR_HOST_URL \
-                                    -Dsonar.login=$SONAR_AUTH_TOKEN
-                                '''
+                                sh './node_modules/.bin/sonar-scanner -Dsonar.projectKey=bibliotek-angular'
                             }
                         }
                     }
