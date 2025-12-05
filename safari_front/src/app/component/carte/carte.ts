@@ -102,7 +102,7 @@ export class Carte implements AfterViewInit{
         this.joueurService.updateAsAdmin(joueurDto);
        
         console.log("Récompense appliquée :", joueurDto);
-        setTimeout(() => this.reloadInventaireOut.emit(), 10);
+        setTimeout(() => this.reloadInventaireOut.emit(), 100);
       },  
       error: (err) => console.error("Erreur JoueurService :", err)
     });
