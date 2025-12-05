@@ -9,7 +9,7 @@
     </div>
 
     <div class="erreurconx" *ngIf="registerError">
-        Impossible de créer un compte
+        Impossible de créer un compte <br> <br> Identifiant déjà utilisé
     </div>
 
     <form (ngSubmit)="register()" [formGroup]="registerForm">
